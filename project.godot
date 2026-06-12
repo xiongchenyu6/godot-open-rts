@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Open RTS"
 run/main_scene="res://source/Main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://assets/logos/godot_logo_vertical_monochrome_dark_312x357.png"
 boot_splash/fullsize=false
@@ -227,3 +227,7 @@ locale/translations=PackedStringArray("res://assets/translations/match.en.transl
 
 3d/merge_rasterizer_cell_scale=0.001
 3d/use_edge_connections=false
+
+[rendering]
+
+renderer/rendering_method.web="gl_compatibility"

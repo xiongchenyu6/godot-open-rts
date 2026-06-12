@@ -32,6 +32,10 @@ void fragment()
   // transform depth from <0; 1> value to corresponding point in projection space <-1,-1,0; 1,1,1>*
   // * note that projection space in Vulkan is different than in OpenGL
   vec3 normalized_device_coordinates = vec3(SCREEN_UV * 2.0 - 1.0, depth);
+#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
+  // OpenGL uses NDC z in <-1; 1> range, unlike Vulkan's <0; 1>
+  normalized_device_coordinates.z = normalized_device_coordinates.z * 2.0 - 1.0;
+#endif
   // move depth point from projection space to world space
   // * note that INV_PROJECTION_MATRIX is broken atm. so, let's use inverse(PROJECTION_MATRIX)
   vec4 world_position =
