@@ -4,21 +4,30 @@ const Human = preload("res://source/match/players/human/Human.gd")
 
 @onready var _match = find_parent("Match")
 
-# TODO: handle human player removal/addition
-
 
 func _ready():
 	await find_parent("Match").ready
-	_hide_all_bars()
 	_setup_all_bars()
+	_refresh_visible_bars()
+	if not MatchSignals.visible_player_changed.is_connected(_on_visible_player_changed):
+		MatchSignals.visible_player_changed.connect(_on_visible_player_changed)
+
+
+func _on_visible_player_changed(_previous_player, _new_player):
+	_refresh_visible_bars()
+
+
+func _refresh_visible_bars():
+	_hide_all_bars()
 	var human_players = get_tree().get_nodes_in_group("players").filter(
 		func(player): return player is Human
 	)
 	if (
 		_match.settings.visibility == _match.settings.Visibility.PER_PLAYER
-		and not human_players.is_empty()
+		and (not human_players.is_empty() or _match.visible_player != null)
 	):
-		_show_player_bars([human_players[0]])
+		var tracked_player = human_players[0] if not human_players.is_empty() else _match.visible_player
+		_show_player_bars([tracked_player])
 	else:
 		_show_player_bars(get_tree().get_nodes_in_group("players"))
 

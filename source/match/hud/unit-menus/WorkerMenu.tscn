@@ -1,61 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://btvii654eytjr"]
+[gd_scene load_steps=23 format=3 uid="uid://btvii654eytjr"]
 
 [ext_resource type="Script" path="res://source/match/hud/unit-menus/WorkerMenu.gd" id="1_jbs0a"]
-[ext_resource type="Texture2D" uid="uid://sc5cu0dm3sgn" path="res://assets/ui/icons/CommandCenter.png" id="2_1d2t8"]
-[ext_resource type="Texture2D" uid="uid://bhrw5rae6vmw8" path="res://assets/ui/icons/AntiGroundTurret.png" id="2_72g55"]
-[ext_resource type="Texture2D" uid="uid://cv0qk8bjjc1eo" path="res://assets/ui/icons/AntiAirTurret.png" id="3_wyfuf"]
-[ext_resource type="Texture2D" uid="uid://dvdd6mno4d5da" path="res://assets/ui/icons/AircraftFactory.png" id="4_44m4x"]
-[ext_resource type="Texture2D" uid="uid://djmjxf3ikfrri" path="res://assets/ui/icons/VehicleFactory.png" id="4_f8mve"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/CommandCenter.png" id="2_1d2t8"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AntiGroundTurret.png" id="2_72g55"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AntiAirTurret.png" id="3_wyfuf"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AircraftFactory.png" id="4_44m4x"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/VehicleFactory.png" id="4_f8mve"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RadarUplink.png" id="6_d6cpk"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/TechLab.png" id="7_t6nqc"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/PowerReactor.png" id="8_kfns1"]
+[ext_resource type="Texture2D" uid="uid://d2g77har015p" path="res://assets/ui/icons/RoboticsBay.png" id="9_8y2ac"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Refinery.png" id="10_k5hht"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Barracks.png" id="11_c8tur"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ArcCoilDefenseTower.png" id="12_arccoil"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/LanceBeamDefenseTower.png" id="13_lance"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RailCannonBunker.png" id="14_rail"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/WeatherControlSpire.png" id="15_weather"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RepairPad.png" id="16_repair"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AdvancedReactorPlant.png" id="17_advanced"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/TeslaFenceSegment.png" id="18_tesla"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/PrismDefenseObelisk.png" id="19_prism"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/OrePurifier.png" id="20_orepurifier"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/MobileConstructionVehicle.png" id="21_mcv"]
 
 [node name="WorkerMenu" type="GridContainer"]
 mouse_filter = 2
-columns = 4
+columns = 6
 script = ExtResource("1_jbs0a")
 
-[node name="Padding" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding2" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding3" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding5" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding6" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding7" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding8" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Padding9" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
 [node name="PlaceAntiGroundTurretButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "AG"
 
 [node name="TextureRect" type="TextureRect" parent="PlaceAntiGroundTurretButton"]
 layout_mode = 1
@@ -69,9 +45,9 @@ texture = ExtResource("2_72g55")
 expand_mode = 1
 
 [node name="PlaceAntiAirTurretButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "AA"
 
 [node name="TextureRect" type="TextureRect" parent="PlaceAntiAirTurretButton"]
 layout_mode = 1
@@ -84,21 +60,155 @@ mouse_filter = 2
 texture = ExtResource("3_wyfuf")
 expand_mode = 1
 
-[node name="Padding12" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="PlaceTeslaFenceSegmentButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
-mouse_filter = 2
+focus_mode = 0
 
-[node name="Padding13" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="PlaceTeslaFenceSegmentButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("18_tesla")
+expand_mode = 1
+
+[node name="PlaceArcCoilDefenseTowerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceArcCoilDefenseTowerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_arccoil")
+expand_mode = 1
+
+[node name="PlaceLanceBeamDefenseTowerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceLanceBeamDefenseTowerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_lance")
+expand_mode = 1
+
+[node name="PlacePrismDefenseObeliskButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlacePrismDefenseObeliskButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_prism")
+expand_mode = 1
+
+[node name="PlaceRailCannonBunkerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceRailCannonBunkerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_rail")
+expand_mode = 1
+
+[node name="PlaceRadarUplinkButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceRadarUplinkButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_d6cpk")
+expand_mode = 1
+
+[node name="PlaceRoboticsBayButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceRoboticsBayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_8y2ac")
+expand_mode = 1
+
+[node name="PlaceTechLabButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceTechLabButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_t6nqc")
+expand_mode = 1
+
+[node name="PlaceWeatherControlSpireButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceWeatherControlSpireButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_weather")
+expand_mode = 1
 
 [node name="PlaceCommandCenterButton" type="Button" parent="."]
 auto_translate_mode = 2
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "CC"
 
 [node name="TextureRect" type="TextureRect" parent="PlaceCommandCenterButton"]
 layout_mode = 1
@@ -112,9 +222,9 @@ texture = ExtResource("2_1d2t8")
 expand_mode = 1
 
 [node name="PlaceVehicleFactoryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "VF"
 
 [node name="TextureRect" type="TextureRect" parent="PlaceVehicleFactoryButton"]
 layout_mode = 1
@@ -128,9 +238,9 @@ texture = ExtResource("4_f8mve")
 expand_mode = 1
 
 [node name="PlaceAircraftFactoryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "AF"
 
 [node name="TextureRect" type="TextureRect" parent="PlaceAircraftFactoryButton"]
 layout_mode = 1
@@ -143,13 +253,137 @@ mouse_filter = 2
 texture = ExtResource("4_44m4x")
 expand_mode = 1
 
-[node name="Padding16" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="PlacePowerReactorButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlacePowerReactorButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("8_kfns1")
+expand_mode = 1
+
+[node name="PlaceAdvancedReactorPlantButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceAdvancedReactorPlantButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_advanced")
+expand_mode = 1
+
+[node name="PlaceRefineryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceRefineryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_k5hht")
+expand_mode = 1
+
+[node name="PlaceOrePurifierButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceOrePurifierButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_orepurifier")
+expand_mode = 1
+
+[node name="PlaceBarracksButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceBarracksButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_c8tur")
+expand_mode = 1
+
+[node name="PlaceRepairPadButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PlaceRepairPadButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_repair")
+expand_mode = 1
+
+[node name="DeployMobileConstructionVehicleButton" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="DeployMobileConstructionVehicleButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("21_mcv")
+expand_mode = 1
 
 [connection signal="pressed" from="PlaceAntiGroundTurretButton" to="." method="_on_place_anti_ground_turret_button_pressed"]
 [connection signal="pressed" from="PlaceAntiAirTurretButton" to="." method="_on_place_anti_air_turret_button_pressed"]
+[connection signal="pressed" from="PlaceTeslaFenceSegmentButton" to="." method="_on_place_tesla_fence_segment_button_pressed"]
+[connection signal="pressed" from="PlaceArcCoilDefenseTowerButton" to="." method="_on_place_arc_coil_defense_tower_button_pressed"]
+[connection signal="pressed" from="PlaceLanceBeamDefenseTowerButton" to="." method="_on_place_lance_beam_defense_tower_button_pressed"]
+[connection signal="pressed" from="PlacePrismDefenseObeliskButton" to="." method="_on_place_prism_defense_obelisk_button_pressed"]
+[connection signal="pressed" from="PlaceRailCannonBunkerButton" to="." method="_on_place_rail_cannon_bunker_button_pressed"]
+[connection signal="pressed" from="PlacePowerReactorButton" to="." method="_on_place_power_reactor_button_pressed"]
+[connection signal="pressed" from="PlaceAdvancedReactorPlantButton" to="." method="_on_place_advanced_reactor_plant_button_pressed"]
+[connection signal="pressed" from="PlaceRefineryButton" to="." method="_on_place_refinery_button_pressed"]
+[connection signal="pressed" from="PlaceOrePurifierButton" to="." method="_on_place_ore_purifier_button_pressed"]
+[connection signal="pressed" from="PlaceBarracksButton" to="." method="_on_place_barracks_button_pressed"]
+[connection signal="pressed" from="PlaceRadarUplinkButton" to="." method="_on_place_radar_uplink_button_pressed"]
+[connection signal="pressed" from="PlaceRoboticsBayButton" to="." method="_on_place_robotics_bay_button_pressed"]
+[connection signal="pressed" from="PlaceRepairPadButton" to="." method="_on_place_repair_pad_button_pressed"]
+[connection signal="pressed" from="PlaceTechLabButton" to="." method="_on_place_tech_lab_button_pressed"]
+[connection signal="pressed" from="PlaceWeatherControlSpireButton" to="." method="_on_place_weather_control_spire_button_pressed"]
 [connection signal="pressed" from="PlaceCommandCenterButton" to="." method="_on_place_command_center_button_pressed"]
 [connection signal="pressed" from="PlaceVehicleFactoryButton" to="." method="_on_place_vehicle_factory_button_pressed"]
 [connection signal="pressed" from="PlaceAircraftFactoryButton" to="." method="_on_place_aircraft_factory_button_pressed"]
+[connection signal="pressed" from="DeployMobileConstructionVehicleButton" to="." method="_on_deploy_mobile_construction_vehicle_button_pressed"]

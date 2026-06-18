@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_l07um"]
+[ext_resource type="Script" path="res://tests/manual/TestRadarMinimap.gd" id="2_hm011"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_8rwpb"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_0g10p"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_2u7ov"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_dbxrk"]
+
+[sub_resource type="Resource" id="Resource_pqs2y"]
+script = ExtResource("3_8rwpb")
+players = Array[Resource]([])
+visibility = 0
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_l07um")]
+script = ExtResource("2_hm011")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_pqs2y")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_0g10p")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_2u7ov")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("6_dbxrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)

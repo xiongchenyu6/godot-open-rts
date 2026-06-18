@@ -1,0 +1,180 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Map.tscn" id="1_map"]
+[ext_resource type="Material" path="res://source/match/resources/materials/terrain.material.tres" id="2_terrain"]
+[ext_resource type="PackedScene" path="res://source/match/units/non-player/ResourceA.tscn" id="3_resource_a"]
+[ext_resource type="PackedScene" path="res://source/match/units/non-player/ResourceB.tscn" id="4_resource_b"]
+[ext_resource type="PackedScene" path="res://source/match/decorations/RockLargeA.tscn" id="5_rock"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_neutral_player"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechOilDerrick.tscn" id="7_oil_derrick"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechAirport.tscn" id="8_tech_airport"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechHospital.tscn" id="9_tech_hospital"]
+[ext_resource type="PackedScene" path="res://source/match/units/non-player/SupplyCrate.tscn" id="10_supply_crate"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechRepairDepot.tscn" id="11_tech_repair_depot"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechBunker.tscn" id="12_tech_bunker"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_four_corners"]
+resource_local_to_scene = true
+material = ExtResource("2_terrain")
+size = Vector2(76, 76)
+center_offset = Vector3(36, 0, 36)
+
+[node name="Map" instance=ExtResource("1_map")]
+size = Vector2(72, 72)
+
+[node name="Terrain" parent="Geometry" index="1"]
+mesh = SubResource("PlaneMesh_four_corners")
+
+[node name="Marker3D" type="Marker3D" parent="SpawnPoints" index="0"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 10, 0, 10)
+
+[node name="Marker3D2" type="Marker3D" parent="SpawnPoints" index="1"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 62, 0, 10)
+
+[node name="Marker3D3" type="Marker3D" parent="SpawnPoints" index="2"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 62, 0, 62)
+
+[node name="Marker3D4" type="Marker3D" parent="SpawnPoints" index="3"]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 10, 0, 62)
+
+[node name="NorthWestOre" type="Node3D" parent="Resources" index="0"]
+
+[node name="ResourceA" parent="Resources/NorthWestOre" index="0" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 15, 0, 16)
+
+[node name="ResourceA2" parent="Resources/NorthWestOre" index="1" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 18, 0, 15)
+resource_a = 5
+
+[node name="ResourceA3" parent="Resources/NorthWestOre" index="2" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 17, 0, 18)
+
+[node name="ResourceB" parent="Resources/NorthWestOre" index="3" instance=ExtResource("4_resource_b")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 22, 0, 20)
+
+[node name="NorthEastOre" type="Node3D" parent="Resources" index="1"]
+
+[node name="ResourceA" parent="Resources/NorthEastOre" index="0" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 57, 0, 16)
+
+[node name="ResourceA2" parent="Resources/NorthEastOre" index="1" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 54, 0, 15)
+resource_a = 5
+
+[node name="ResourceA3" parent="Resources/NorthEastOre" index="2" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 55, 0, 18)
+
+[node name="ResourceB" parent="Resources/NorthEastOre" index="3" instance=ExtResource("4_resource_b")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 50, 0, 20)
+
+[node name="SouthEastOre" type="Node3D" parent="Resources" index="2"]
+
+[node name="ResourceA" parent="Resources/SouthEastOre" index="0" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 57, 0, 56)
+
+[node name="ResourceA2" parent="Resources/SouthEastOre" index="1" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, 54, 0, 57)
+resource_a = 5
+
+[node name="ResourceA3" parent="Resources/SouthEastOre" index="2" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, -0.173648, 55, 0, 54)
+
+[node name="ResourceB" parent="Resources/SouthEastOre" index="3" instance=ExtResource("4_resource_b")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 50, 0, 52)
+
+[node name="SouthWestOre" type="Node3D" parent="Resources" index="3"]
+
+[node name="ResourceA" parent="Resources/SouthWestOre" index="0" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 15, 0, 56)
+
+[node name="ResourceA2" parent="Resources/SouthWestOre" index="1" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 18, 0, 57)
+resource_a = 5
+
+[node name="ResourceA3" parent="Resources/SouthWestOre" index="2" instance=ExtResource("3_resource_a")]
+transform = Transform3D(-0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, -0.984808, 17, 0, 54)
+
+[node name="ResourceB" parent="Resources/SouthWestOre" index="3" instance=ExtResource("4_resource_b")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 22, 0, 52)
+
+[node name="CenterOre" type="Node3D" parent="Resources" index="4"]
+
+[node name="ResourceA" parent="Resources/CenterOre" index="0" instance=ExtResource("3_resource_a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 36)
+resource_a = 5
+
+[node name="ResourceA2" parent="Resources/CenterOre" index="1" instance=ExtResource("3_resource_a")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 40, 0, 36)
+resource_a = 5
+
+[node name="ResourceB" parent="Resources/CenterOre" index="2" instance=ExtResource("4_resource_b")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 36, 0, 32)
+
+[node name="ResourceB2" parent="Resources/CenterOre" index="3" instance=ExtResource("4_resource_b")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 36, 0, 40)
+
+[node name="CenterRocks" type="Node3D" parent="Decorations" index="0"]
+
+[node name="RockLargeA" parent="Decorations/CenterRocks" index="0" instance=ExtResource("5_rock")]
+transform = Transform3D(1.25, 0, 0.25, 0, 1.25, 0, -0.25, 0, 1.25, 30, 0, 30)
+
+[node name="RockLargeA2" parent="Decorations/CenterRocks" index="1" instance=ExtResource("5_rock")]
+transform = Transform3D(1.25, 0, -0.25, 0, 1.25, 0, 0.25, 0, 1.25, 42, 0, 30)
+
+[node name="RockLargeA3" parent="Decorations/CenterRocks" index="2" instance=ExtResource("5_rock")]
+transform = Transform3D(1.25, 0, -0.25, 0, 1.25, 0, 0.25, 0, 1.25, 42, 0, 42)
+
+[node name="RockLargeA4" parent="Decorations/CenterRocks" index="3" instance=ExtResource("5_rock")]
+transform = Transform3D(1.25, 0, 0.25, 0, 1.25, 0, -0.25, 0, 1.25, 30, 0, 42)
+
+[node name="SupplyCrates" type="Node3D" parent="."]
+
+[node name="NorthWestResourceCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 27, 0, 27)
+
+[node name="NorthEastRepairCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 45, 0, 27)
+effect_type = "repair"
+
+[node name="SouthEastVeterancyCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(-0.382683, 0, 0.92388, 0, 1, 0, -0.92388, 0, -0.382683, 45, 0, 45)
+effect_type = "veterancy"
+
+[node name="SouthWestResourceCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(-0.92388, 0, 0.382683, 0, 1, 0, -0.382683, 0, -0.92388, 27, 0, 45)
+
+[node name="NeutralPlayers" type="Node3D" parent="."]
+
+[node name="NeutralTech" parent="NeutralPlayers" instance=ExtResource("6_neutral_player")]
+color = Color(0.56, 0.56, 0.56, 1)
+participates_in_match = false
+
+[node name="WestOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 24, 0, 36)
+
+[node name="EastOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 48, 0, 36)
+
+[node name="NorthTechAirport" parent="NeutralPlayers/NeutralTech" instance=ExtResource("8_tech_airport")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 36, 0, 24)
+
+[node name="SouthTechAirport" parent="NeutralPlayers/NeutralTech" instance=ExtResource("8_tech_airport")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 36, 0, 48)
+
+[node name="NorthEastTechHospital" parent="NeutralPlayers/NeutralTech" instance=ExtResource("9_tech_hospital")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 48, 0, 24)
+
+[node name="SouthWestTechHospital" parent="NeutralPlayers/NeutralTech" instance=ExtResource("9_tech_hospital")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 24, 0, 48)
+
+[node name="NorthWestTechRepairDepot" parent="NeutralPlayers/NeutralTech" instance=ExtResource("11_tech_repair_depot")]
+transform = Transform3D(0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 24, 0, 24)
+
+[node name="SouthEastTechRepairDepot" parent="NeutralPlayers/NeutralTech" instance=ExtResource("11_tech_repair_depot")]
+transform = Transform3D(-0.92388, 0, 0.382683, 0, 1, 0, -0.382683, 0, -0.92388, 48, 0, 48)
+
+[node name="NorthCenterTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 36, 0, 28)
+
+[node name="SouthCenterTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 36, 0, 44)

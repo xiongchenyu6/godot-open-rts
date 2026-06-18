@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+albedo_color = Color(0.99, 0.81, 0.48, 1)
+metallic = 0.55
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark"]
+albedo_color = Color(0.08, 0.10, 0.11, 1)
+metallic = 0.65
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arc"]
+albedo_color = Color(0.08, 0.78, 1, 1)
+emission_enabled = true
+emission = Color(0.05, 0.74, 1, 1)
+emission_energy_multiplier = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+material = SubResource("StandardMaterial3D_dark")
+size = Vector3(1.55, 0.16, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_post"]
+material = SubResource("StandardMaterial3D_body")
+top_radius = 0.12
+bottom_radius = 0.16
+height = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_arc"]
+material = SubResource("StandardMaterial3D_arc")
+size = Vector3(1.18, 0.06, 0.06)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cap"]
+material = SubResource("StandardMaterial3D_arc")
+top_radius = 0.16
+bottom_radius = 0.16
+height = 0.08
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="LeftPost" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62, 0.58, 0)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="RightPost" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62, 0.58, 0)
+mesh = SubResource("CylinderMesh_post")
+
+[node name="ArcBeamFront" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, -0.14)
+mesh = SubResource("BoxMesh_arc")
+
+[node name="ArcBeamBack" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0.14)
+mesh = SubResource("BoxMesh_arc")
+
+[node name="LeftCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62, 1.08, 0)
+mesh = SubResource("CylinderMesh_cap")
+
+[node name="RightCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62, 1.08, 0)
+mesh = SubResource("CylinderMesh_cap")

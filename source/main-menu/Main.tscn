@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctyd01bv020i8"]
+[gd_scene load_steps=7 format=3 uid="uid://ctyd01bv020i8"]
 
 [ext_resource type="Script" path="res://source/main-menu/Main.gd" id="1_2uj2d"]
 [ext_resource type="Theme" uid="uid://c2kgsk4ffhbwo" path="res://source/resources/main_menu.theme" id="1_sc713"]
 [ext_resource type="PackedScene" uid="uid://dij5xr8swlfdx" path="res://source/main-menu/Background.tscn" id="2_depxw"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RosterPreview.png" id="4_roster"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_command_panel"]
+bg_color = Color(0.015, 0.029, 0.028, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.35, 0.82, 0.74, 0.62)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intel_panel"]
+bg_color = Color(0.02, 0.055, 0.052, 0.64)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.58, 0.53, 0.48)
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -17,50 +34,177 @@ script = ExtResource("1_2uj2d")
 [node name="Background" parent="." instance=ExtResource("2_depxw")]
 layout_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="TacticalTint" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = -97.0
-offset_right = 55.0
-offset_bottom = 97.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.025, 0.022, 0.48)
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = -48.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MainLayout" type="HBoxContainer" parent="RootMargin"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/separation = 36
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(400, 0)
+[node name="BriefingColumn" type="VBoxContainer" parent="RootMargin/MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="TitleSpacer" type="Control" parent="RootMargin/MainLayout/BriefingColumn"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="RootMargin/MainLayout/BriefingColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 1, 0.94, 1)
+theme_override_font_sizes/font_size = 72
+text = "OPEN RTS"
+
+[node name="SubtitleLabel" type="Label" parent="RootMargin/MainLayout/BriefingColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.54, 0.93, 0.85, 1)
+theme_override_font_sizes/font_size = 22
+text = "Frontline command"
+uppercase = true
+
+[node name="OperationPanel" type="PanelContainer" parent="RootMargin/MainLayout/BriefingColumn"]
+custom_minimum_size = Vector2(0, 148)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_intel_panel")
+
+[node name="OperationMargin" type="MarginContainer" parent="RootMargin/MainLayout/BriefingColumn/OperationPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="OperationStack" type="VBoxContainer" parent="RootMargin/MainLayout/BriefingColumn/OperationPanel/OperationMargin"]
 layout_mode = 2
 theme_override_constants/separation = 10
-alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OperationLabel" type="Label" parent="RootMargin/MainLayout/BriefingColumn/OperationPanel/OperationMargin/OperationStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 1, 0.95, 1)
+theme_override_font_sizes/font_size = 28
+text = "Operation: Skirmish command"
+uppercase = true
+
+[node name="StatusLabel" type="Label" parent="RootMargin/MainLayout/BriefingColumn/OperationPanel/OperationMargin/OperationStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74, 0.9, 0.86, 1)
+theme_override_font_sizes/font_size = 18
+text = "Expanded arsenal online. Choose a theater and deploy."
+autowrap_mode = 3
+
+[node name="RosterPanel" type="PanelContainer" parent="RootMargin/MainLayout/BriefingColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_intel_panel")
+
+[node name="RosterMargin" type="MarginContainer" parent="RootMargin/MainLayout/BriefingColumn/RosterPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="RosterStack" type="VBoxContainer" parent="RootMargin/MainLayout/BriefingColumn/RosterPanel/RosterMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RosterLabel" type="Label" parent="RootMargin/MainLayout/BriefingColumn/RosterPanel/RosterMargin/RosterStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76, 0.96, 0.9, 1)
+theme_override_font_sizes/font_size = 18
+text = "Available battle group"
+uppercase = true
+
+[node name="RosterPreview" type="TextureRect" parent="RootMargin/MainLayout/BriefingColumn/RosterPanel/RosterMargin/RosterStack"]
+custom_minimum_size = Vector2(512, 326)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_roster")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CommandPanel" type="PanelContainer" parent="RootMargin/MainLayout"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_command_panel")
+
+[node name="CommandMargin" type="MarginContainer" parent="RootMargin/MainLayout/CommandPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 26
+
+[node name="CommandStack" type="VBoxContainer" parent="RootMargin/MainLayout/CommandPanel/CommandMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="CommandLabel" type="Label" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.79, 1, 0.94, 1)
+theme_override_font_sizes/font_size = 24
+text = "Command menu"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="CommandDivider" type="HSeparator" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+custom_minimum_size = Vector2(0, 62)
 layout_mode = 2
 text = "PLAY"
 
-[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "OPTIONS"
 
-[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="CreditsButton" type="Button" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "CREDITS"
 
-[node name="Button4" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 text = "QUIT"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button2" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button3" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button4" to="." method="_on_quit_button_pressed"]
+[node name="CommandFill" type="Control" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatusStrip" type="Label" parent="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.76, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "SYSTEMS: ONLINE"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="RootMargin/MainLayout/CommandPanel/CommandMargin/CommandStack/QuitButton" to="." method="_on_quit_button_pressed"]

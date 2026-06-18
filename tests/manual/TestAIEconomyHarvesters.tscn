@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestAIEconomyHarvesters.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn" id="6_ai"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_cc"]
+[ext_resource type="PackedScene" path="res://source/match/units/Refinery.tscn" id="8_refinery"]
+[ext_resource type="PackedScene" path="res://source/match/units/VehicleFactory.tscn" id="9_vehicle_factory"]
+
+[sub_resource type="Resource" id="Resource_settings"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_settings")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+
+[node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("6_ai")]
+expected_number_of_workers = 0
+expected_number_of_refineries = 0
+expected_number_of_ore_harvesters = 1
+expected_number_of_ag_turrets = 0
+expected_number_of_aa_turrets = 0
+expected_number_of_arc_coil_towers = 0
+expected_number_of_lance_beam_towers = 0
+expected_number_of_prism_defense_obelisks = 0
+expected_number_of_rail_cannon_bunkers = 0
+expected_number_of_battlegroups = 0
+
+[node name="CommandCenter" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("7_cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.0, 0, 35.0)
+
+[node name="Refinery" parent="Players/SimpleClairvoyantAI" index="1" instance=ExtResource("8_refinery")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 38.0, 0, 35.0)
+
+[node name="VehicleFactory" parent="Players/SimpleClairvoyantAI" index="2" instance=ExtResource("9_vehicle_factory")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 35.0, 0, 38.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

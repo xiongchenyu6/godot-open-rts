@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/TechLab.gd" id="1_o1ams"]
+[ext_resource type="PackedScene" uid="uid://cgsi062w5fjia" path="res://source/match/units/traits/Highlight.tscn" id="2_s1jfr"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/TechLab.tscn" id="3_64ogi"]
+[ext_resource type="PackedScene" uid="uid://3c1h14nqdumt" path="res://source/match/units/traits/Selection.tscn" id="4_nay6m"]
+[ext_resource type="PackedScene" uid="uid://d4cwip5hpxlmo" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_th71s"]
+[ext_resource type="PackedScene" uid="uid://c3ssj2p6voauk" path="res://source/match/units/traits/HealthBar.tscn" id="6_cx2lb"]
+[ext_resource type="PackedScene" uid="uid://d4cm4yhtf11ur" path="res://source/match/units/traits/Targetability.tscn" id="7_kgefh"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0xg7f"]
+height = 1.0
+radius = 1.6
+
+[node name="TechLab" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_o1ams")
+
+[node name="Geometry" parent="." instance=ExtResource("3_64ogi")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_0xg7f")
+
+[node name="Highlight" parent="." instance=ExtResource("2_s1jfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.6
+
+[node name="Selection" parent="." instance=ExtResource("4_nay6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.6
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_th71s")]
+radius = 1.6
+vertices = PackedVector3Array(0, 0, -1.2, 0.848, 0, -0.848, 1.2, 0, 0, 0.848, 0, 0.848, 0, 0, 1.2, -0.848, 0, 0.848, -1.2, 0, 0, -0.848, 0, -0.848)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_cx2lb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+size = Vector2(260, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_kgefh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.6
+
+[editable path="Geometry"]

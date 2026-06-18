@@ -29,6 +29,7 @@ func _ready():
 	await get_tree().physics_frame
 	var a_match = match_prototype.instantiate()
 	a_match.settings = match_settings
+	a_match.map_path = map_path
 	a_match.map = map
 	_progress_bar.value = 0.9
 

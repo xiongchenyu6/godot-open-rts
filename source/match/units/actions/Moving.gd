@@ -7,7 +7,13 @@ var _target_position = null
 
 
 static func is_applicable(unit):
-	return unit.find_child("Movement") != null
+	return (
+		unit.find_child("Movement") != null
+		and (
+			not unit.has_method("can_receive_movement_commands")
+			or unit.can_receive_movement_commands()
+		)
+	)
 
 
 func _init(target_position):
@@ -20,7 +26,7 @@ func _ready():
 
 
 func _exit_tree():
-	if is_inside_tree():
+	if _movement_trait != null and is_instance_valid(_movement_trait):
 		_movement_trait.stop()
 
 

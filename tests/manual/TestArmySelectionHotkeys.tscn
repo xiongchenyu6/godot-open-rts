@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestArmySelectionHotkeys.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="6_tank"]
+[ext_resource type="PackedScene" path="res://source/match/units/FieldMedic.tscn" id="7_medic"]
+[ext_resource type="PackedScene" path="res://source/match/units/Worker.tscn" id="8_worker"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="9_command"]
+[ext_resource type="PackedScene" path="res://source/match/units/OreHarvester.tscn" id="10_harvester"]
+
+[sub_resource type="Resource" id="Resource_settings"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_settings")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+
+[node name="NearTank" parent="Players/Human" index="0" instance=ExtResource("6_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0, 0, 12.0)
+
+[node name="FarTank" parent="Players/Human" index="1" instance=ExtResource("6_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.0, 0, 44.0)
+
+[node name="FieldMedic" parent="Players/Human" index="2" instance=ExtResource("7_medic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0, 0, 12.0)
+
+[node name="Worker" parent="Players/Human" index="3" instance=ExtResource("8_worker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0, 0, 14.0)
+
+[node name="BusyWorker" parent="Players/Human" index="4" instance=ExtResource("8_worker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0, 0, 14.0)
+
+[node name="IdleHarvester" parent="Players/Human" index="5" instance=ExtResource("10_harvester")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0, 0, 14.0)
+
+[node name="BusyHarvester" parent="Players/Human" index="6" instance=ExtResource("10_harvester")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0, 0, 14.0)
+
+[node name="CommandCenter" parent="Players/Human" index="7" instance=ExtResource("9_command")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0, 0, 12.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

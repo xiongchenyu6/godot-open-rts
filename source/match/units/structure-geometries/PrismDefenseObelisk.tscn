@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_closed.glb" id="1_base"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="2_generator"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/rock_crystalsLargeA.glb" id="3_crystal"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/satelliteDish_large.glb" id="4_emitter"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+
+[node name="structure_closed" parent="Transforms" instance=ExtResource("1_base")]
+transform = Transform3D(0.86, 0, 0, 0, 0.86, 0, 0, 0, 0.86, -2, 0, -1.5)
+
+[node name="machine_generator_left" parent="Transforms" instance=ExtResource("2_generator")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -1.0, 0, -0.1)
+
+[node name="machine_generator_right" parent="Transforms" instance=ExtResource("2_generator")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -3.0, 0, -0.1)
+
+[node name="AimPivot" type="Node3D" parent="Transforms"]
+
+[node name="prism_crystal" parent="Transforms/AimPivot" instance=ExtResource("3_crystal")]
+transform = Transform3D(0.62, 0, 0, 0, 1.2, 0, 0, 0, 0.62, -2, 0.55, -1.5)
+
+[node name="prism_emitter" parent="Transforms/AimPivot" instance=ExtResource("4_emitter")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2, 1.45, -1.5)

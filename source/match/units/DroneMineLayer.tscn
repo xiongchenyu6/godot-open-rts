@@ -1,0 +1,107 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/DroneMineLayer.gd" id="1_mine_layer"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_highlight"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/rover.glb" id="3_rover"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_barrel.glb" id="4_barrel"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="5_selection"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Movement.tscn" id="6_movement"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="7_health"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="8_target"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_team"]
+albedo_color = Color(0.99, 0.81, 0.48, 1)
+metallic = 0.6
+roughness = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark"]
+albedo_color = Color(0.1, 0.115, 0.12, 1)
+metallic = 0.55
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glow"]
+albedo_color = Color(0.15, 0.72, 1, 1)
+emission_enabled = true
+emission = Color(0.05, 0.55, 1, 1)
+emission_energy_multiplier = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_rack"]
+material = SubResource("StandardMaterial3D_dark")
+size = Vector3(1.1, 0.18, 0.55)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pod"]
+material = SubResource("StandardMaterial3D_team")
+radius = 0.16
+height = 0.24
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mine_layer"]
+height = 0.62
+radius = 0.72
+
+[node name="DroneMineLayer" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_mine_layer")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="rover" parent="Geometry" instance=ExtResource("3_rover")]
+transform = Transform3D(1.78, 0, 0, 0, 1.78, 0, 0, 0, 1.78, -3.56, 0, -2.67)
+
+[node name="MineRack" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58, 0.18)
+mesh = SubResource("BoxMesh_rack")
+
+[node name="MinePodA" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 0.55, 0, 0, 0, 1, -0.34, 0.68, 0.18)
+mesh = SubResource("SphereMesh_pod")
+
+[node name="MinePodB" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 0.55, 0, 0, 0, 1, 0, 0.68, 0.18)
+mesh = SubResource("SphereMesh_pod")
+
+[node name="MinePodC" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 0.55, 0, 0, 0, 1, 0.34, 0.68, 0.18)
+mesh = SubResource("SphereMesh_pod")
+
+[node name="machine_barrel" parent="Geometry" instance=ExtResource("4_barrel")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0, 0.42, -0.5)
+
+[node name="StatusLight" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0.8, -0.18)
+mesh = SubResource("SphereMesh_pod")
+material_override = SubResource("StandardMaterial3D_glow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, 0)
+shape = SubResource("CylinderShape3D_mine_layer")
+
+[node name="Highlight" parent="." instance=ExtResource("2_highlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.72
+
+[node name="Selection" parent="." instance=ExtResource("5_selection")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.72
+
+[node name="Movement" parent="." instance=ExtResource("6_movement")]
+path_desired_distance = 0.39
+target_desired_distance = 0.39
+path_height_offset = 0.6
+path_max_distance = 0.39
+radius = 0.72
+neighbor_distance = 8.0
+max_neighbors = 40
+time_horizon_agents = 3.0
+speed = 3.35
+
+[node name="HealthBar" parent="." instance=ExtResource("7_health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12, 0)
+size = Vector2(115, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("8_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.72
+
+[editable path="Geometry/rover"]
+[editable path="Geometry/machine_barrel"]

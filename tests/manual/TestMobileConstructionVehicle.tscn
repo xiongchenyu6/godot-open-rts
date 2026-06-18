@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestMobileConstructionVehicle.gd" id="2_script"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_cc"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="7_tech"]
+[ext_resource type="PackedScene" path="res://source/match/units/MobileConstructionVehicle.tscn" id="8_mcv"]
+
+[sub_resource type="Resource" id="Resource_mcv_settings"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_script")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_mcv_settings")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+resource_a = 99
+resource_b = 99
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("6_cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0, 0, 10.0)
+
+[node name="TechLab" parent="Players/Human" index="1" instance=ExtResource("7_tech")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 15.0, 0, 11.5)
+
+[node name="MobileConstructionVehicle" parent="Players/Human" index="2" instance=ExtResource("8_mcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0, 0, 10.0)

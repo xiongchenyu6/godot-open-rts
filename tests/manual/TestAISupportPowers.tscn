@@ -1,0 +1,73 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestAISupportPowers.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_ai"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_cc"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="8_power"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="9_robotics"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="10_tank"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="11_radar"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="12_tech"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/TacticalSupportPowersController.gd" id="13_support"]
+[ext_resource type="PackedScene" path="res://source/match/units/WeatherControlSpire.tscn" id="14_weather"]
+
+[sub_resource type="Resource" id="Resource_ai_support"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_ai_support")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("7_cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0, 0, 10.0)
+
+[node name="Tank" parent="Players/Human" index="1" instance=ExtResource("10_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0, 0, 10.0)
+
+[node name="Tank2" parent="Players/Human" index="2" instance=ExtResource("10_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0, 0, 10.0)
+
+[node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("6_ai")]
+color = Color(1, 0.360784, 0.45098, 1)
+
+[node name="TacticalSupportPowersController" type="Node" parent="Players/SimpleClairvoyantAI"]
+script = ExtResource("13_support")
+
+[node name="CommandCenter" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("7_cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.0, 0, 34.0)
+
+[node name="PowerReactor" parent="Players/SimpleClairvoyantAI" index="1" instance=ExtResource("8_power")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 37.0, 0, 34.0)
+
+[node name="PowerReactor2" parent="Players/SimpleClairvoyantAI" index="2" instance=ExtResource("8_power")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 40.0, 0, 34.0)
+
+[node name="RoboticsBay" parent="Players/SimpleClairvoyantAI" index="3" instance=ExtResource("9_robotics")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 34.0, 0, 37.0)
+
+[node name="RadarUplink" parent="Players/SimpleClairvoyantAI" index="4" instance=ExtResource("11_radar")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 37.0, 0, 37.0)
+
+[node name="TechLab" parent="Players/SimpleClairvoyantAI" index="5" instance=ExtResource("12_tech")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 40.0, 0, 37.0)
+
+[node name="WeatherControlSpire" parent="Players/SimpleClairvoyantAI" index="6" instance=ExtResource("14_weather")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 43.0, 0, 37.0)
+
+[node name="Tank" parent="Players/SimpleClairvoyantAI" index="7" instance=ExtResource("10_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0, 0, 28.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

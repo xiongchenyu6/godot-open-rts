@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_7t8w3"]
+[ext_resource type="Script" path="res://tests/manual/TestBattleNotifications.gd" id="2_ad8th"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_c72u8"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_c0wde"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_kmjwh"]
+[ext_resource type="PackedScene" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn" id="6_i3n67"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_qnay5"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="8_ukkya"]
+
+[sub_resource type="Resource" id="Resource_5tu04"]
+script = ExtResource("3_c72u8")
+players = Array[Resource]([])
+visibility = 0
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_7t8w3")]
+script = ExtResource("2_ad8th")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_5tu04")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_c0wde")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_kmjwh")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("7_qnay5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="HumanTank" parent="Players/Human" index="1" instance=ExtResource("8_ukkya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0, 0, 10.0)
+
+[node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("6_i3n67")]
+
+[node name="Tank" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("8_ukkya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0, 0, 10.0)

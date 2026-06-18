@@ -1,0 +1,56 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestAIEconomyOrePurifier.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_cc"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="8_power"]
+[ext_resource type="PackedScene" path="res://source/match/units/Refinery.tscn" id="9_refinery"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="10_radar"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="11_robotics"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="12_tech"]
+[ext_resource type="PackedScene" path="res://source/match/units/Worker.tscn" id="13_worker"]
+
+[sub_resource type="Resource" id="Resource_ai_ore_purifier"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_ai_ore_purifier")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("7_cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0, 0, 24.0)
+
+[node name="PowerReactor" parent="Players/Human" index="1" instance=ExtResource("8_power")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 36.0, 0, 34.0)
+
+[node name="PowerReactor2" parent="Players/Human" index="2" instance=ExtResource("8_power")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 40.0, 0, 34.0)
+
+[node name="Refinery" parent="Players/Human" index="3" instance=ExtResource("9_refinery")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 44.0, 0, 34.0)
+
+[node name="RadarUplink" parent="Players/Human" index="4" instance=ExtResource("10_radar")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 36.0, 0, 40.0)
+
+[node name="RoboticsBay" parent="Players/Human" index="5" instance=ExtResource("11_robotics")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 40.0, 0, 40.0)
+
+[node name="TechLab" parent="Players/Human" index="6" instance=ExtResource("12_tech")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 44.0, 0, 40.0)
+
+[node name="Worker" parent="Players/Human" index="7" instance=ExtResource("13_worker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.0, 0, 24.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/non-player/SupplyCrate.gd" id="1_crate"]
+[ext_resource type="PackedScene" uid="uid://dwlxojdatqbl7" path="res://assets/models/kenney-spacekit/platform_small.glb" id="2_platform"]
+[ext_resource type="PackedScene" uid="uid://cx1sxncrhrarh" path="res://assets/models/kenney-spacekit/barrels_rail.glb" id="3_barrels"]
+[ext_resource type="PackedScene" uid="uid://y18l32rljque" path="res://assets/models/kenney-spacekit/barrel.glb" id="4_barrel"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Sparkling.tscn" id="5_sparkling"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_supply_crate"]
+height = 0.8
+radius = 0.85
+
+[node name="SupplyCrate" type="Area3D" groups=["supply_crates"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_crate")
+
+[node name="Geometry" type="Node3D" parent="."]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 0, 0.08, 0)
+
+[node name="platform_small" parent="Geometry" instance=ExtResource("2_platform")]
+transform = Transform3D(0.42, 0, 0, 0, 0.18, 0, 0, 0, 0.42, 0, 0, 0)
+
+[node name="barrels_rail" parent="Geometry" instance=ExtResource("3_barrels")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, -0.14, 0.12, 0)
+
+[node name="barrel" parent="Geometry" instance=ExtResource("4_barrel")]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0.32, 0.12, -0.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CylinderShape3D_supply_crate")
+
+[node name="Sparkling" parent="." instance=ExtResource("5_sparkling")]

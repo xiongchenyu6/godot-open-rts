@@ -6,6 +6,8 @@ enum BlueprintPositionValidity {
 	NOT_NAVIGABLE,
 	NOT_ENOUGH_RESOURCES,
 	OUT_OF_MAP,
+	MISSING_TECH,
+	OUT_OF_BASE_RADIUS,
 }
 
 const ROTATION_BY_KEY_STEP = 45.0
@@ -94,8 +96,12 @@ func _blueprint_rotation_started():
 func _calculate_blueprint_position_validity():
 	if _active_bluprint_out_of_map():
 		return BlueprintPositionValidity.OUT_OF_MAP
+	if not _player_has_required_tech():
+		return BlueprintPositionValidity.MISSING_TECH
 	if not _player_has_enough_resources():
 		return BlueprintPositionValidity.NOT_ENOUGH_RESOURCES
+	if not _active_blueprint_within_base_construction_radius():
+		return BlueprintPositionValidity.OUT_OF_BASE_RADIUS
 	var placement_validity = Utils.Match.Unit.Placement.validate_agent_placement_position(
 		_active_blueprint_node.global_position,
 		_pending_structure_radius,
@@ -114,6 +120,18 @@ func _player_has_enough_resources():
 		_pending_structure_prototype.resource_path
 	]
 	return _player.has_resources(construction_cost)
+
+
+func _player_has_required_tech():
+	return Utils.Match.Unit.Tech.can_construct(
+		_player, _pending_structure_prototype.resource_path
+	)
+
+
+func _active_blueprint_within_base_construction_radius():
+	return Utils.Match.Unit.Placement.is_within_base_construction_radius(
+		_player, _active_blueprint_node.global_position, _pending_structure_radius
+	)
 
 
 func _active_bluprint_out_of_map():
@@ -137,6 +155,21 @@ func _update_feedback_label(blueprint_position_validity):
 			_feedback_label.text = tr("BLUEPRINT_NOT_ENOUGH_RESOURCES")
 		BlueprintPositionValidity.OUT_OF_MAP:
 			_feedback_label.text = tr("BLUEPRINT_OUT_OF_MAP")
+		BlueprintPositionValidity.MISSING_TECH:
+			var missing_requirements = (
+				Utils
+				. Match
+				. Unit
+				. Tech
+				. missing_construction_requirements(
+					_player, _pending_structure_prototype.resource_path
+				)
+			)
+			_feedback_label.text = tr("BLUEPRINT_MISSING_TECH").format(
+				[Utils.Match.Unit.Tech.requirement_names(missing_requirements)]
+			)
+		BlueprintPositionValidity.OUT_OF_BASE_RADIUS:
+			_feedback_label.text = tr("BLUEPRINT_OUT_OF_BASE_RADIUS")
 
 
 func _start_structure_placement(structure_prototype):
@@ -195,7 +228,7 @@ func _cancel_structure_placement():
 
 
 func _finish_structure_placement():
-	if _player_has_enough_resources():
+	if _calculate_blueprint_position_validity() == BlueprintPositionValidity.VALID:
 		var construction_cost = Constants.Match.Units.CONSTRUCTION_COSTS[
 			_pending_structure_prototype.resource_path
 		]
@@ -225,17 +258,24 @@ func _rotate_blueprint_towards_mouse_pos():
 	var mouse_pos_3d = get_viewport().get_camera_3d().get_ray_intersection(mouse_pos_2d)
 	if mouse_pos_3d == null:
 		return
-	var mouse_pos_yless = mouse_pos_3d * Vector3(1, 0, 1)
-	var blueprint_pos_3d = _active_blueprint_node.global_transform.origin
-	var blueprint_pos_yless = blueprint_pos_3d * Vector3(-999, 0, -999)
-	if mouse_pos_yless.distance_to(blueprint_pos_yless) < ROTATION_DEAD_ZONE_DISTANCE:
-		return
-	var rotation_target = Vector3(mouse_pos_yless.x, blueprint_pos_3d.y, mouse_pos_yless.z)
-	if rotation_target.is_equal_approx(_active_blueprint_node.global_transform.origin):
+	var rotation_target = _calculate_blueprint_rotation_target(mouse_pos_3d)
+	if rotation_target == null:
 		return
 	_active_blueprint_node.global_transform = _active_blueprint_node.global_transform.looking_at(
 		rotation_target, Vector3.UP
 	)
+
+
+func _calculate_blueprint_rotation_target(mouse_pos_3d):
+	var mouse_pos_yless = mouse_pos_3d * Vector3(1, 0, 1)
+	var blueprint_pos_3d = _active_blueprint_node.global_transform.origin
+	var blueprint_pos_yless = blueprint_pos_3d * Vector3(1, 0, 1)
+	if mouse_pos_yless.distance_to(blueprint_pos_yless) < ROTATION_DEAD_ZONE_DISTANCE:
+		return null
+	var rotation_target = Vector3(mouse_pos_yless.x, blueprint_pos_3d.y, mouse_pos_yless.z)
+	if rotation_target.is_equal_approx(_active_blueprint_node.global_transform.origin):
+		return null
+	return rotation_target
 
 
 func _finish_blueprint_rotation():

@@ -1,64 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1b3uq81171lf"]
+[gd_scene load_steps=27 format=3 uid="uid://d1b3uq81171lf"]
 
 [ext_resource type="Script" path="res://source/match/hud/unit-menus/VehicleFactoryMenu.gd" id="1_hxrij"]
-[ext_resource type="Texture2D" uid="uid://bqp6cemj1sw4" path="res://assets/ui/icons/Tank.png" id="2_m80mi"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Tank.png" id="2_m80mi"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ScoutRover.png" id="3_e74ow"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RocketTrooperRobot.png" id="4_xgr8k"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AntiAirWalker.png" id="5_3m3tm"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SiegeArtilleryVehicle.png" id="6_focx4"]
+[ext_resource type="Texture2D" uid="uid://ulc56au4aav4" path="res://assets/ui/icons/FlameAssaultBuggy.png" id="7_82orr"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/JammerVehicle.png" id="8_l742n"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RailgunTank.png" id="9_6iwfv"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/LanceBeamTank.png" id="10_bmiji"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/MirageScoutTank.png" id="11_mirage"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ModularMissileCarrier.png" id="12_missile"]
+[ext_resource type="Texture2D" uid="uid://ch2tjgr1tf7ag" path="res://assets/ui/icons/FlakHoverTank.png" id="13_flak"]
+[ext_resource type="Texture2D" uid="uid://cbuudo56wy8xp" path="res://assets/ui/icons/MobileRepairCrawler.png" id="14_repair"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SellStructure.png" id="15_sell"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/LongbowMissileCrawler.png" id="16_longbow"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/HeavySiegeWalker.png" id="17_walker"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RallyPoint.png" id="18_rally"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RailArtilleryWalker.png" id="19_railwalker"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/HammerSiegeTank.png" id="20_hammer"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/OreHarvester.png" id="21_harvester"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SiegeDrillTank.png" id="22_drill"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/TeslaCrawlerMk2.png" id="23_tesla"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/MobileShieldProjector.png" id="24_shield"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/DroneMineLayer.png" id="25_mine"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/MobileConstructionVehicle.png" id="26_mcv"]
 
 [node name="VehicleFactoryMenu" type="GridContainer"]
-columns = 4
+columns = 6
 script = ExtResource("1_hxrij")
 
-[node name="Padding" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding2" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding3" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding5" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding6" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding7" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding8" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding9" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding10" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding11" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding12" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding13" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
 [node name="ProduceTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 focus_mode = 0
-text = "T"
 
 [node name="TextureRect" type="TextureRect" parent="ProduceTankButton"]
 layout_mode = 1
@@ -71,16 +47,412 @@ mouse_filter = 2
 texture = ExtResource("2_m80mi")
 expand_mode = 1
 
-[node name="Padding14" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="ProduceScoutRoverButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+focus_mode = 0
 
-[node name="Padding15" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="ProduceScoutRoverButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_e74ow")
+expand_mode = 1
 
-[node name="Padding16" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="ProduceOreHarvesterButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceOreHarvesterButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("21_harvester")
+expand_mode = 1
+
+[node name="ProduceMobileConstructionVehicleButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceMobileConstructionVehicleButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("26_mcv")
+expand_mode = 1
+
+[node name="ProduceMirageScoutTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceMirageScoutTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_mirage")
+expand_mode = 1
+
+[node name="ProduceFlameAssaultBuggyButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceFlameAssaultBuggyButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_82orr")
+expand_mode = 1
+
+[node name="ProduceDroneMineLayerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceDroneMineLayerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("25_mine")
+expand_mode = 1
+
+[node name="ProduceTeslaCrawlerMk2Button" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceTeslaCrawlerMk2Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("23_tesla")
+expand_mode = 1
+
+[node name="ProduceRocketTrooperRobotButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceRocketTrooperRobotButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_xgr8k")
+expand_mode = 1
+
+[node name="ProduceModularMissileCarrierButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceModularMissileCarrierButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_missile")
+expand_mode = 1
+
+[node name="ProduceLongbowMissileCrawlerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceLongbowMissileCrawlerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_longbow")
+expand_mode = 1
+
+[node name="ProduceJammerVehicleButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceJammerVehicleButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_l742n")
+expand_mode = 1
+
+[node name="ProduceAntiAirWalkerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceAntiAirWalkerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_3m3tm")
+expand_mode = 1
+
+[node name="ProduceFlakHoverTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceFlakHoverTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_flak")
+expand_mode = 1
+
+[node name="ProduceMobileRepairCrawlerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceMobileRepairCrawlerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_repair")
+expand_mode = 1
+
+[node name="ProduceMobileShieldProjectorButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceMobileShieldProjectorButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("24_shield")
+expand_mode = 1
+
+[node name="ProduceSiegeArtilleryVehicleButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceSiegeArtilleryVehicleButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_focx4")
+expand_mode = 1
+
+[node name="ProduceSiegeDrillTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceSiegeDrillTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("22_drill")
+expand_mode = 1
+
+[node name="ProduceLanceBeamTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceLanceBeamTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_bmiji")
+expand_mode = 1
+
+[node name="ProduceRailgunTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceRailgunTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_6iwfv")
+expand_mode = 1
+
+[node name="ProduceHammerSiegeTankButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceHammerSiegeTankButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_hammer")
+expand_mode = 1
+
+[node name="ProduceHeavySiegeWalkerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceHeavySiegeWalkerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_walker")
+expand_mode = 1
+
+[node name="ProduceRailArtilleryWalkerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceRailArtilleryWalkerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_railwalker")
+expand_mode = 1
+
+[node name="SellStructureButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="SellStructureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_sell")
+expand_mode = 1
+
+[node name="SetRallyPointButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="SetRallyPointButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_rally")
+expand_mode = 1
 
 [connection signal="pressed" from="ProduceTankButton" to="." method="_on_produce_tank_button_pressed"]
+[connection signal="pressed" from="ProduceScoutRoverButton" to="." method="_on_produce_scout_rover_button_pressed"]
+[connection signal="pressed" from="ProduceOreHarvesterButton" to="." method="_on_produce_ore_harvester_button_pressed"]
+[connection signal="pressed" from="ProduceMobileConstructionVehicleButton" to="." method="_on_produce_mobile_construction_vehicle_button_pressed"]
+[connection signal="pressed" from="ProduceMirageScoutTankButton" to="." method="_on_produce_mirage_scout_tank_button_pressed"]
+[connection signal="pressed" from="ProduceFlameAssaultBuggyButton" to="." method="_on_produce_flame_assault_buggy_button_pressed"]
+[connection signal="pressed" from="ProduceDroneMineLayerButton" to="." method="_on_produce_drone_mine_layer_button_pressed"]
+[connection signal="pressed" from="ProduceTeslaCrawlerMk2Button" to="." method="_on_produce_tesla_crawler_mk2_button_pressed"]
+[connection signal="pressed" from="ProduceRocketTrooperRobotButton" to="." method="_on_produce_rocket_trooper_robot_button_pressed"]
+[connection signal="pressed" from="ProduceModularMissileCarrierButton" to="." method="_on_produce_modular_missile_carrier_button_pressed"]
+[connection signal="pressed" from="ProduceLongbowMissileCrawlerButton" to="." method="_on_produce_longbow_missile_crawler_button_pressed"]
+[connection signal="pressed" from="ProduceJammerVehicleButton" to="." method="_on_produce_jammer_vehicle_button_pressed"]
+[connection signal="pressed" from="ProduceAntiAirWalkerButton" to="." method="_on_produce_anti_air_walker_button_pressed"]
+[connection signal="pressed" from="ProduceFlakHoverTankButton" to="." method="_on_produce_flak_hover_tank_button_pressed"]
+[connection signal="pressed" from="ProduceMobileRepairCrawlerButton" to="." method="_on_produce_mobile_repair_crawler_button_pressed"]
+[connection signal="pressed" from="ProduceMobileShieldProjectorButton" to="." method="_on_produce_mobile_shield_projector_button_pressed"]
+[connection signal="pressed" from="ProduceSiegeArtilleryVehicleButton" to="." method="_on_produce_siege_artillery_vehicle_button_pressed"]
+[connection signal="pressed" from="ProduceSiegeDrillTankButton" to="." method="_on_produce_siege_drill_tank_button_pressed"]
+[connection signal="pressed" from="ProduceLanceBeamTankButton" to="." method="_on_produce_lance_beam_tank_button_pressed"]
+[connection signal="pressed" from="ProduceRailgunTankButton" to="." method="_on_produce_railgun_tank_button_pressed"]
+[connection signal="pressed" from="ProduceHammerSiegeTankButton" to="." method="_on_produce_hammer_siege_tank_button_pressed"]
+[connection signal="pressed" from="ProduceHeavySiegeWalkerButton" to="." method="_on_produce_heavy_siege_walker_button_pressed"]
+[connection signal="pressed" from="ProduceRailArtilleryWalkerButton" to="." method="_on_produce_rail_artillery_walker_button_pressed"]
+[connection signal="pressed" from="SellStructureButton" to="." method="_on_sell_structure_button_pressed"]
+[connection signal="pressed" from="SetRallyPointButton" to="." method="_on_set_rally_point_button_pressed"]

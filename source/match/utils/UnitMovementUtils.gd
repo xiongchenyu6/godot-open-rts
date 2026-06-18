@@ -25,6 +25,13 @@ static func crowd_moved_to_new_pivot(units, new_pivot):
 	return condensed_unit_positions
 
 
+static func crowd_moved_to_unit(units, target_unit):
+	"""calculates new unit positions around a moving or stationary target unit"""
+	var target_pivot = target_unit.global_position_yless
+	var positions = crowd_moved_to_new_pivot(units, target_pivot)
+	return _push_positions_outside_target_unit(positions, target_unit, target_pivot)
+
+
 static func calculate_aabb_crowd_pivot_yless(units):
 	"""calculates pivot which is a center of crowd AABB"""
 	var unit_positions = []
@@ -90,6 +97,25 @@ static func _attract_unit_positions_towards_pivot(unit_positions, pivot, interun
 				break
 		discs.append([new_unit_positions[unit], unit.radius])
 	return Utils.Dict.items(new_unit_positions)
+
+
+static func _push_positions_outside_target_unit(unit_positions, target_unit, target_pivot):
+	var pushed_positions = []
+	for tuple in unit_positions:
+		var unit = tuple[0]
+		var point = tuple[1] * Vector3(1, 0, 1)
+		var direction_from_target = point - target_pivot
+		if direction_from_target.is_zero_approx():
+			direction_from_target = unit.global_position_yless - target_pivot
+		if direction_from_target.is_zero_approx():
+			direction_from_target = Vector3.FORWARD
+		var min_distance_from_target = (
+			target_unit.radius + unit.radius + Constants.Match.Units.ADHERENCE_MARGIN_M
+		)
+		if direction_from_target.length() < min_distance_from_target:
+			point = target_pivot + direction_from_target.normalized() * min_distance_from_target
+		pushed_positions.append([unit, point])
+	return pushed_positions
 
 
 static func _disc_collides_with_others(disc, discs, adherence_margin):

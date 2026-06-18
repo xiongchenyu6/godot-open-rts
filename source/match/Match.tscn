@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://camns8fqod8d4"]
+[gd_scene load_steps=52 format=3 uid="uid://camns8fqod8d4"]
 
 [ext_resource type="Script" path="res://source/match/Match.gd" id="1_1555u"]
 [ext_resource type="Script" path="res://source/match/IsometricCamera3D.gd" id="1_qb2ry"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://clbjgy724q2si" path="res://source/generic-scenes-and-nodes/2d/DynamicCircle2D.tscn" id="6_ux0ef"]
 [ext_resource type="Script" path="res://source/match/Terrain.gd" id="7_ccpu4"]
 [ext_resource type="Script" path="res://source/match/Navigation.gd" id="10_1wfp1"]
-[ext_resource type="PackedScene" uid="uid://b6n7cwv706x5n" path="res://source/match/debug/GodModeHud.tscn" id="10_p6gno"]
 [ext_resource type="Shader" path="res://source/shaders/3d/fog.gdshader" id="10_weh6c"]
 [ext_resource type="Shader" path="res://source/shaders/2d/blurr.gdshader" id="12_pow7t"]
 [ext_resource type="PackedScene" uid="uid://cwefaix6rye6k" path="res://source/match/hud/ResourcesBar.tscn" id="12_r13sk"]
@@ -22,13 +21,22 @@
 [ext_resource type="Shader" path="res://source/shaders/2d/white_transparent.gdshader" id="19_m1b2v"]
 [ext_resource type="PackedScene" uid="uid://c0uxy26e4qs4w" path="res://source/match/handlers/MouseClickAnimationsHandler.tscn" id="22_438pb"]
 [ext_resource type="PackedScene" uid="uid://1rby73ckmk7b" path="res://source/match/Menu.tscn" id="22_ofmlu"]
-[ext_resource type="PackedScene" uid="uid://b83l4dny3gly0" path="res://source/match/debug/FrameIncrementer.tscn" id="23_exhtd"]
-[ext_resource type="PackedScene" uid="uid://c3xjdp2yrr1fu" path="res://source/match/debug/DiagnosticHud.tscn" id="23_pocq6"]
 [ext_resource type="PackedScene" uid="uid://bocb7hjilvri5" path="res://source/match/handlers/ArealUnitSelectionHandler.tscn" id="24_aug7m"]
 [ext_resource type="PackedScene" uid="uid://pi813oou7xim" path="res://source/match/handlers/DoubleClickUnitSelectionHandler.tscn" id="25_ldkhw"]
 [ext_resource type="PackedScene" uid="uid://yn470qvc3eak" path="res://source/match/handlers/MatchEndHandler.tscn" id="26_4d7im"]
 [ext_resource type="PackedScene" uid="uid://ck6vrgdyg7hja" path="res://source/match/handlers/UnitGroupSelectionHandler.tscn" id="27_j2drv"]
 [ext_resource type="PackedScene" uid="uid://b8p6lcwubx1tp" path="res://source/match/handlers/UnitVisibilityHandler.tscn" id="32_fci1c"]
+[ext_resource type="Script" path="res://source/match/MusicController.gd" id="33_6juvp"]
+[ext_resource type="Script" path="res://source/match/hud/RtsHudStyler.gd" id="34_j2x31"]
+[ext_resource type="PackedScene" path="res://source/match/hud/SupportPowers.tscn" id="35_rqydb"]
+[ext_resource type="PackedScene" path="res://source/match/hud/BattleNotifications.tscn" id="36_q5pm3"]
+[ext_resource type="PackedScene" path="res://source/match/hud/SelectionInfo.tscn" id="37_8rb82"]
+[ext_resource type="PackedScene" path="res://source/match/handlers/BattlefieldEventFocusController.tscn" id="38_focus"]
+[ext_resource type="PackedScene" path="res://source/match/handlers/CameraBookmarkHandler.tscn" id="39_bookmark"]
+[ext_resource type="PackedScene" path="res://source/match/handlers/ArmySelectionHotkeysHandler.tscn" id="40_army_select"]
+[ext_resource type="PackedScene" path="res://source/match/handlers/ProductionStructureHotkeysHandler.tscn" id="41_prod_select"]
+[ext_resource type="PackedScene" path="res://source/match/hud/MatchBriefing.tscn" id="42_briefing"]
+[ext_resource type="PackedScene" path="res://source/match/hud/ObjectiveTracker.tscn" id="43_objective"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ysb0j"]
 sun_angle_max = 200.0
@@ -67,9 +75,6 @@ shader_parameter/blurr_factor = 1.0
 shader_parameter/remove_alpha = false
 shader_parameter/overlay = true
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7yqgo"]
-viewport_path = NodePath("FogOfWar/CombinedViewport")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5rcuq"]
 resource_local_to_scene = true
 render_priority = 2
@@ -78,7 +83,6 @@ shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/texture_units_per_world_unit = 2
 shader_parameter/outer_margin_for_fade_out = 2.0
 shader_parameter/debug_texture_view = false
-shader_parameter/world_visibility_texture = SubResource("ViewportTexture_7yqgo")
 
 [sub_resource type="QuadMesh" id="QuadMesh_xttrh"]
 flip_faces = true
@@ -107,16 +111,9 @@ agent_radius = 0.9
 agent_max_climb = 0.0
 edge_max_error = 1.0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vu2gm"]
-viewport_path = NodePath("FogOfWar/CombinedViewport")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3nec5"]
 resource_local_to_scene = true
 shader = ExtResource("19_m1b2v")
-shader_parameter/reference_texture = SubResource("ViewportTexture_vu2gm")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8q44e"]
-viewport_path = NodePath("HUD/MarginContainer/Minimap/MarginContainer/MinimapViewport")
 
 [node name="Match" type="Node3D"]
 script = ExtResource("1_1555u")
@@ -146,9 +143,14 @@ directional_shadow_pancake_size = 100.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qxcnu")
 
+[node name="MusicController" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("33_6juvp")
+
 [node name="RectangularSelection3D" parent="." instance=ExtResource("5_yi0pu")]
 
-[node name="Terrain" type="StaticBody3D" parent="."]
+[node name="Terrain" type="StaticBody3D" parent="." groups=["terrain_navigation_input"]]
+collision_layer = 2
 collision_mask = 0
 script = ExtResource("7_ccpu4")
 
@@ -269,6 +271,7 @@ navigation_mesh = SubResource("NavigationMesh_exfwj")
 [node name="RectangularSelection2D" parent="UI" instance=ExtResource("16_ccb0o")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("34_j2x31")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 2
@@ -345,8 +348,33 @@ antialiased = true
 
 [node name="MinimapTextureRect" type="TextureRect" parent="HUD/MarginContainer/Minimap/MarginContainer"]
 layout_mode = 2
-texture = SubResource("ViewportTexture_8q44e")
 stretch_mode = 5
+
+[node name="RadarOfflineOverlay" type="ColorRect" parent="HUD/MarginContainer/Minimap/MarginContainer/MinimapTextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.02, 0.04, 0.045, 0.82)
+
+[node name="RadarOfflineLabel" type="Label" parent="HUD/MarginContainer/Minimap/MarginContainer/MinimapTextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.68, 0.93, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "RADAR_OFFLINE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUD"]
 offset_right = 40.0
@@ -382,14 +410,90 @@ layout_mode = 2
 [node name="ResourcesBar8" parent="HUD/MarginContainer2/Resources" instance=ExtResource("12_r13sk")]
 layout_mode = 2
 
+[node name="BriefingButtonAnchor" type="MarginContainer" parent="HUD"]
+offset_left = 5.0
+offset_top = 76.0
+offset_right = 156.0
+offset_bottom = 108.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="ObjectivesButton" type="Button" parent="HUD/BriefingButtonAnchor"]
+layout_mode = 2
+focus_mode = 0
+tooltip_text = "OBJECTIVES_BUTTON_TOOLTIP"
+text = "OBJECTIVES_BUTTON"
+
+[node name="MatchBriefingAnchor" type="MarginContainer" parent="HUD"]
+offset_left = 5.0
+offset_top = 112.0
+offset_right = 455.0
+offset_bottom = 366.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="MatchBriefing" parent="HUD/MatchBriefingAnchor" instance=ExtResource("42_briefing")]
+layout_mode = 2
+
+[node name="ObjectiveTrackerAnchor" type="MarginContainer" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 82.0
+offset_right = 220.0
+offset_bottom = 168.0
+grow_horizontal = 2
+
+[node name="ObjectiveTracker" parent="HUD/ObjectiveTrackerAnchor" instance=ExtResource("43_objective")]
+layout_mode = 2
+
+[node name="SupportPowersAnchor" type="MarginContainer" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -650.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 79.0
+grow_horizontal = 0
+
+[node name="SupportPowers" parent="HUD/SupportPowersAnchor" instance=ExtResource("35_rqydb")]
+layout_mode = 2
+
+[node name="BattleNotificationsAnchor" type="MarginContainer" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 66.0
+offset_right = 180.0
+offset_bottom = 250.0
+grow_horizontal = 2
+
+[node name="BattleNotifications" parent="HUD/BattleNotificationsAnchor" instance=ExtResource("36_q5pm3")]
+layout_mode = 2
+
+[node name="SelectionInfoAnchor" type="MarginContainer" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 225.0
+offset_top = -142.0
+offset_right = -815.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionInfo" parent="HUD/SelectionInfoAnchor" instance=ExtResource("37_8rb82")]
+layout_mode = 2
+
 [node name="MarginContainer3" type="MarginContainer" parent="HUD"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -805.0
+offset_top = -874.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_right = 5
@@ -409,15 +513,15 @@ size_flags_horizontal = 8
 [node name="Menu" parent="." instance=ExtResource("22_ofmlu")]
 visible = false
 
-[node name="Debug" type="Node3D" parent="."]
-
-[node name="DiagnosticHUD" parent="Debug" instance=ExtResource("23_pocq6")]
-
-[node name="GodModeHUD" parent="Debug" instance=ExtResource("10_p6gno")]
-
-[node name="FrameIncrementer" parent="Debug" instance=ExtResource("23_exhtd")]
-
 [node name="Handlers" type="Node3D" parent="."]
+
+[node name="BattlefieldEventFocusController" parent="Handlers" instance=ExtResource("38_focus")]
+
+[node name="CameraBookmarkHandler" parent="Handlers" instance=ExtResource("39_bookmark")]
+
+[node name="ArmySelectionHotkeysHandler" parent="Handlers" instance=ExtResource("40_army_select")]
+
+[node name="ProductionStructureHotkeysHandler" parent="Handlers" instance=ExtResource("41_prod_select")]
 
 [node name="ArealUnitSelectionHandler" parent="Handlers" instance=ExtResource("24_aug7m")]
 rectangular_selection_3d = NodePath("../../RectangularSelection3D")

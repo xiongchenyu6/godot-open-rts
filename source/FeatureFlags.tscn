@@ -4,4 +4,6 @@
 
 [node name="FeatureFlags" type="Node"]
 script = ExtResource("1_wihie")
-god_mode = true
+diagnostic_hud = false
+frame_incrementer = false
+god_mode = false

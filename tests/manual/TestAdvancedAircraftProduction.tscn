@@ -1,0 +1,49 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_3yxkm"]
+[ext_resource type="Script" path="res://tests/manual/TestAdvancedAircraftProduction.gd" id="2_tv771"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_u1t1d"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_x2vdl"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_10q5k"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_c2by6"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="7_sqntl"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="8_pn3l3"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="9_sikx3"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="10_mmtga"]
+[ext_resource type="PackedScene" path="res://source/match/units/AircraftFactory.tscn" id="11_l0wft"]
+
+[sub_resource type="Resource" id="Resource_x5i1t"]
+script = ExtResource("3_u1t1d")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_3yxkm")]
+script = ExtResource("2_tv771")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_x5i1t")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_x2vdl")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_10q5k")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("6_c2by6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="PowerReactor" parent="Players/Human" index="1" instance=ExtResource("7_sqntl")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 13.0, 0, 10.0)
+
+[node name="RadarUplink" parent="Players/Human" index="2" instance=ExtResource("8_pn3l3")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 10.0, 0, 13.0)
+
+[node name="RoboticsBay" parent="Players/Human" index="3" instance=ExtResource("9_sikx3")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 16.0, 0, 10.0)
+
+[node name="TechLab" parent="Players/Human" index="4" instance=ExtResource("10_mmtga")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 16.0, 0, 13.0)
+
+[node name="AircraftFactory" parent="Players/Human" index="5" instance=ExtResource("11_l0wft")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 13.0, 0, 13.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

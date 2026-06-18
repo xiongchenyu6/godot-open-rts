@@ -5,6 +5,14 @@ var resource_b = 0
 var resources_max = null
 
 
+func can_construct_structures():
+	return true
+
+
+func can_collect_resources():
+	return resources_max != null and resources_max > 0
+
+
 func is_full():
 	assert(resource_a + resource_b <= resources_max, "worker capacity was exceeded somehow")
 	return resource_a + resource_b == resources_max

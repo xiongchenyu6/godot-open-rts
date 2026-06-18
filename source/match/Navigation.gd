@@ -14,10 +14,9 @@ func _ready():
 
 
 func get_navigation_map_rid_by_domain(domain):
-	return {
-		Constants.Match.Navigation.Domain.AIR: air.navigation_map_rid,
-		Constants.Match.Navigation.Domain.TERRAIN: terrain.navigation_map_rid,
-	}[domain]
+	if domain == Constants.Match.Navigation.Domain.AIR:
+		return air.navigation_map_rid if _air_navigation_map_is_usable() else terrain.navigation_map_rid
+	return terrain.navigation_map_rid
 
 
 func setup(map):
@@ -49,3 +48,9 @@ func _setup_static_obstacles():
 		NavigationServer3D.obstacle_set_vertices(obstacle, obstacle_vertices)
 		NavigationServer3D.obstacle_set_avoidance_enabled(obstacle, true)
 		_static_obstacles.append(obstacle)
+
+
+func _air_navigation_map_is_usable():
+	var probe = Vector3(_match.map.size.x * 0.5, Constants.Match.Air.Y, _match.map.size.y * 0.5)
+	var closest = NavigationServer3D.map_get_closest_point(air.navigation_map_rid, probe)
+	return not (closest * Vector3(1, 0, 1)).is_equal_approx(Vector3.ZERO)

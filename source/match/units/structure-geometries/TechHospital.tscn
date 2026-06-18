@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" uid="uid://i3jcg4se2kuf" path="res://assets/models/kenney-spacekit/structure_closed.glb" id="1_structure"]
+[ext_resource type="PackedScene" uid="uid://dwlxojdatqbl7" path="res://assets/models/kenney-spacekit/platform_small.glb" id="2_platform"]
+[ext_resource type="PackedScene" uid="uid://ddsbu8y2r5846" path="res://assets/models/kenney-spacekit/stairs_short.glb" id="3_stairs"]
+[ext_resource type="PackedScene" uid="uid://cq6joivyy0sv6" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="4_generator"]
+[ext_resource type="PackedScene" uid="uid://ms7ghpo8l1wf" path="res://assets/models/kenney-spacekit/satelliteDish.glb" id="5_dish"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+
+[node name="platform_small" parent="Transforms" instance=ExtResource("2_platform")]
+transform = Transform3D(0.85, 0, 0, 0, 0.42, 0, 0, 0, 0.85, 0, 0, 0)
+
+[node name="structure_closed" parent="Transforms" instance=ExtResource("1_structure")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, -0.85, 0.05, -0.75)
+
+[node name="machine_generatorLarge" parent="Transforms" instance=ExtResource("4_generator")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, 0.75, 0.05, 0.65)
+
+[node name="satelliteDish" parent="Transforms" instance=ExtResource("5_dish")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.85, 0.4, -0.75)
+
+[node name="stairs_short" parent="Transforms" instance=ExtResource("3_stairs")]
+transform = Transform3D(0.58, 0, 0, 0, 0.32, 0, 0, 0, 0.58, -0.85, 0.02, 0.85)

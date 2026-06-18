@@ -64,19 +64,29 @@ class RouletteWheel:
 	var _values_w_sorted_normalized_shares = []
 
 	func _init(value_to_share_mapping):
-		var total_share = Arr.sum(value_to_share_mapping.values())
+		var total_share = 0.0
+		for share in value_to_share_mapping.values():
+			if share > 0.0:
+				total_share += share
+		if total_share <= 0.0:
+			push_warning("Roulette wheel has no positive shares")
+			return
 		for value in value_to_share_mapping:
 			var share = value_to_share_mapping[value]
+			if share <= 0.0:
+				continue
 			var normalized_share = share / total_share
 			_values_w_sorted_normalized_shares.append([value, normalized_share])
 		for i in range(1, _values_w_sorted_normalized_shares.size()):
 			_values_w_sorted_normalized_shares[i][1] += _values_w_sorted_normalized_shares[i - 1][1]
 
 	func get_value(probability):
+		if _values_w_sorted_normalized_shares.is_empty():
+			return null
+		var normalized_probability = clampf(probability, 0.0, 1.0)
 		for tuple in _values_w_sorted_normalized_shares:
 			var value = tuple[0]
 			var accumulated_share = tuple[1]
-			if probability <= accumulated_share:
+			if normalized_probability <= accumulated_share:
 				return value
-		assert(false, "unexpected flow")
-		return -1
+		return _values_w_sorted_normalized_shares[-1][0]

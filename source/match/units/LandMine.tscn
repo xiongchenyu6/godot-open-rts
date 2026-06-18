@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/LandMine.gd" id="1_land_mine"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dark"]
+albedo_color = Color(0.055, 0.058, 0.065, 1)
+metallic = 0.7
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_team"]
+albedo_color = Color(0.99, 0.81, 0.48, 1)
+metallic = 0.55
+roughness = 0.35
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_body"]
+material = SubResource("StandardMaterial3D_dark")
+top_radius = 0.34
+bottom_radius = 0.38
+height = 0.12
+
+[sub_resource type="TorusMesh" id="TorusMesh_ring"]
+material = SubResource("StandardMaterial3D_team")
+inner_radius = 0.03
+outer_radius = 0.31
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mine"]
+height = 0.14
+radius = 0.4
+
+[node name="LandMine" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_land_mine")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Body" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+mesh = SubResource("CylinderMesh_body")
+
+[node name="TeamRing" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.14, 0)
+mesh = SubResource("TorusMesh_ring")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
+shape = SubResource("CylinderShape3D_mine")

@@ -4,3 +4,4 @@ tmp/
 *.translation
 misc/
 build/
+gdextension_interface.h

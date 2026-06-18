@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://tests/manual/TestMatchEndVictory.tscn" id="1_base"]
+
+[node name="Match" instance=ExtResource("1_base")]
+test_locale = "zh_CN"

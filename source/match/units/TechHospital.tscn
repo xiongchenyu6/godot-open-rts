@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/TechHospital.gd" id="1_ff0ic"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_5gfxi"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/TechHospital.tscn" id="3_l0koi"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="4_r3fdq"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_bqksi"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="6_2110p"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="7_nxwvp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ham8b"]
+height = 1.0
+radius = 1.55
+
+[node name="TechHospital" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ff0ic")
+
+[node name="Geometry" parent="." instance=ExtResource("3_l0koi")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_ham8b")
+
+[node name="Highlight" parent="." instance=ExtResource("2_5gfxi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.55
+
+[node name="Selection" parent="." instance=ExtResource("4_r3fdq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.55
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_bqksi")]
+radius = 1.55
+vertices = PackedVector3Array(0, 0, -1.18, 0.834, 0, -0.834, 1.18, 0, 0, 0.834, 0, 0.834, 0, 0, 1.18, -0.834, 0, 0.834, -1.18, 0, 0, -0.834, 0, -0.834)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_2110p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+size = Vector2(250, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_nxwvp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.55
+
+[editable path="Geometry"]

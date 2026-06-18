@@ -4,6 +4,9 @@ enum PlayerType {
 	NONE = 0,
 	HUMAN = 1,
 	SIMPLE_CLAIRVOYANT_AI = 2,
+	SIMPLE_CLAIRVOYANT_AI_EASY = 3,
+	SIMPLE_CLAIRVOYANT_AI_HARD = 4,
+	SIMPLE_CLAIRVOYANT_AI_BEGINNER = 5,
 }
 
 
@@ -13,34 +16,39 @@ class Match:
 	class Player:
 		const CONTROLLER_SCENES = {
 			PlayerType.HUMAN: preload("res://source/match/players/human/Human.tscn"),
+			PlayerType.SIMPLE_CLAIRVOYANT_AI_BEGINNER:
+			preload("res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn"),
+			PlayerType.SIMPLE_CLAIRVOYANT_AI_EASY:
+			preload("res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn"),
 			PlayerType.SIMPLE_CLAIRVOYANT_AI:
+			preload("res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn"),
+			PlayerType.SIMPLE_CLAIRVOYANT_AI_HARD:
 			preload("res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn"),
 		}
 
 
 class Player:
 	const COLORS = [
-		Color("66b1ff"),
-		Color("ff5c73"),
-		Color("a5ff99"),
-		Color("ed85ff"),
-		Color("006400"),
-		Color("bdb76b"),
-		Color("000080"),
-		Color("48d1cc"),
-		# TODO: make sure the colors below are visually distinct from the ones above
-		Color("ff0000"),
-		Color("ffa500"),
-		Color("ffff00"),
-		Color("00ff00"),
-		Color("00fa9a"),
-		Color("0000ff"),
-		Color("da70d6"),
-		Color("d8bfd8"),
-		Color("ff00ff"),
-		Color("1e90ff"),
-		Color("fa8072"),
-		Color("2f4f4f"),
+		Color("2d7dff"),
+		Color("ff4f64"),
+		Color("2acf75"),
+		Color("b96cff"),
+		Color("ff9f1c"),
+		Color("20cfe8"),
+		Color("f4d23a"),
+		Color("f05deb"),
+		Color("0aff0a"),
+		Color("441fff"),
+		Color("8bcc08"),
+		Color("3976b2"),
+		Color("b26239"),
+		Color("b23976"),
+		Color("ff0a0a"),
+		Color("d60aff"),
+		Color("1fffda"),
+		Color("1836cc"),
+		Color("ff1f8f"),
+		Color("b22407"),
 	]
 
 

@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/GrenadierTrooper.gd" id="1_q1sva"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_v2v0h"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/astronautA.glb" id="3_758r0"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/weapon_rifle.glb" id="4_5iq8l"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="5_g1a7m"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Movement.tscn" id="6_507u6"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="7_tmg46"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="8_vlpmo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oam5v"]
+height = 0.76
+radius = 0.43
+
+[node name="GrenadierTrooper" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_q1sva")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="astronautA" parent="Geometry" instance=ExtResource("3_758r0")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.3, 0, -0.3)
+
+[node name="weapon_rifle" parent="Geometry" instance=ExtResource("4_5iq8l")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, -0.28, 0.56, -0.58)
+
+[node name="ProjectileOrigin" type="Marker3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86, -0.58)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
+shape = SubResource("CylinderShape3D_oam5v")
+
+[node name="Highlight" parent="." instance=ExtResource("2_v2v0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.43
+
+[node name="Selection" parent="." instance=ExtResource("5_g1a7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.43
+
+[node name="Movement" parent="." instance=ExtResource("6_507u6")]
+path_desired_distance = 0.25
+target_desired_distance = 0.25
+path_height_offset = 0.65
+path_max_distance = 0.31
+radius = 0.43
+neighbor_distance = 6.0
+max_neighbors = 30
+time_horizon_agents = 2.0
+speed = 3.2
+
+[node name="HealthBar" parent="." instance=ExtResource("7_tmg46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22, 0)
+size = Vector2(86, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("8_vlpmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.43
+
+[editable path="Geometry/astronautA"]
+[editable path="Geometry/weapon_rifle"]

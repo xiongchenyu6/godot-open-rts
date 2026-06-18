@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/hangar_largeA.glb" id="1_hangar"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/platform_large.glb" id="2_platform"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/craft_cargoA.glb" id="3_cargo"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/satelliteDish.glb" id="4_dish"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+
+[node name="platform_large" parent="Transforms" instance=ExtResource("2_platform")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -0.2, 0, 0)
+
+[node name="hangar_largeA" parent="Transforms" instance=ExtResource("1_hangar")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -1.35, 0.05, -1.1)
+
+[node name="craft_cargoA" parent="Transforms" instance=ExtResource("3_cargo")]
+transform = Transform3D(0.28, 0, 0.08, 0, 0.3, 0, -0.08, 0, 0.28, 0.75, 0.25, 0.65)
+
+[node name="satelliteDish" parent="Transforms" instance=ExtResource("4_dish")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 1.0, 0.25, -1.1)

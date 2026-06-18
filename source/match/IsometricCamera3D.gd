@@ -21,6 +21,7 @@ const EXPECTED_PROJECTION = PROJECTION_ORTHOGONAL
 
 var _mouse_pos_when_rotation_started = null
 var _camera_global_pos_when_rotation_started = null
+var _mouse_edge_movement_active = false
 
 
 func _ready():
@@ -39,6 +40,7 @@ func _physics_process(delta: float):
 
 
 func _unhandled_input(event: InputEvent):
+	_track_mouse_edge_movement_activation(event)
 	_try_handling_zoom(event)
 	_try_handling_mouse_rotation(event)
 
@@ -52,6 +54,22 @@ func set_size_safely(a_size: float):
 
 func set_position_safely(target_position: Vector3):
 	global_transform.origin = _target_position_to_camera_position(target_position)
+
+
+func get_view_state() -> Dictionary:
+	return {
+		"global_transform": global_transform,
+		"size": size,
+	}
+
+
+func restore_view_state(view_state: Dictionary):
+	if not view_state.has("global_transform") or not view_state.has("size"):
+		return
+	size = clamp(float(view_state["size"]), size_min, size_max)
+	global_transform = view_state["global_transform"]
+	_align_camera_far_to_size(size)
+	_align_position_to_bounding_planes()
 
 
 func get_ray_intersection(mouse_pos: Vector2) -> Variant:
@@ -93,6 +111,9 @@ func _calculate_screen_move_vector() -> Vector2:
 	var y_axis = Input.get_axis("move_map_up", "move_map_down")
 	var move_vector = Vector2(x_axis, y_axis)
 
+	if not _mouse_edge_movement_active:
+		return move_vector
+
 	if mouse_pos.x <= screen_margin_for_movement:
 		move_vector.x = -1
 
@@ -106,6 +127,11 @@ func _calculate_screen_move_vector() -> Vector2:
 		move_vector.y = 1
 
 	return move_vector
+
+
+func _track_mouse_edge_movement_activation(event: InputEvent):
+	if event is InputEventMouseMotion:
+		_mouse_edge_movement_active = true
 
 
 func _try_handling_zoom(event: InputEvent):
@@ -252,9 +278,30 @@ func _align_position_to_bounding_planes():
 
 func _clamp_position_to_bounding_planes(a_position: Vector3) -> Vector3:
 	for bounding_plane in bounding_planes:
+		var normal = bounding_plane.normal
+		if _is_axis_normal(normal, 1.0, 0.0, 0.0):
+			a_position.x = max(a_position.x, bounding_plane.d)
+			continue
+		if _is_axis_normal(normal, -1.0, 0.0, 0.0):
+			a_position.x = min(a_position.x, -bounding_plane.d)
+			continue
+		if _is_axis_normal(normal, 0.0, 0.0, 1.0):
+			a_position.z = max(a_position.z, bounding_plane.d)
+			continue
+		if _is_axis_normal(normal, 0.0, 0.0, -1.0):
+			a_position.z = min(a_position.z, -bounding_plane.d)
+			continue
 		if not bounding_plane.is_point_over(a_position):
 			a_position = a_position - bounding_plane.normal * bounding_plane.distance_to(a_position)
 	return a_position
+
+
+func _is_axis_normal(normal: Vector3, x: float, y: float, z: float):
+	return (
+		is_equal_approx(normal.x, x)
+		and is_equal_approx(normal.y, y)
+		and is_equal_approx(normal.z, z)
+	)
 
 
 func _target_position_to_camera_position(target_position: Vector3) -> Vector3:

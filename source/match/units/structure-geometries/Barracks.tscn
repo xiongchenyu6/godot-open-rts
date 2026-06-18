@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/hangar_smallB.glb" id="1_ob2w5"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_detailed.glb" id="2_txefc"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/gate_simple.glb" id="3_b3afu"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/platform_low.glb" id="4_uw0q3"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="5_6h1a2"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="hangar_smallB" parent="Transforms" instance=ExtResource("1_ob2w5")]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, -1.9, 0, -1.4)
+
+[node name="structure_detailed" parent="Transforms" instance=ExtResource("2_txefc")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0.2, 0, 0.45)
+
+[node name="gate_simple" parent="Transforms" instance=ExtResource("3_b3afu")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.35, 0, 1.25)
+
+[node name="platform_low" parent="Transforms" instance=ExtResource("4_uw0q3")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, 1.05, 0, 0.25)
+
+[node name="machine_wireless" parent="Transforms" instance=ExtResource("5_6h1a2")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.25, 0.1, -0.85)

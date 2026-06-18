@@ -1,9 +1,11 @@
 class Unit:
 	const Movement = preload("res://source/match/utils/UnitMovementUtils.gd")
 	const Placement = preload("res://source/match/utils/UnitPlacementUtils.gd")
+	const Tech = preload("res://source/match/utils/UnitTechUtils.gd")
 
 
 const Resources = preload("res://source/match/utils/ResourceUtils.gd")
+const UnitCommands = preload("res://source/match/utils/UnitCommandUtils.gd")
 
 
 static func traverse_node_tree_and_replace_materials_matching_albedo(
@@ -25,8 +27,11 @@ static func traverse_node_tree_and_replace_materials_matching_albedo(
 				child.set("surface_material_override/{0}".format([surface_id]), material_to_set)
 
 
-static func select_units(units_to_select):
-	if not units_to_select.empty() and not Input.is_action_pressed("shift_selecting"):
+static func select_units(units_to_select, replace_current_selection = null):
+	var should_replace_selection = not Input.is_action_pressed("shift_selecting")
+	if replace_current_selection != null:
+		should_replace_selection = replace_current_selection
+	if not units_to_select.empty() and should_replace_selection:
 		MatchSignals.deselect_all_units.emit()
 	for unit in units_to_select.iterate():
 		var selection = unit.find_child("Selection")

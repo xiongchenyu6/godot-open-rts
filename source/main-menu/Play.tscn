@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://baeshrvg30aer"]
+[gd_scene load_steps=5 format=3 uid="uid://baeshrvg30aer"]
 
 [ext_resource type="Script" path="res://source/main-menu/Play.gd" id="1_o62d3"]
 [ext_resource type="PackedScene" uid="uid://dij5xr8swlfdx" path="res://source/main-menu/Background.tscn" id="2_xtk15"]
 [ext_resource type="Theme" uid="uid://c2kgsk4ffhbwo" path="res://source/resources/main_menu.theme" id="3_qwd67"]
+[ext_resource type="Script" path="res://source/main-menu/MapPreview.gd" id="4_preview"]
 
 [node name="Play" type="Control"]
 layout_mode = 3
@@ -55,13 +56,13 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="MapHeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Map"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Label"]
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MapHeaderLabel"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -96,24 +97,62 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="MapDetailsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MapPreview" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_preview")
+
+[node name="MapDetailsLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 70)
 bbcode_enabled = true
-text = "[u]Players:[/u] 4
-[u]Size:[/u] 50x50"
+text = "[u]MAP_DETAILS_PLAYERS:[/u] 4
+[u]MAP_DETAILS_SIZE:[/u] 50x50"
+
+[node name="StartingResourcesLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Starting resources"
+
+[node name="StartingResourcesOptionButton" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 4
+selected = 1
+popup/item_0/text = "Low"
+popup/item_0/id = 0
+popup/item_1/text = "Standard"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+popup/item_3/text = "Rich"
+popup/item_3/id = 3
+
+[node name="OperationSummaryLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 132)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = "[b]Operation summary[/b]"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayersHeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label"]
+[node name="Panel" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlayersHeaderLabel"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15

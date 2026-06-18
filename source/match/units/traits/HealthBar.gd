@@ -2,6 +2,12 @@
 extends Node3D
 
 const BAR_AUTO_VISIBILITY_DURATION = 2.0
+const RANK_COLORS = [
+	Color(0.0, 1.0, 0.0),
+	Color(1.0, 0.78, 0.16),
+	Color(0.18, 0.9, 1.0),
+]
+const RANK_BADGE_TEXTS = ["", "V", "E"]
 
 @export var size = Vector2(200, 20):
 	set(value):
@@ -13,6 +19,7 @@ var _bar_value_initialized = false
 
 @onready var _unit = get_parent()
 @onready var _actual_bar = find_child("ActualBar")
+@onready var _rank_badge = find_child("RankBadge")
 @onready var _visibility_timer = find_child("Timer")
 
 
@@ -24,7 +31,9 @@ func _ready():
 	_unit.selected.connect(_on_unit_selected)
 	_unit.deselected.connect(_on_unit_deselected)
 	_unit.hp_changed.connect(_on_hp_changed)
+	_unit.veterancy_changed.connect(_on_unit_veterancy_changed)
 	_visibility_timer.timeout.connect(_on_visibility_timer_timeout)
+	_update_rank_color()
 
 
 func _recalulate_bar_value():
@@ -46,6 +55,14 @@ func _show_for_a_while():
 	_visibility_timer.start(BAR_AUTO_VISIBILITY_DURATION)
 
 
+func _update_rank_color():
+	var rank = clampi(_unit.veterancy_rank, 0, RANK_COLORS.size() - 1)
+	_actual_bar.texture.gradient.set_color(0, RANK_COLORS[rank])
+	_rank_badge.text = RANK_BADGE_TEXTS[rank]
+	_rank_badge.modulate = RANK_COLORS[rank]
+	_rank_badge.visible = rank > 0
+
+
 func _on_unit_selected():
 	_visibility_timer.stop()
 	show()
@@ -57,6 +74,11 @@ func _on_unit_deselected():
 
 func _on_hp_changed():
 	_recalulate_bar_value()
+
+
+func _on_unit_veterancy_changed(_new_rank):
+	_update_rank_color()
+	_show_for_a_while()
 
 
 func _on_visibility_timer_timeout():

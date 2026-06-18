@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/MobileShieldProjector.gd" id="1_shield"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_highlight"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/rover.glb" id="3_rover"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/satelliteDish_large.glb" id="4_dish"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="5_generator"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wirelessCable.glb" id="6_cable"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="7_selection"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Movement.tscn" id="8_movement"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="9_health"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="10_target"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Sparkling.tscn" id="11_spark"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield"]
+transparency = 1
+albedo_color = Color(0.15, 0.72, 1, 0.32)
+emission_enabled = true
+emission = Color(0.1, 0.62, 1, 1)
+emission_energy_multiplier = 1.4
+
+[sub_resource type="TorusMesh" id="TorusMesh_shield"]
+material = SubResource("StandardMaterial3D_shield")
+inner_radius = 0.06
+outer_radius = 0.95
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_shield"]
+height = 0.7
+radius = 0.8
+
+[node name="MobileShieldProjector" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_shield")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="rover" parent="Geometry" instance=ExtResource("3_rover")]
+transform = Transform3D(1.9, 0, 0, 0, 1.9, 0, 0, 0, 1.9, -3.8, 0, -2.85)
+
+[node name="satelliteDish_large" parent="Geometry" instance=ExtResource("4_dish")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -0.15, 0.72, -0.05)
+
+[node name="machine_generatorLarge" parent="Geometry" instance=ExtResource("5_generator")]
+transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 0.42, 0.38, 0.32)
+
+[node name="machine_wirelessCable" parent="Geometry" instance=ExtResource("6_cable")]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, -0.48, 0.3, 0.32)
+
+[node name="ShieldEmitterRing" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.48, 0)
+mesh = SubResource("TorusMesh_shield")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+shape = SubResource("CylinderShape3D_shield")
+
+[node name="Highlight" parent="." instance=ExtResource("2_highlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.8
+
+[node name="Selection" parent="." instance=ExtResource("7_selection")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.8
+
+[node name="Movement" parent="." instance=ExtResource("8_movement")]
+path_desired_distance = 0.45
+target_desired_distance = 0.45
+path_height_offset = 0.6
+path_max_distance = 0.45
+radius = 0.8
+neighbor_distance = 8.0
+max_neighbors = 40
+time_horizon_agents = 3.0
+speed = 2.85
+
+[node name="HealthBar" parent="." instance=ExtResource("9_health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22, 0)
+size = Vector2(135, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("10_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.8
+
+[node name="Sparkling" parent="." instance=ExtResource("11_spark")]
+
+[editable path="Geometry/rover"]
+[editable path="Geometry/satelliteDish_large"]
+[editable path="Geometry/machine_generatorLarge"]
+[editable path="Geometry/machine_wirelessCable"]

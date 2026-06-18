@@ -27,7 +27,7 @@ material_override = SubResource("StandardMaterial3D_ve5fg")
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_0fj4w")
 
-[node name="Terrain" type="MeshInstance3D" parent="Geometry" groups=["terrain_navigation_input"]]
+[node name="Terrain" type="MeshInstance3D" parent="Geometry"]
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_ypksr")
 

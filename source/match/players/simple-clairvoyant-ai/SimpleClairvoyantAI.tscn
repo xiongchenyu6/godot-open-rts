@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://1qlllsy6h5tc"]
+[gd_scene load_steps=12 format=3 uid="uid://1qlllsy6h5tc"]
 
 [ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.gd" id="1_shcx6"]
 [ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/EconomyController.gd" id="2_otp5l"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/OffenseController.gd" id="4_3nwat"]
 [ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/IntelligenceController.gd" id="5_cxy6e"]
 [ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/ConstructionWorksController.gd" id="6_cbdwc"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/TacticalSupportPowersController.gd" id="7_support"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/EngineerCaptureController.gd" id="8_capture"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/SupplyCrateCollectionController.gd" id="9_crates"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/TechBunkerGarrisonController.gd" id="10_bunker_garrison"]
+[ext_resource type="Script" path="res://source/match/players/simple-clairvoyant-ai/SaboteurInfiltrationController.gd" id="11_saboteur"]
 
 [node name="SimpleClairvoyantAI" type="Node3D"]
 script = ExtResource("1_shcx6")
@@ -23,5 +28,20 @@ script = ExtResource("4_3nwat")
 [node name="IntelligenceController" type="Node" parent="."]
 script = ExtResource("5_cxy6e")
 
+[node name="SupplyCrateCollectionController" type="Node" parent="."]
+script = ExtResource("9_crates")
+
 [node name="ConstructionWorksController" type="Node" parent="."]
 script = ExtResource("6_cbdwc")
+
+[node name="TacticalSupportPowersController" type="Node" parent="."]
+script = ExtResource("7_support")
+
+[node name="EngineerCaptureController" type="Node" parent="."]
+script = ExtResource("8_capture")
+
+[node name="TechBunkerGarrisonController" type="Node" parent="."]
+script = ExtResource("10_bunker_garrison")
+
+[node name="SaboteurInfiltrationController" type="Node" parent="."]
+script = ExtResource("11_saboteur")

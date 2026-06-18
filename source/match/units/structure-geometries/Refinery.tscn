@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_detailed.glb" id="1_xm5i4"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_barrelLarge.glb" id="2_qhkji"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/barrels.glb" id="3_s8vee"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/pipe_straight.glb" id="4_o3dv1"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/pipe_cornerRound.glb" id="5_o71bi"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/chimney_detailed.glb" id="6_l7mdc"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
+
+[node name="structure_detailed" parent="Transforms" instance=ExtResource("1_xm5i4")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -1.25, 0, -0.25)
+
+[node name="machine_barrelLarge" parent="Transforms" instance=ExtResource("2_qhkji")]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0.25, 0, -0.1)
+
+[node name="barrels" parent="Transforms" instance=ExtResource("3_s8vee")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 1.55, 0, 0.65)
+
+[node name="pipe_straight" parent="Transforms" instance=ExtResource("4_o3dv1")]
+transform = Transform3D(0.5, 0, 0, 0, 3.06162e-17, -0.5, 0, 0.5, 3.06162e-17, -0.45, 0.15, 1.05)
+
+[node name="pipe_cornerRound" parent="Transforms" instance=ExtResource("5_o71bi")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0.85, 0.12, 1.05)
+
+[node name="chimney_detailed" parent="Transforms" instance=ExtResource("6_l7mdc")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 1.45, 0, -0.95)

@@ -1,10 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkqj84vbodkb6"]
+[gd_scene load_steps=14 format=3 uid="uid://bkqj84vbodkb6"]
 
 [ext_resource type="PackedScene" uid="uid://b7c1crf36x1li" path="res://source/match/Map.tscn" id="1_c0hq7"]
 [ext_resource type="Material" uid="uid://co8vfcoqqs5i8" path="res://source/match/resources/materials/terrain.material.tres" id="2_hmoqb"]
 [ext_resource type="PackedScene" uid="uid://bf3jjdafqvh0w" path="res://source/match/units/non-player/ResourceA.tscn" id="3_qa7u8"]
 [ext_resource type="PackedScene" uid="uid://bufgjfa3ne3uk" path="res://source/match/units/non-player/ResourceB.tscn" id="4_un678"]
 [ext_resource type="PackedScene" uid="uid://btor1402wkw8k" path="res://source/match/decorations/RockLargeA.tscn" id="5_blryv"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_neutral_player"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechOilDerrick.tscn" id="7_oil_derrick"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechAirport.tscn" id="8_tech_airport"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechHospital.tscn" id="9_tech_hospital"]
+[ext_resource type="PackedScene" path="res://source/match/units/non-player/SupplyCrate.tscn" id="10_supply_crate"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechRepairDepot.tscn" id="11_tech_repair_depot"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechBunker.tscn" id="12_tech_bunker"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_43n1t"]
 resource_local_to_scene = true
@@ -605,3 +612,71 @@ transform = Transform3D(-0.229008, 0, 2.99125, 0, 1.5, 0, -2.99125, 0, -0.229008
 
 [node name="RockLargeA24" parent="Decorations/Wall7" index="23" instance=ExtResource("5_blryv")]
 transform = Transform3D(2.21699, 0, 2.02113, 0, 1.5, 0, -2.02113, 0, 2.21699, 11.1121, 9.53676e-07, 86.6327)
+
+[node name="SupplyCrates" type="Node3D" parent="."]
+
+[node name="CenterResourceCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 50)
+
+[node name="NorthRepairCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 50, 0, 42)
+effect_type = "repair"
+
+[node name="EastVeterancyCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(0.382683, 0, -0.92388, 0, 1, 0, 0.92388, 0, 0.382683, 58, 0, 50)
+effect_type = "veterancy"
+
+[node name="SouthResourceCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(-0.92388, 0, 0.382683, 0, 1, 0, -0.382683, 0, -0.92388, 50, 0, 58)
+
+[node name="WestRepairCrate" parent="SupplyCrates" instance=ExtResource("10_supply_crate")]
+transform = Transform3D(-0.382683, 0, 0.92388, 0, 1, 0, -0.92388, 0, -0.382683, 42, 0, 50)
+effect_type = "repair"
+
+[node name="NeutralPlayers" type="Node3D" parent="."]
+
+[node name="NeutralTech" parent="NeutralPlayers" instance=ExtResource("6_neutral_player")]
+color = Color(0.56, 0.56, 0.56, 1)
+participates_in_match = false
+
+[node name="NorthOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 50, 0, 34)
+
+[node name="EastOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 0, 50)
+
+[node name="SouthOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 50, 0, 66)
+
+[node name="WestOilDerrick" parent="NeutralPlayers/NeutralTech" instance=ExtResource("7_oil_derrick")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 34, 0, 50)
+
+[node name="WestTechAirport" parent="NeutralPlayers/NeutralTech" instance=ExtResource("8_tech_airport")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 38, 0, 44)
+
+[node name="EastTechAirport" parent="NeutralPlayers/NeutralTech" instance=ExtResource("8_tech_airport")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 62, 0, 56)
+
+[node name="NorthTechHospital" parent="NeutralPlayers/NeutralTech" instance=ExtResource("9_tech_hospital")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 56, 0, 38)
+
+[node name="SouthTechHospital" parent="NeutralPlayers/NeutralTech" instance=ExtResource("9_tech_hospital")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 44, 0, 62)
+
+[node name="WestTechRepairDepot" parent="NeutralPlayers/NeutralTech" instance=ExtResource("11_tech_repair_depot")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 38, 0, 56)
+
+[node name="EastTechRepairDepot" parent="NeutralPlayers/NeutralTech" instance=ExtResource("11_tech_repair_depot")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 62, 0, 44)
+
+[node name="NorthWestTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 44, 0, 38)
+
+[node name="NorthEastTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 62, 0, 38)
+
+[node name="SouthEastTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 56, 0, 62)
+
+[node name="SouthWestTechBunker" parent="NeutralPlayers/NeutralTech" instance=ExtResource("12_tech_bunker")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 38, 0, 62)

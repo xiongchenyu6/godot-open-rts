@@ -25,5 +25,17 @@ texture_filter = 2
 render_priority = 1
 texture = SubResource("GradientTexture2D_p6fyg")
 
+[node name="RankBadge" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+billboard = 1
+no_depth_test = true
+texture_filter = 2
+render_priority = 2
+modulate = Color(1, 0.78, 0.16, 1)
+outline_modulate = Color(0, 0, 0, 0.9)
+text = ""
+font_size = 22
+outline_size = 4
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

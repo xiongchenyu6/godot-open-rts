@@ -19,6 +19,8 @@ func _ready():
 	NavigationServer3D.map_set_cell_height(
 		navigation_map_rid, Constants.Match.Terrain.Navmesh.CELL_HEIGHT
 	)
+	NavigationServer3D.region_set_map(_navigation_region.get_region_rid(), navigation_map_rid)
+	NavigationServer3D.map_set_active(navigation_map_rid, true)
 	NavigationServer3D.map_force_update(navigation_map_rid)
 	MatchSignals.schedule_navigation_rebake.connect(_on_schedule_navigation_rebake)
 
@@ -72,7 +74,10 @@ func _rebake():
 # TODO: remove whenever Godot fixes that on its side
 func _sync_navmesh_changes():
 	"""this function forces synchronization between server-level primitives and nodes"""
-	_navigation_region.navigation_mesh = _navigation_region.navigation_mesh
+	NavigationServer3D.region_set_navigation_mesh(
+		_navigation_region.get_region_rid(), _navigation_region.navigation_mesh
+	)
+	NavigationServer3D.map_force_update(navigation_map_rid)
 
 
 func _safety_checks():

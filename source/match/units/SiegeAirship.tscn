@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/SiegeAirship.gd" id="1_3cf2n"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_7ycva"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/craft_cargoB.glb" id="3_p7ig1"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_barrelLarge.glb" id="4_hkxtd"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="5_o4olb"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Movement.tscn" id="6_vb18s"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="7_ug0m2"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/AirToTerrainMarker.tscn" id="8_eycnp"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="9_22grk"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6n7fd"]
+height = 0.8
+radius = 0.8
+
+[node name="SiegeAirship" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_3cf2n")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="craft_cargoB" parent="Geometry" instance=ExtResource("3_p7ig1")]
+transform = Transform3D(0.78, 0, 0, 0, 0.78, 0, 0, 0, 0.78, -1.56, 0, -1.17)
+
+[node name="bomb_pod_left" parent="Geometry" instance=ExtResource("4_hkxtd")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -0.65, -0.18, -0.1)
+
+[node name="bomb_pod_right" parent="Geometry" instance=ExtResource("4_hkxtd")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0.12, -0.18, -0.1)
+
+[node name="ProjectileOrigin" type="Marker3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24, -0.05, -0.85)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+shape = SubResource("CylinderShape3D_6n7fd")
+
+[node name="Highlight" parent="." instance=ExtResource("2_7ycva")]
+radius = 0.8
+
+[node name="Selection" parent="." instance=ExtResource("5_o4olb")]
+radius = 0.8
+
+[node name="Movement" parent="." instance=ExtResource("6_vb18s")]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_height_offset = 0.8
+radius = 0.8
+neighbor_distance = 8.0
+max_neighbors = 40
+domain = 0
+speed = 1.55
+
+[node name="HealthBar" parent="." instance=ExtResource("7_ug0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+size = Vector2(180, 10)
+
+[node name="AirToTerrainMarker" parent="." instance=ExtResource("8_eycnp")]
+
+[node name="Targetability" parent="." instance=ExtResource("9_22grk")]
+radius = 0.8
+
+[editable path="Geometry/craft_cargoB"]
+[editable path="Geometry/bomb_pod_left"]
+[editable path="Geometry/bomb_pod_right"]

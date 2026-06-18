@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_doqn8"]
+[ext_resource type="Script" path="res://tests/manual/TestAIBattlegroupRepairSupport.gd" id="2_0b5mn"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_cfuy7"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_i7uvn"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_g33nc"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_v4p73"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="7_6mj5w"]
+[ext_resource type="PackedScene" path="res://source/match/units/MobileRepairCrawler.tscn" id="8_md4hm"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="9_i8uf7"]
+
+[sub_resource type="Resource" id="Resource_5go4r"]
+script = ExtResource("3_cfuy7")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_doqn8")]
+script = ExtResource("2_0b5mn")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_5go4r")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_i7uvn")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_g33nc")]
+
+[node name="Tank" parent="Players/Human" index="0" instance=ExtResource("7_6mj5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="MobileRepairCrawler" parent="Players/Human" index="1" instance=ExtResource("8_md4hm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0, 0, 10.0)
+
+[node name="Player" parent="Players" index="1" instance=ExtResource("6_v4p73")]
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="CommandCenter" parent="Players/Player" index="0" instance=ExtResource("9_i8uf7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0, 0, 10.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

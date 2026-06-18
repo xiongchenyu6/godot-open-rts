@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_7u2df"]
+[ext_resource type="Script" path="res://tests/manual/TestHoldPosition.gd" id="2_bjop4"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_i85cq"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_2nvkt"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_qvnjq"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_wq5kk"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="7_dysc6"]
+[ext_resource type="PackedScene" path="res://source/match/units/Worker.tscn" id="8_tl6h1"]
+
+[sub_resource type="Resource" id="Resource_yot53"]
+script = ExtResource("3_i85cq")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_7u2df")]
+script = ExtResource("2_bjop4")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_yot53")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_2nvkt")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_qvnjq")]
+
+[node name="Tank" parent="Players/Human" index="0" instance=ExtResource("7_dysc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="Player" parent="Players" index="1" instance=ExtResource("6_wq5kk")]
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Worker" parent="Players/Player" index="0" instance=ExtResource("8_tl6h1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0, 0, 10.0)

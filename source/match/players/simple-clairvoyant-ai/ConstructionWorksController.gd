@@ -23,7 +23,8 @@ func _setup_refresh_timer():
 
 func _on_refresh_timer_timeout():
 	var workers = get_tree().get_nodes_in_group("units").filter(
-		func(unit): return unit is Worker and unit.player == _player
+		func(unit):
+			return unit is Worker and unit.can_construct_structures() and unit.player == _player
 	)
 	if workers.any(func(worker): return worker.action != null and worker.action is Constructing):
 		return
@@ -32,7 +33,19 @@ func _on_refresh_timer_timeout():
 			return unit is Structure and not unit.is_constructed() and unit.player == _player
 	)
 	if not structures_to_construct.is_empty() and not workers.is_empty():
-		# TODO: introduce some algortihm based on distances
-		workers.shuffle()
-		structures_to_construct.shuffle()
-		workers[0].action = Constructing.new(structures_to_construct[0])
+		var assignment = _closest_worker_structure_assignment(workers, structures_to_construct)
+		assignment["worker"].action = Constructing.new(assignment["structure"])
+
+
+func _closest_worker_structure_assignment(workers, structures):
+	var best_worker = workers[0]
+	var best_structure = structures[0]
+	var best_distance = INF
+	for worker in workers:
+		for structure in structures:
+			var distance = worker.global_position_yless.distance_to(structure.global_position_yless)
+			if distance < best_distance:
+				best_distance = distance
+				best_worker = worker
+				best_structure = structure
+	return {"worker": best_worker, "structure": best_structure}

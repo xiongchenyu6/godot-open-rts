@@ -12,26 +12,26 @@ theme_override_constants/separation = 5
 alignment = 2
 
 [node name="ColorRect" type="ColorRect" parent="QueueElements"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 color = Color(1, 0.466667, 0.435294, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="QueueElements"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 color = Color(1, 0.466667, 0.435294, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="QueueElements"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 color = Color(1, 0.466667, 0.435294, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="QueueElements"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 color = Color(1, 0.466667, 0.435294, 1)
 
 [node name="ColorRect5" type="ColorRect" parent="QueueElements"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 color = Color(1, 0.466667, 0.435294, 1)
