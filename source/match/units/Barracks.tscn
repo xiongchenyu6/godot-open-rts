@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/Barracks.gd" id="1_ltmk7"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_xhxlv"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/Barracks.tscn" id="3_v6nlt"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="4_qo0n0"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_5ghdu"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="6_o23l6"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="7_2r7bh"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/RallyPoint.tscn" id="8_b44gm"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/ProductionQueue.tscn" id="9_u0gka"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vkqnm"]
+height = 1.0
+radius = 1.45
+
+[node name="Barracks" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_ltmk7")
+
+[node name="Geometry" parent="." instance=ExtResource("3_v6nlt")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_vkqnm")
+
+[node name="Highlight" parent="." instance=ExtResource("2_xhxlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.45
+
+[node name="Selection" parent="." instance=ExtResource("4_qo0n0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.45
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_5ghdu")]
+radius = 1.45
+vertices = PackedVector3Array(0, 0, -1.1, 0.778, 0, -0.778, 1.1, 0, 0, 0.778, 0, 0.778, 0, 0, 1.1, -0.778, 0, 0.778, -1.1, 0, 0, -0.778, 0, -0.778)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_o23l6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+size = Vector2(240, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_2r7bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.45
+
+[node name="RallyPoint" parent="." instance=ExtResource("8_b44gm")]
+
+[node name="ProductionQueue" parent="." instance=ExtResource("9_u0gka")]
+
+[editable path="Geometry"]

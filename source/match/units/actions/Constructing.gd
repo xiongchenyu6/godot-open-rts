@@ -15,7 +15,10 @@ var _sub_action = null
 
 static func is_applicable(source_unit, target_unit):
 	return (
-		source_unit is Worker
+		_has_runtime_unit(source_unit)
+		and _has_runtime_unit(target_unit)
+		and source_unit is Worker
+		and source_unit.can_construct_structures()
 		and target_unit is Structure
 		and not target_unit.is_constructed()
 		and source_unit.player == target_unit.player
@@ -24,14 +27,21 @@ static func is_applicable(source_unit, target_unit):
 
 func _init(target_unit):
 	_target_unit = target_unit
-	_target_unit.constructed.connect(_on_target_unit_constructed)
 
 
 func _ready():
+	if not is_applicable(_unit, _target_unit):
+		queue_free()
+		return
+	_target_unit.tree_exited.connect(_on_target_unit_removed)
+	_target_unit.constructed.connect(_on_target_unit_constructed)
 	_construct_or_move_closer()
 
 
 func _construct_or_move_closer():
+	if not is_applicable(_unit, _target_unit):
+		queue_free()
+		return
 	_sub_action = (
 		MovingToUnit.new(_target_unit)
 		if not Utils.Match.Unit.Movement.units_adhere(_unit, _target_unit)
@@ -49,7 +59,7 @@ func _to_string():
 func _on_sub_action_finished():
 	if not is_inside_tree():
 		return
-	if not is_instance_valid(_target_unit) or not _target_unit.is_inside_tree():
+	if not is_applicable(_unit, _target_unit):
 		queue_free()
 		return
 	_sub_action = null
@@ -59,5 +69,14 @@ func _on_sub_action_finished():
 func _on_target_unit_constructed():
 	if not is_inside_tree():
 		return
-	_sub_action.tree_exited.disconnect(_on_sub_action_finished)
+	if _sub_action != null and _sub_action.tree_exited.is_connected(_on_sub_action_finished):
+		_sub_action.tree_exited.disconnect(_on_sub_action_finished)
 	queue_free()
+
+
+func _on_target_unit_removed():
+	queue_free()
+
+
+static func _has_runtime_unit(unit):
+	return unit != null and is_instance_valid(unit) and unit.is_inside_tree()

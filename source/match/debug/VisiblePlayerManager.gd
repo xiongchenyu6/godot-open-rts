@@ -6,6 +6,9 @@ extends PanelContainer
 
 
 func _ready():
+	if not FeatureFlags.god_mode or _match == null:
+		queue_free()
+		return
 	await _match.ready
 	if (
 		_match.settings.visibility

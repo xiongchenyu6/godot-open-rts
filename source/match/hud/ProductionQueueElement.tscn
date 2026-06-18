@@ -5,19 +5,64 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ar725"]
 
 [node name="ProductionQueueElement" type="Button"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(72, 72)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ar725")
 text = "Y"
 script = ExtResource("1_yaio2")
 
-[node name="Label" type="Label" parent="."]
+[node name="IconTextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 10
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusBackdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -18.0
+offset_right = -5.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.0156863, 0.027451, 0.0313726, 0.88)
+
+[node name="ProgressFill" type="ColorRect" parent="StatusBackdrop"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 0.4
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.44, 0.86, 1, 0.78)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -19.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 11
 text = "10%"
 horizontal_alignment = 2
 vertical_alignment = 2

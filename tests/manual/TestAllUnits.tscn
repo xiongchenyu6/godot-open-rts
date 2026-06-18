@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b65yuqx0iw62f"]
+[gd_scene load_steps=38 format=3 uid="uid://b65yuqx0iw62f"]
 
 [ext_resource type="PackedScene" uid="uid://camns8fqod8d4" path="res://source/match/Match.tscn" id="1_oiu0k"]
 [ext_resource type="Script" path="res://tests/manual/Match.gd" id="2_ghr3h"]
@@ -18,7 +18,18 @@
 [ext_resource type="PackedScene" uid="uid://bufgjfa3ne3uk" path="res://source/match/units/non-player/ResourceB.tscn" id="7_g0wbf"]
 [ext_resource type="PackedScene" uid="uid://i58ffvwxbbwm" path="res://source/match/units/Tank.tscn" id="9_csgr3"]
 [ext_resource type="PackedScene" uid="uid://bf0r3fovbvf1m" path="res://source/match/units/Worker.tscn" id="10_c3eov"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="11_snhol"]
+[ext_resource type="PackedScene" path="res://source/match/units/RocketInfantry.tscn" id="12_y1cuq"]
+[ext_resource type="PackedScene" path="res://source/match/units/RepairPad.tscn" id="13_repair"]
+[ext_resource type="PackedScene" path="res://source/match/units/MobileShieldProjector.tscn" id="14_shield"]
+[ext_resource type="PackedScene" path="res://source/match/units/AdvancedReactorPlant.tscn" id="15_advanced"]
+[ext_resource type="PackedScene" path="res://source/match/units/TeslaFenceSegment.tscn" id="15_tesla"]
 [ext_resource type="Shader" path="res://source/shaders/2d/white_transparent.gdshader" id="16_mqpbu"]
+[ext_resource type="PackedScene" path="res://source/match/units/DroneMineLayer.tscn" id="17_mine_layer"]
+[ext_resource type="PackedScene" path="res://source/match/units/PrismDefenseObelisk.tscn" id="18_prism"]
+[ext_resource type="PackedScene" path="res://source/match/units/FlakRocketTeamMk2.tscn" id="19_flakmk2"]
+[ext_resource type="PackedScene" path="res://source/match/units/SaboteurInfiltrator.tscn" id="20_infiltrator"]
+[ext_resource type="PackedScene" path="res://source/match/units/OrePurifier.tscn" id="21_orepurifier"]
 
 [sub_resource type="Resource" id="Resource_rpdec"]
 script = ExtResource("4_bf0h3")
@@ -107,8 +118,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.67897, 0, 3.61146)
 [node name="Tank" parent="Players/Human" index="8" instance=ExtResource("9_csgr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2469, 0, 5.45996)
 
-[node name="Worker" parent="Players/Human" index="9" instance=ExtResource("10_c3eov")]
+[node name="RocketInfantry" parent="Players/Human" index="9" instance=ExtResource("12_y1cuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8, 0, 6.6)
+
+[node name="Worker" parent="Players/Human" index="10" instance=ExtResource("10_c3eov")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5856, 0, 14.6178)
+
+[node name="PowerReactor" parent="Players/Human" index="11" instance=ExtResource("11_snhol")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 15.6, 0, 13.25)
+
+[node name="RepairPad" parent="Players/Human" index="12" instance=ExtResource("13_repair")]
+transform = Transform3D(0.955336, 0, -0.29552, 0, 1, 0, 0.29552, 0, 0.955336, 18.6, 0, 13.25)
+
+[node name="MobileShieldProjector" parent="Players/Human" index="13" instance=ExtResource("14_shield")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 21.3, 0, 13.25)
+
+[node name="DroneMineLayer" parent="Players/Human" index="14" instance=ExtResource("17_mine_layer")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 23.7, 0, 13.25)
+
+[node name="AdvancedReactorPlant" parent="Players/Human" index="15" instance=ExtResource("15_advanced")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 15.6, 0, 16.35)
+
+[node name="OrePurifier" parent="Players/Human" index="16" instance=ExtResource("21_orepurifier")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 12.0, 0, 16.35)
+
+[node name="TeslaFenceSegment" parent="Players/Human" index="17" instance=ExtResource("15_tesla")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 19.2, 0, 16.35)
+
+[node name="PrismDefenseObelisk" parent="Players/Human" index="18" instance=ExtResource("18_prism")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 22.9, 0, 16.35)
+
+[node name="FlakRocketTeamMk2" parent="Players/Human" index="19" instance=ExtResource("19_flakmk2")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 26.0, 0, 16.35)
+
+[node name="SaboteurInfiltrator" parent="Players/Human" index="20" instance=ExtResource("20_infiltrator")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 28.5, 0, 16.35)
 
 [node name="ScreenOverlay" parent="FogOfWar" index="1"]
 material_override = SubResource("ShaderMaterial_67o07")

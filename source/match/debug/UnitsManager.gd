@@ -10,6 +10,9 @@ var _enable_debug_visuals_for_new_untis = false
 
 
 func _ready():
+	if not FeatureFlags.god_mode:
+		queue_free()
+		return
 	MatchSignals.unit_spawned.connect(_on_unit_spawned)
 
 

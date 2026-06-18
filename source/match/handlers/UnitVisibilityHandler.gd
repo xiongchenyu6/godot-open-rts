@@ -1,12 +1,14 @@
 extends Node3D
 
 const SIGHT_COMPENSATION = 2.0  # compensates for blurry edges of FoW
+const WEB_VISIBILITY_SYNC_INTERVAL_SECONDS = 0.15
 
 const Structure = preload("res://source/match/units/Structure.gd")
 
 var _units_processed_at_least_once = {}
 var _structure_to_dummy_mapping = {}
 var _orphaned_dummies = []
+var _visibility_sync_elapsed = WEB_VISIBILITY_SYNC_INTERVAL_SECONDS
 
 
 func _ready():
@@ -14,9 +16,14 @@ func _ready():
 	MatchSignals.unit_died.connect(_on_unit_died)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	if OS.has_feature("web"):
+		_visibility_sync_elapsed += delta
+		if _visibility_sync_elapsed < WEB_VISIBILITY_SYNC_INTERVAL_SECONDS:
+			return
+		_visibility_sync_elapsed = 0.0
 	var all_units = get_tree().get_nodes_in_group("units")
-	var revealed_units = all_units.filter(func(unit): return unit.is_in_group("revealed_units"))
+	var revealed_units = _get_current_revealers(all_units)
 	for unit in all_units:
 		_recalculate_unit_visibility(unit, revealed_units)
 	for orphaned_dummy in _orphaned_dummies:
@@ -34,9 +41,7 @@ func _recalculate_unit_visibility(unit, revealed_units = null):
 
 	var should_be_visible = false
 	if revealed_units == null:
-		revealed_units = get_tree().get_nodes_in_group("units").filter(
-			func(a_unit): return a_unit.is_in_group("revealed_units")
-		)
+		revealed_units = _get_current_revealers(get_tree().get_nodes_in_group("units"))
 	for revealed_unit in revealed_units:
 		if (
 			revealed_unit.is_revealing()
@@ -85,9 +90,7 @@ func _try_removing_dummy_structure(unit):
 func _recalcuate_orphaned_dummy_existence(orphaned_dummy, revealed_units = null):
 	var should_exist = true
 	if revealed_units == null:
-		revealed_units = get_tree().get_nodes_in_group("units").filter(
-			func(unit): return unit.is_in_group("revealed_units")
-		)
+		revealed_units = _get_current_revealers(get_tree().get_nodes_in_group("units"))
 	for revealed_unit in revealed_units:
 		if (
 			revealed_unit.is_revealing()
@@ -104,6 +107,13 @@ func _recalcuate_orphaned_dummy_existence(orphaned_dummy, revealed_units = null)
 	if not should_exist:
 		_orphaned_dummies.erase(orphaned_dummy)
 		orphaned_dummy.queue_free()
+
+
+func _get_current_revealers(all_units):
+	return (
+		all_units.filter(func(unit): return unit.is_in_group("revealed_units"))
+		+ get_tree().get_nodes_in_group("temporary_revealers")
+	)
 
 
 func _on_unit_died(unit):

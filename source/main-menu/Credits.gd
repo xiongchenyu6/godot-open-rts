@@ -1,6 +1,7 @@
 extends Control
 
 @onready var _rich_text_label = find_child("RichTextLabel")
+@onready var _back_button = find_child("Button")
 
 
 func _ready():
@@ -10,6 +11,7 @@ func _ready():
 		. replace("CORE_CONTRIBUTORS", tr("CORE_CONTRIBUTORS"))
 		. replace("ASSETS", tr("ASSETS"))
 	)
+	_back_button.text = tr("BACK")
 
 
 func _on_back_button_pressed():

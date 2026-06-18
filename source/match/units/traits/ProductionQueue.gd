@@ -3,13 +3,12 @@ extends Node
 signal element_enqueued(element)
 signal element_removed(element)
 
-const Moving = preload("res://source/match/units/actions/Moving.gd")
-
 
 class ProductionQueueElement:
 	extends Resource
 	var unit_prototype = null
 	var time_total = null
+	var blocked_notification_sent = false
 	var time_left = null:
 		set(value):
 			time_left = value
@@ -25,13 +24,19 @@ var _queue = []
 
 
 func _process(delta):
-	while _queue.size() > 0 and delta > 0.0:
+	var production_delta = delta * _unit.player.get_production_speed_multiplier()
+	while _queue.size() > 0 and production_delta > 0.0:
 		var current_queue_element = _queue.front()
-		current_queue_element.time_left = max(0.0, current_queue_element.time_left - delta)
-		if current_queue_element.time_left == 0.0:
-			_remove_element(current_queue_element)
-			_finalize_production(current_queue_element)
-		delta = max(0.0, delta - current_queue_element.time_left)
+		if current_queue_element.time_left <= 0.0:
+			if not _try_finalize_production(current_queue_element):
+				break
+			continue
+		var step = min(production_delta, current_queue_element.time_left)
+		current_queue_element.time_left = max(0.0, current_queue_element.time_left - step)
+		production_delta -= step
+		if current_queue_element.time_left <= 0.0:
+			if not _try_finalize_production(current_queue_element):
+				break
 
 
 func size():
@@ -44,11 +49,13 @@ func get_elements():
 
 func produce(unit_prototype, ignore_limit = false):
 	if not ignore_limit and _queue.size() >= Constants.Match.Units.PRODUCTION_QUEUE_LIMIT:
-		return
+		return null
+	if not Utils.Match.Unit.Tech.can_produce(_unit.player, unit_prototype.resource_path):
+		return null
 	var production_cost = Constants.Match.Units.PRODUCTION_COSTS[unit_prototype.resource_path]
 	if not _unit.player.has_resources(production_cost):
 		MatchSignals.not_enough_resources_for_production.emit(_unit.player)
-		return
+		return null
 	_unit.player.subtract_resources(production_cost)
 	var queue_element = ProductionQueueElement.new()
 	queue_element.unit_prototype = unit_prototype
@@ -56,6 +63,7 @@ func produce(unit_prototype, ignore_limit = false):
 	queue_element.time_left = Constants.Match.Units.PRODUCTION_TIMES[unit_prototype.resource_path]
 	_enqueue_element(queue_element)
 	MatchSignals.unit_production_started.emit(unit_prototype, _unit)
+	return queue_element
 
 
 func cancel_all():
@@ -83,7 +91,7 @@ func _remove_element(element):
 	element_removed.emit(element)
 
 
-func _finalize_production(former_queue_element):
+func _try_finalize_production(former_queue_element):
 	var produced_unit = former_queue_element.unit_prototype.instantiate()
 	var placement_position = (
 		Utils
@@ -103,11 +111,45 @@ func _finalize_production(former_queue_element):
 			get_tree()
 		)
 	)
+	if placement_position == Vector3.INF:
+		_notify_production_blocked_once(former_queue_element)
+		produced_unit.free()
+		return false
+	_remove_element(former_queue_element)
 	MatchSignals.setup_and_spawn_unit.emit(
 		produced_unit, Transform3D(Basis(), placement_position), _unit.player
 	)
+	_apply_production_veterancy_bonus(produced_unit)
 	MatchSignals.unit_production_finished.emit(produced_unit, _unit)
 
-	var rally_point = _unit.find_child("RallyPoint")
-	if rally_point != null:
+	var rally_point = _unit.find_child("RallyPoint", true, false)
+	if rally_point != null and "is_set" in rally_point and rally_point.is_set:
 		MatchSignals.navigate_unit_to_rally_point.emit(produced_unit, rally_point)
+	return true
+
+
+func _apply_production_veterancy_bonus(produced_unit):
+	if (
+		not _unit.player.has_method("get_production_veterancy_rank")
+		or not produced_unit.has_method("grant_veterancy_rank")
+	):
+		return
+	var rank = _unit.player.get_production_veterancy_rank(_producer_scene_path())
+	if rank <= 0:
+		return
+	if not produced_unit.is_node_ready():
+		await produced_unit.ready
+	if is_instance_valid(produced_unit):
+		produced_unit.grant_veterancy_rank(rank)
+
+
+func _producer_scene_path():
+	return _unit.get_script().resource_path.replace(".gd", ".tscn")
+
+
+func _notify_production_blocked_once(queue_element):
+	if queue_element.blocked_notification_sent:
+		return
+	queue_element.blocked_notification_sent = true
+	queue_element.emit_changed()
+	MatchSignals.unit_production_blocked.emit(queue_element.unit_prototype, _unit)

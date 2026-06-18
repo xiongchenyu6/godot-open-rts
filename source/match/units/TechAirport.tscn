@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/TechAirport.gd" id="1_0hgrw"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_1248w"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/TechAirport.tscn" id="3_jty4h"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="4_0dbdw"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_m7idm"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="6_8o7tu"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="7_b6tpy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_p1yh8"]
+height = 1.0
+radius = 1.8
+
+[node name="TechAirport" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_0hgrw")
+
+[node name="Geometry" parent="." instance=ExtResource("3_jty4h")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_p1yh8")
+
+[node name="Highlight" parent="." instance=ExtResource("2_1248w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.8
+
+[node name="Selection" parent="." instance=ExtResource("4_0dbdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.8
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_m7idm")]
+radius = 1.8
+vertices = PackedVector3Array(0, 0, -1.35, 0.955, 0, -0.955, 1.35, 0, 0, 0.955, 0, 0.955, 0, 0, 1.35, -0.955, 0, 0.955, -1.35, 0, 0, -0.955, 0, -0.955)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_8o7tu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+size = Vector2(280, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_b6tpy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.8
+
+[editable path="Geometry"]

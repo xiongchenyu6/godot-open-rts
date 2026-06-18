@@ -21,15 +21,30 @@ func _exit_tree():
 
 
 func _align_unit_position_to_navigation():
-	_unit.global_transform.origin = (
-		NavigationServer3D.map_get_closest_point(
-			get_navigation_map(), get_parent().global_transform.origin
-		)
-		- Vector3(0, path_height_offset, 0)
+	var initial_position = get_parent().global_transform.origin
+	var closest_point = NavigationServer3D.map_get_closest_point(
+		get_navigation_map(), initial_position
 	)
+	if _is_navigation_point_valid(initial_position, closest_point):
+		_unit.global_transform.origin = closest_point - Vector3(0, path_height_offset, 0)
+	else:
+		_unit.global_transform.origin = initial_position
 
 
 func _affect_navigation_if_needed():
 	if affect_navigation_mesh:
 		add_to_group(Constants.Match.Navigation.DOMAIN_TO_GROUP_MAPPING[domain])
 		MatchSignals.schedule_navigation_rebake.emit(domain)
+
+
+func _is_navigation_point_valid(query_position, closest_point):
+	if not (
+		is_finite(closest_point.x) and is_finite(closest_point.y) and is_finite(closest_point.z)
+	):
+		return false
+	var query_position_yless = query_position * Vector3(1, 0, 1)
+	var closest_point_yless = closest_point * Vector3(1, 0, 1)
+	return not (
+		closest_point_yless.is_equal_approx(Vector3.ZERO)
+		and not query_position_yless.is_equal_approx(Vector3.ZERO)
+	)

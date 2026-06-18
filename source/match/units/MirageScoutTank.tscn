@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/MirageScoutTank.gd" id="1_62hvk"]
+[ext_resource type="PackedScene" uid="uid://cgsi062w5fjia" path="res://source/match/units/traits/Highlight.tscn" id="2_fawgp"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/craft_speederC.glb" id="3_hbqef"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="4_6ewkq"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/weapon_gun.glb" id="5_56ukg"]
+[ext_resource type="PackedScene" uid="uid://3c1h14nqdumt" path="res://source/match/units/traits/Selection.tscn" id="6_mkfv6"]
+[ext_resource type="PackedScene" uid="uid://ivlo0e66qocl" path="res://source/match/units/traits/Movement.tscn" id="7_tn4bj"]
+[ext_resource type="PackedScene" uid="uid://c3ssj2p6voauk" path="res://source/match/units/traits/HealthBar.tscn" id="8_yusce"]
+[ext_resource type="PackedScene" uid="uid://d4cm4yhtf11ur" path="res://source/match/units/traits/Targetability.tscn" id="9_pglcr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v3j8m"]
+height = 0.58
+radius = 0.62
+
+[node name="MirageScoutTank" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_62hvk")
+
+[node name="Geometry" type="Node3D" parent="."]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0, 0)
+
+[node name="craft_speederC" parent="Geometry" instance=ExtResource("3_hbqef")]
+transform = Transform3D(1.08, 0, 0, 0, 1.08, 0, 0, 0, 1.08, -2.16, 0, -1.62)
+
+[node name="machine_wireless" parent="Geometry" instance=ExtResource("4_6ewkq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.72, 0.54, -0.1)
+
+[node name="weapon_gun" parent="Geometry" instance=ExtResource("5_56ukg")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.88, -0.78, 0.5, -1.45)
+
+[node name="ProjectileOrigin" type="Marker3D" parent="Geometry"]
+transform = Transform3D(1.21951, 0, 0, 0, 1.21951, 0, 0, 0, 1.21951, -0.78, 0.56, -1.55)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29, 0)
+shape = SubResource("CylinderShape3D_v3j8m")
+
+[node name="Highlight" parent="." instance=ExtResource("2_fawgp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.62
+
+[node name="Selection" parent="." instance=ExtResource("6_mkfv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.62
+
+[node name="Movement" parent="." instance=ExtResource("7_tn4bj")]
+path_desired_distance = 0.34
+target_desired_distance = 0.34
+path_height_offset = 0.56
+path_max_distance = 0.34
+radius = 0.62
+neighbor_distance = 8.0
+max_neighbors = 40
+time_horizon_agents = 2.5
+speed = 4.6
+
+[node name="HealthBar" parent="." instance=ExtResource("8_yusce")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92, 0)
+size = Vector2(100, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("9_pglcr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.62
+
+[editable path="Geometry/craft_speederC"]
+[editable path="Geometry/machine_wireless"]
+[editable path="Geometry/weapon_gun"]

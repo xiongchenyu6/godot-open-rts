@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_b2p7g"]
+[ext_resource type="Script" path="res://tests/manual/TestMatchBriefing.gd" id="2_o5uyk"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_vgifm"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_v1w48"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_ytpoy"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_y7b1v"]
+
+[sub_resource type="Resource" id="Resource_jqupd"]
+script = ExtResource("3_vgifm")
+players = Array[Resource]([])
+visibility = 0
+visible_player = 0
+starting_resource_a = 8
+starting_resource_b = 4
+
+[node name="Match" instance=ExtResource("1_b2p7g")]
+script = ExtResource("2_o5uyk")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_jqupd")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_v1w48")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_ytpoy")]
+
+[node name="Enemy" parent="Players" index="1" instance=ExtResource("6_y7b1v")]
+color = Color(1, 0.360784, 0.45098, 1)

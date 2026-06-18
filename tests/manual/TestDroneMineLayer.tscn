@@ -1,0 +1,53 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestDroneMineLayer.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_enemy"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_command_center"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="8_robotics"]
+[ext_resource type="PackedScene" path="res://source/match/units/VehicleFactory.tscn" id="9_factory"]
+[ext_resource type="PackedScene" path="res://source/match/units/DroneMineLayer.tscn" id="10_mine_layer"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="11_tank"]
+[ext_resource type="PackedScene" path="res://source/match/units/Drone.tscn" id="12_drone"]
+
+[sub_resource type="Resource" id="Resource_drone_mine_layer"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_drone_mine_layer")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("7_command_center")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 0, 9.0)
+
+[node name="RoboticsBay" parent="Players/Human" index="1" instance=ExtResource("8_robotics")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 8.0, 0, 12.0)
+
+[node name="VehicleFactory" parent="Players/Human" index="2" instance=ExtResource("9_factory")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 11.0, 0, 9.0)
+
+[node name="DroneMineLayer" parent="Players/Human" index="3" instance=ExtResource("10_mine_layer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0, 0, 10.0)
+
+[node name="Enemy" parent="Players" index="1" instance=ExtResource("6_enemy")]
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Tank" parent="Players/Enemy" index="0" instance=ExtResource("11_tank")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.0, 0, 30.0)
+
+[node name="Drone" parent="Players/Enemy" index="1" instance=ExtResource("12_drone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0, 0, 30.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

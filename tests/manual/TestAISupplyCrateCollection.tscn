@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestAISupplyCrateCollection.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn" id="5_ai"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_command"]
+[ext_resource type="PackedScene" path="res://source/match/units/non-player/SupplyCrate.tscn" id="9_crate"]
+
+[sub_resource type="Resource" id="Resource_ai_crate_settings"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+settings = SubResource("Resource_ai_crate_settings")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="SimpleClairvoyantAI" parent="Players" index="0" instance=ExtResource("5_ai")]
+resource_a = 3
+resource_b = 2
+expected_number_of_workers = 0
+expected_number_of_refineries = 0
+expected_number_of_ore_harvesters = 0
+expected_number_of_ag_turrets = 0
+expected_number_of_aa_turrets = 0
+expected_number_of_tesla_fence_segments = 0
+expected_number_of_arc_coil_towers = 0
+expected_number_of_lance_beam_towers = 0
+expected_number_of_prism_defense_obelisks = 0
+expected_number_of_rail_cannon_bunkers = 0
+expected_number_of_battlegroups = 0
+
+[node name="CommandCenter" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("7_command")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="SupplyCrates" type="Node3D" parent="." index="4"]
+
+[node name="ResourceCrate" parent="SupplyCrates" index="0" instance=ExtResource("9_crate")]
+transform = Transform3D(0.92388, 0, -0.382683, 0, 1, 0, 0.382683, 0, 0.92388, 25, 0, 20)
+
+[node name="HUD" parent="." index="12"]
+visible = false

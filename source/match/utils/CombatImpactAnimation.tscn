@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://source/match/utils/CombatImpactAnimation.gd" id="1_rj6fd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flash"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_flash"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 0.95, 0.55, 1, 1, 0.35, 0.08, 0.9, 0.2, 0.05, 0.02, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_flash"]
+gradient = SubResource("Gradient_flash")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_flash"]
+emission_shape = 1
+emission_sphere_radius = 0.08
+spread = 180.0
+initial_velocity_min = 2.4
+initial_velocity_max = 5.2
+gravity = Vector3(0, -2, 0)
+damping_min = 3.0
+damping_max = 6.0
+scale_min = 0.05
+scale_max = 0.12
+color_ramp = SubResource("GradientTexture1D_flash")
+
+[sub_resource type="QuadMesh" id="QuadMesh_flash"]
+size = Vector2(0.16, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smoke"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_smoke"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.35, 0.33, 0.31, 0.45, 0.08, 0.08, 0.08, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_smoke"]
+gradient = SubResource("Gradient_smoke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_smoke"]
+emission_shape = 1
+emission_sphere_radius = 0.12
+spread = 90.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0.3, 0)
+damping_min = 0.5
+damping_max = 1.2
+scale_min = 0.16
+scale_max = 0.36
+color_ramp = SubResource("GradientTexture1D_smoke")
+
+[sub_resource type="QuadMesh" id="QuadMesh_smoke"]
+size = Vector2(0.22, 0.22)
+
+[node name="CombatImpactAnimation" type="Node3D"]
+script = ExtResource("1_rj6fd")
+ttl = 1.2
+
+[node name="FlashParticles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_flash")
+emitting = false
+amount = 28
+lifetime = 0.45
+one_shot = true
+explosiveness = 0.85
+randomness = 0.2
+process_material = SubResource("ParticleProcessMaterial_flash")
+draw_pass_1 = SubResource("QuadMesh_flash")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_smoke")
+emitting = false
+amount = 16
+lifetime = 0.9
+one_shot = true
+explosiveness = 0.55
+randomness = 0.35
+process_material = SubResource("ParticleProcessMaterial_smoke")
+draw_pass_1 = SubResource("QuadMesh_smoke")
+
+[node name="Timer" type="Timer" parent="."]

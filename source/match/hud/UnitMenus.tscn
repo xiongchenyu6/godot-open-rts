@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwcedr6jj7yty"]
+[gd_scene load_steps=8 format=3 uid="uid://cwcedr6jj7yty"]
 
 [ext_resource type="PackedScene" uid="uid://pawymiv0p8ab" path="res://source/match/hud/unit-menus/GenericMenu.tscn" id="1_4ci70"]
 [ext_resource type="Script" path="res://source/match/hud/UnitMenus.gd" id="1_hugbq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://btvii654eytjr" path="res://source/match/hud/unit-menus/WorkerMenu.tscn" id="4_1s3pp"]
 [ext_resource type="PackedScene" uid="uid://d1b3uq81171lf" path="res://source/match/hud/unit-menus/VehicleFactoryMenu.tscn" id="4_ngnkq"]
 [ext_resource type="PackedScene" uid="uid://dk3no87nfpp8i" path="res://source/match/hud/unit-menus/AircraftFactoryMenu.tscn" id="5_jocca"]
+[ext_resource type="PackedScene" path="res://source/match/hud/unit-menus/BarracksMenu.tscn" id="6_q3h2j"]
 
 [node name="UnitMenus" type="PanelContainer"]
 script = ExtResource("1_hugbq")
@@ -17,89 +18,197 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="BackgroundGrid" type="GridContainer" parent="MarginContainer"]
-layout_mode = 2
-columns = 4
-
-[node name="Panel" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel4" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel5" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel6" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel7" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel8" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel9" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel10" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel11" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel12" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel13" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel14" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel15" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel16" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="GenericMenu" parent="MarginContainer" instance=ExtResource("1_4ci70")]
+[node name="CommandPanelViewport" type="Control" parent="MarginContainer"]
+custom_minimum_size = Vector2(768, 768)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CommandCenterMenu" parent="MarginContainer" instance=ExtResource("3_hqirh")]
+[node name="BackgroundGrid" type="GridContainer" parent="MarginContainer/CommandPanelViewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+columns = 6
+
+[node name="Panel" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel4" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel5" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel6" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel7" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel8" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel9" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel10" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel11" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel12" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel13" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel14" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel15" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel16" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel17" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel18" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel19" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel20" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel21" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel22" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel23" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel24" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel25" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel26" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel27" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel28" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel29" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel30" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel31" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel32" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel33" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel34" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel35" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Panel36" type="Panel" parent="MarginContainer/CommandPanelViewport/BackgroundGrid"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="MenuScroll" type="ScrollContainer" parent="MarginContainer/CommandPanelViewport"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuStack" type="Control" parent="MarginContainer/CommandPanelViewport/MenuScroll"]
+custom_minimum_size = Vector2(768, 768)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VehicleFactoryMenu" parent="MarginContainer" instance=ExtResource("4_ngnkq")]
-layout_mode = 2
+[node name="GenericMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("1_4ci70")]
+layout_mode = 1
 mouse_filter = 2
 
-[node name="AircraftFactoryMenu" parent="MarginContainer" instance=ExtResource("5_jocca")]
-layout_mode = 2
+[node name="CommandCenterMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("3_hqirh")]
+layout_mode = 1
 mouse_filter = 2
 
-[node name="WorkerMenu" parent="MarginContainer" instance=ExtResource("4_1s3pp")]
-layout_mode = 2
+[node name="VehicleFactoryMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("4_ngnkq")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="AircraftFactoryMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("5_jocca")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="BarracksMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("6_q3h2j")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="WorkerMenu" parent="MarginContainer/CommandPanelViewport/MenuScroll/MenuStack" instance=ExtResource("4_1s3pp")]
+layout_mode = 1

@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/TechBunker.gd" id="1_bunker"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_highlight"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="3_selection"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/TechBunker.tscn" id="4_geometry"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_obstacle"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="6_health"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="7_target"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/RotateRandomlyWhenLookingForTargetsIdle.tscn" id="8_idle"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bunker"]
+height = 1.1
+radius = 1.15
+
+[node name="TechBunker" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_bunker")
+
+[node name="PositionSynchronizer" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../DetachTransform/Geometry")
+update_rotation = false
+update_scale = false
+
+[node name="RotationSynchronizer" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../DetachTransform/Geometry/Transforms/AimPivot")
+update_position = false
+update_scale = false
+
+[node name="DetachTransform" type="Node" parent="."]
+
+[node name="Geometry" parent="DetachTransform" instance=ExtResource("4_geometry")]
+
+[node name="ProjectileOrigin" type="Marker3D" parent="DetachTransform/Geometry/Transforms/AimPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04, -0.78)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("CylinderShape3D_bunker")
+
+[node name="Highlight" parent="." instance=ExtResource("2_highlight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.15
+
+[node name="Selection" parent="." instance=ExtResource("3_selection")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.15
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_obstacle")]
+radius = 1.15
+vertices = PackedVector3Array(0, 0, -0.75, 0.53, 0, -0.53, 0.75, 0, 0, 0.53, 0, 0.53, 0, 0, 0.75, -0.53, 0, 0.53, -0.75, 0, 0, -0.53, 0, -0.53)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+size = Vector2(175, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.15
+
+[node name="RotateRandomlyWhenLookingForTargetsIdle" parent="." instance=ExtResource("8_idle")]
+node_to_rotate = NodePath("../DetachTransform/Geometry/Transforms/AimPivot")
+
+[editable path="DetachTransform/Geometry"]

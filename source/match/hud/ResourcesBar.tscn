@@ -68,3 +68,22 @@ mouse_filter = 2
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "0"
+
+[node name="PowerContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "POWER"
+theme_override_constants/separation = 6
+
+[node name="PowerCaptionLabel" type="Label" parent="MarginContainer/HBoxContainer/PowerContainer"]
+layout_mode = 2
+text = "PWR"
+
+[node name="PowerLabel" type="Label" parent="MarginContainer/HBoxContainer/PowerContainer"]
+custom_minimum_size = Vector2(62, 0)
+layout_mode = 2
+text = "0/0"
+
+[node name="LowPowerLabel" type="Label" parent="MarginContainer/HBoxContainer/PowerContainer"]
+visible = false
+layout_mode = 2
+text = "LOW_POWER_STATUS"

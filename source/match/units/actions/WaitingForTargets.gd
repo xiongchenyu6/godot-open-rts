@@ -26,11 +26,19 @@ func is_idle():
 	return _sub_action == null
 
 
+func _unit_can_auto_acquire_targets():
+	if _unit == null or not is_instance_valid(_unit):
+		return false
+	return not _unit.has_method("can_auto_acquire_targets") or _unit.can_auto_acquire_targets()
+
+
 func _get_units_to_attack():
+	if _unit == null or not is_instance_valid(_unit):
+		return []
 	return get_tree().get_nodes_in_group("units").filter(
 		func(unit):
 			return (
-				unit.player != _unit.player
+				_unit.player.is_enemy_with(unit.player)
 				and unit.movement_domain in _unit.attack_domains
 				and (
 					_unit.global_position_yless.distance_to(unit.global_position_yless)
@@ -41,7 +49,6 @@ func _get_units_to_attack():
 
 
 func _attack_unit(unit):
-	_timer.timeout.disconnect(_on_timer_timeout)
 	_sub_action = (
 		AutoAttacking.new(unit) if _unit.movement_speed > 0.0 else AttackingWhileInRange.new(unit)
 	)
@@ -51,6 +58,16 @@ func _attack_unit(unit):
 
 
 func _on_timer_timeout():
+	if _unit == null or not is_instance_valid(_unit):
+		_clear_sub_action()
+		return
+	if not _unit_can_auto_acquire_targets():
+		_clear_sub_action()
+		return
+	if _sub_action != null:
+		return
+	if _unit.hold_position:
+		return
 	var units_to_attack = _get_units_to_attack()
 	if not units_to_attack.is_empty():
 		_attack_unit(_pick_closest_unit(units_to_attack, _unit))
@@ -61,7 +78,20 @@ func _on_attack_finished():
 		return
 	_sub_action = null
 	_unit.action_updated.emit()
-	_timer.timeout.connect(_on_timer_timeout)
+
+
+func _clear_sub_action():
+	if _sub_action == null:
+		return
+	var sub_action = _sub_action
+	_sub_action = null
+	if sub_action.tree_exited.is_connected(_on_attack_finished):
+		sub_action.tree_exited.disconnect(_on_attack_finished)
+	if sub_action.is_inside_tree():
+		remove_child(sub_action)
+	sub_action.queue_free()
+	if _unit != null and is_instance_valid(_unit):
+		_unit.action_updated.emit()
 
 
 static func _pick_closest_unit(units, unit):

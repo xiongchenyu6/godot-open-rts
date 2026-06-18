@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_w2nif"]
+[ext_resource type="Script" path="res://tests/manual/TestVeterancy.gd" id="2_j3r7a"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_louel"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_t60id"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_r8wua"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_nlm35"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="7_i66lv"]
+
+[sub_resource type="Resource" id="Resource_hefqf"]
+script = ExtResource("3_louel")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_w2nif")]
+script = ExtResource("2_j3r7a")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_hefqf")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_t60id")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_r8wua")]
+
+[node name="Tank" parent="Players/Human" index="0" instance=ExtResource("7_i66lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="Player" parent="Players" index="1" instance=ExtResource("6_nlm35")]
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Tank" parent="Players/Player" index="0" instance=ExtResource("7_i66lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0, 0, 10.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

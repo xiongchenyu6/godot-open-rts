@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_match"]
+[ext_resource type="Script" path="res://tests/manual/TestAISaboteurInfiltration.gd" id="2_test"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_settings"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_map"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_human"]
+[ext_resource type="PackedScene" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn" id="6_ai"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="7_power"]
+[ext_resource type="PackedScene" path="res://source/match/units/Barracks.tscn" id="8_barracks"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="9_radar"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="10_robotics"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="11_tech"]
+
+[sub_resource type="Resource" id="Resource_ai_saboteur"]
+script = ExtResource("3_settings")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_match")]
+script = ExtResource("2_test")
+allow_resources_deficit_spending = false
+settings = SubResource("Resource_ai_saboteur")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_map")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_human")]
+resource_a = 10
+resource_b = 10
+
+[node name="Barracks" parent="Players/Human" index="0" instance=ExtResource("8_barracks")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 18.0, 0, 10.0)
+
+[node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("6_ai")]
+resource_a = 30
+resource_b = 30
+expected_number_of_workers = 0
+expected_number_of_refineries = 0
+expected_number_of_ore_harvesters = 0
+expected_number_of_ccs = 0
+expected_number_of_ag_turrets = 0
+expected_number_of_aa_turrets = 0
+expected_number_of_tesla_fence_segments = 0
+expected_number_of_arc_coil_towers = 0
+expected_number_of_lance_beam_towers = 0
+expected_number_of_prism_defense_obelisks = 0
+expected_number_of_rail_cannon_bunkers = 0
+expected_number_of_battlegroups = 0
+
+[node name="PowerReactor" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("7_power")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 10.0, 0, 10.0)
+
+[node name="PowerReactor2" parent="Players/SimpleClairvoyantAI" index="1" instance=ExtResource("7_power")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 10.0, 0, 13.0)
+
+[node name="Barracks" parent="Players/SimpleClairvoyantAI" index="2" instance=ExtResource("8_barracks")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 12.0, 0, 10.0)
+
+[node name="RadarUplink" parent="Players/SimpleClairvoyantAI" index="3" instance=ExtResource("9_radar")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 12.0, 0, 13.0)
+
+[node name="RoboticsBay" parent="Players/SimpleClairvoyantAI" index="4" instance=ExtResource("10_robotics")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 14.0, 0, 10.0)
+
+[node name="TechLab" parent="Players/SimpleClairvoyantAI" index="5" instance=ExtResource("11_tech")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 14.0, 0, 13.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

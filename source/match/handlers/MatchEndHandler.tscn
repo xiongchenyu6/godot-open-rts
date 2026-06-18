@@ -34,21 +34,21 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="Victory" type="ColorRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0.5)
-custom_minimum_size = Vector2(0, 200)
+self_modulate = Color(1, 1, 1, 0.92)
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
-color = Color(0, 1, 0, 1)
+color = Color(0.075, 0.22, 0.18, 1)
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Victory"]
 layout_mode = 1
@@ -57,17 +57,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Victory"
+theme_override_colors/font_color = Color(0.66, 1, 0.82, 1)
+theme_override_font_sizes/font_size = 34
+text = "MISSION ACCOMPLISHED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Defeat" type="ColorRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0.5)
-custom_minimum_size = Vector2(0, 200)
+self_modulate = Color(1, 1, 1, 0.92)
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
-color = Color(1, 0, 0, 1)
+color = Color(0.23, 0.055, 0.06, 1)
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Defeat"]
 layout_mode = 1
@@ -76,16 +76,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Defeat"
+theme_override_colors/font_color = Color(1, 0.62, 0.58, 1)
+theme_override_font_sizes/font_size = 34
+text = "MISSION FAILED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Finish" type="ColorRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-self_modulate = Color(1, 1, 1, 0.5)
-custom_minimum_size = Vector2(0, 200)
+self_modulate = Color(1, 1, 1, 0.92)
+custom_minimum_size = Vector2(0, 170)
 layout_mode = 2
+color = Color(0.06, 0.11, 0.15, 1)
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Finish"]
 layout_mode = 1
@@ -94,15 +95,161 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Match finished"
+theme_override_colors/font_color = Color(0.68, 0.93, 1, 1)
+theme_override_font_sizes/font_size = 34
+text = "BATTLEFIELD SECURED"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ResultPanel" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResultMargin" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="ResultBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ResultTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Result"
+horizontal_alignment = 1
+
+[node name="ResultGrid" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="ResultReasonLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "Outcome"
+
+[node name="ResultReasonValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "Base command network eliminated"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="RemainingTeamsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "Remaining teams"
+
+[node name="RemainingTeamsValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 2
+
+[node name="RemainingAnchorsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "Command anchors"
+
+[node name="RemainingAnchorsValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResultPanel/ResultMargin/ResultBox/ResultGrid"]
+layout_mode = 2
+text = "2"
+horizontal_alignment = 2
+
+[node name="StatsPanel" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsMargin" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 12
+
+[node name="StatsBox" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StatsTitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Battle report"
+horizontal_alignment = 1
+
+[node name="StatsGrid" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="DurationLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Duration"
+
+[node name="DurationValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "0:00"
+horizontal_alignment = 2
+
+[node name="EnemyUnitsLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Enemy units destroyed"
+
+[node name="EnemyUnitsValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="EnemyStructuresLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Enemy structures destroyed"
+
+[node name="EnemyStructuresValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="UnitsLostLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Units lost"
+
+[node name="UnitsLostValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="StructuresLostLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Structures lost"
+
+[node name="StructuresLostValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "0"
+horizontal_alignment = 2
+
+[node name="ResourcesLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "Resources banked"
+
+[node name="ResourcesValue" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/StatsPanel/StatsMargin/StatsBox/StatsGrid"]
+layout_mode = 2
+text = "A 0 / B 0"
+horizontal_alignment = 2
+
+[node name="RestartButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Restart"
+
+[node name="SetupButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "Return to setup"
 
 [node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Exit"
 
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SetupButton" to="." method="_on_setup_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

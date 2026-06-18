@@ -31,22 +31,33 @@ var _total_direction_in_the_low_pass_filter_window = Vector3.ZERO
 var _previously_set_global_transform_of_unit = null
 
 var _passive_movement_detected = false
+var _last_requested_velocity = Vector3.ZERO
 
 @onready var _match = find_parent("Match")
 @onready var _unit = get_parent()
 
 
 func _physics_process(delta):
-	_interim_speed = speed * delta
+	_interim_speed = speed * _unit.get_chrono_speed_multiplier() * delta
+	if domain == Constants.Match.Navigation.Domain.AIR and _has_finite_target_position():
+		_move_air_directly_to_target()
+		return
+	if not _is_moving_actively():
+		_last_requested_velocity = Vector3.ZERO
+		if _has_finite_target_position():
+			_on_navigation_finished()
+		return
 	var fake_direction = _get_fake_direction_due_to_stuck_prevention()
 	if fake_direction != null:
-		set_velocity(fake_direction * _interim_speed)
+		_last_requested_velocity = fake_direction * _interim_speed
+		set_velocity(_last_requested_velocity)
 		return
-	var next_path_position: Vector3 = get_next_path_position()
+	var next_path_position: Vector3 = _get_next_path_position_or_direct_target()
 	var current_agent_position: Vector3 = _unit.global_transform.origin
 	var new_velocity: Vector3 = (
 		(next_path_position - current_agent_position).normalized() * _interim_speed
 	)
+	_last_requested_velocity = new_velocity
 	set_velocity(new_velocity)
 
 
@@ -57,12 +68,13 @@ func _ready():
 	navigation_finished.connect(_on_navigation_finished)
 	set_navigation_map(_match.navigation.get_navigation_map_rid_by_domain(domain))
 	_align_unit_position_to_navigation()
-	move(
-		(
-			_unit.global_position
-			+ Vector3(randf(), 0, randf()).normalized() * INITIAL_DISPERSION_FACTOR
+	if _unit.action == null:
+		move(
+			(
+				_unit.global_position
+				+ Vector3(randf(), 0, randf()).normalized() * INITIAL_DISPERSION_FACTOR
+			)
 		)
-	)
 
 
 func move(movement_target: Vector3):
@@ -71,20 +83,79 @@ func move(movement_target: Vector3):
 
 func stop():
 	target_position = Vector3.INF
+	_last_requested_velocity = Vector3.ZERO
+	set_velocity(Vector3.ZERO)
 
 
 func _align_unit_position_to_navigation():
 	await get_tree().process_frame  # wait for navigation to be operational
-	_unit.global_transform.origin = (
-		NavigationServer3D.map_get_closest_point(
-			get_navigation_map(), get_parent().global_transform.origin
-		)
-		- Vector3(0, path_height_offset, 0)
+	var initial_position = get_parent().global_transform.origin
+	var closest_point = NavigationServer3D.map_get_closest_point(
+		get_navigation_map(), initial_position
+	)
+	if _is_navigation_point_valid(initial_position, closest_point):
+		_unit.global_transform.origin = closest_point - Vector3(0, path_height_offset, 0)
+	else:
+		_unit.global_transform.origin = initial_position
+
+
+func _is_navigation_point_valid(query_position, closest_point):
+	if not (
+		is_finite(closest_point.x) and is_finite(closest_point.y) and is_finite(closest_point.z)
+	):
+		return false
+	var query_position_yless = query_position * Vector3(1, 0, 1)
+	var closest_point_yless = closest_point * Vector3(1, 0, 1)
+	return not (
+		closest_point_yless.is_equal_approx(Vector3.ZERO)
+		and not query_position_yless.is_equal_approx(Vector3.ZERO)
 	)
 
 
 func _is_moving_actively():
-	return get_next_path_position() != _unit.global_position
+	if not _has_finite_target_position():
+		return false
+	return _unit.global_position_yless.distance_to(target_position * Vector3(1, 0, 1)) > maxf(
+		target_desired_distance, 0.01
+	)
+
+
+func _has_finite_target_position():
+	return is_finite(target_position.x) and is_finite(target_position.y) and is_finite(target_position.z)
+
+
+func _get_next_path_position_or_direct_target():
+	if domain == Constants.Match.Navigation.Domain.AIR and _has_finite_target_position():
+		return target_position
+	var next_path_position = get_next_path_position()
+	if _should_move_directly_to_target(next_path_position):
+		return target_position
+	return next_path_position
+
+
+func _should_move_directly_to_target(next_path_position):
+	if not _has_finite_target_position():
+		return false
+	var next_path_position_yless = next_path_position * Vector3(1, 0, 1)
+	return next_path_position_yless.distance_to(_unit.global_position_yless) <= 0.01
+
+
+func _move_air_directly_to_target():
+	var current_position_yless = _unit.global_position_yless
+	var target_position_yless = target_position * Vector3(1, 0, 1)
+	if current_position_yless.distance_to(target_position_yless) <= maxf(target_desired_distance, 0.01):
+		_last_requested_velocity = Vector3.ZERO
+		_on_navigation_finished()
+		return
+	var next_position_yless = current_position_yless.move_toward(
+		target_position_yless, _interim_speed
+	)
+	var displacement = next_position_yless - current_position_yless
+	_last_requested_velocity = displacement
+	_rotate_in_direction(displacement)
+	_unit.global_transform.origin += displacement
+	_previously_set_global_transform_of_unit = _unit.global_transform
+	_update_passive_movement_tracking(displacement)
 
 
 func _get_fake_direction_due_to_stuck_prevention():
@@ -179,13 +250,39 @@ func _update_passive_movement_tracking(safe_velocity):
 
 
 func _on_velocity_computed(safe_velocity: Vector3):
+	if domain == Constants.Match.Navigation.Domain.AIR:
+		return
+	var previous_position_yless = _unit.global_position_yless
 	_update_stuck_prevention(safe_velocity)
 	_rotate_in_direction(safe_velocity * Vector3(1, 0, 1))
 	_unit.global_transform.origin = _unit.global_transform.origin.move_toward(
 		_unit.global_transform.origin + safe_velocity, _interim_speed
 	)
+	var actual_position_yless = _unit.global_position_yless
+	var intended_position_yless = (
+		previous_position_yless + _last_requested_velocity * Vector3(1, 0, 1)
+	)
+	_try_crush_nearby_units(
+		previous_position_yless, actual_position_yless, intended_position_yless
+	)
 	_previously_set_global_transform_of_unit = _unit.global_transform
 	_update_passive_movement_tracking(safe_velocity)
+	if _has_finite_target_position() and not _is_moving_actively():
+		_on_navigation_finished()
+
+
+func _try_crush_nearby_units(from_position_yless, actual_position_yless, intended_position_yless):
+	var actual_displacement = from_position_yless.distance_to(actual_position_yless)
+	var intended_displacement = from_position_yless.distance_to(intended_position_yless)
+	if (
+		maxf(actual_displacement, intended_displacement)
+		< Constants.Match.Units.CRUSH_MIN_FRAME_DISPLACEMENT_M
+	):
+		return
+	if _unit.has_method("try_crush_nearby_units"):
+		_unit.try_crush_nearby_units(from_position_yless, actual_position_yless)
+		if not actual_position_yless.is_equal_approx(intended_position_yless):
+			_unit.try_crush_nearby_units(from_position_yless, intended_position_yless)
 
 
 func _on_navigation_finished():

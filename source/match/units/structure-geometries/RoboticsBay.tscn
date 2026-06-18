@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/hangar_roundB.glb" id="1_8oyjc"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="2_px54l"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="3_6mvb8"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_detailed.glb" id="5_eu5mq"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.74, 0, 0, 0, 0.74, 0, 0, 0, 0.74, 0, 0, 0)
+
+[node name="hangar_roundB" parent="Transforms" instance=ExtResource("1_8oyjc")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -2, 0, -1.5)
+
+[node name="structure_detailed" parent="Transforms" instance=ExtResource("5_eu5mq")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, -0.7, 0, 0.35)
+
+[node name="machine_wireless" parent="Transforms" instance=ExtResource("2_px54l")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.1, 0.2, 0.15)
+
+[node name="machine_generatorLarge" parent="Transforms" instance=ExtResource("3_6mvb8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.05, 0, -0.35)

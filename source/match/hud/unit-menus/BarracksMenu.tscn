@@ -1,0 +1,350 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://source/match/hud/unit-menus/BarracksMenu.gd" id="1_f8lre"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/LightRifleInfantry.png" id="2_w6cep"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RocketInfantry.png" id="3_ot3lv"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/HeavyMachinegunTrooper.png" id="4_a3uwa"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/GrenadierTrooper.png" id="5_cyggs"]
+[ext_resource type="Texture2D" uid="uid://bs5nm06q6370d" path="res://assets/ui/icons/SniperScout.png" id="6_6kdt0"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ShockTrooper.png" id="7_e20p3"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/CryoSprayer.png" id="8_umr2w"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/PhaseSaboteur.png" id="9_phase"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/MortarTeam.png" id="10_mortar"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/PulseRifleCommando.png" id="11_pulse"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SellStructure.png" id="12_sell"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RallyPoint.png" id="13_rally"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/FlakRocketTeam.png" id="14_flakteam"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/FieldMedic.png" id="15_fieldmedic"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ShieldTrooper.png" id="16_shield"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/TacticalOfficer.png" id="17_officer"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RailSniperTeam.png" id="18_rail"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/FlakRocketTeamMk2.png" id="19_flakmk2"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SaboteurInfiltrator.png" id="20_infiltrator"]
+
+[node name="BarracksMenu" type="GridContainer"]
+columns = 6
+script = ExtResource("1_f8lre")
+
+[node name="ProduceLightRifleInfantryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceLightRifleInfantryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_w6cep")
+expand_mode = 1
+
+[node name="ProduceRocketInfantryButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceRocketInfantryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ot3lv")
+expand_mode = 1
+
+[node name="ProduceFieldMedicButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceFieldMedicButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_fieldmedic")
+expand_mode = 1
+
+[node name="ProduceShieldTrooperButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceShieldTrooperButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("16_shield")
+expand_mode = 1
+
+[node name="ProduceFlakRocketTeamButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceFlakRocketTeamButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_flakteam")
+expand_mode = 1
+
+[node name="ProduceFlakRocketTeamMk2Button" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceFlakRocketTeamMk2Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_flakmk2")
+expand_mode = 1
+
+[node name="ProduceHeavyMachinegunTrooperButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceHeavyMachinegunTrooperButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_a3uwa")
+expand_mode = 1
+
+[node name="ProduceShockTrooperButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceShockTrooperButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_e20p3")
+expand_mode = 1
+
+[node name="ProduceGrenadierTrooperButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceGrenadierTrooperButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_cyggs")
+expand_mode = 1
+
+[node name="ProduceMortarTeamButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceMortarTeamButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_mortar")
+expand_mode = 1
+
+[node name="ProduceCryoSprayerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceCryoSprayerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_umr2w")
+expand_mode = 1
+
+[node name="ProduceSniperScoutButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceSniperScoutButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_6kdt0")
+expand_mode = 1
+
+[node name="ProduceRailSniperTeamButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceRailSniperTeamButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_rail")
+expand_mode = 1
+
+[node name="ProducePhaseSaboteurButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProducePhaseSaboteurButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_phase")
+expand_mode = 1
+
+[node name="ProduceSaboteurInfiltratorButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceSaboteurInfiltratorButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("20_infiltrator")
+expand_mode = 1
+
+[node name="ProducePulseRifleCommandoButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProducePulseRifleCommandoButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_pulse")
+expand_mode = 1
+
+[node name="ProduceTacticalOfficerButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="ProduceTacticalOfficerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_officer")
+expand_mode = 1
+
+[node name="SellStructureButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="SellStructureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_sell")
+expand_mode = 1
+
+[node name="SetRallyPointButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="SetRallyPointButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_rally")
+expand_mode = 1
+
+[connection signal="pressed" from="ProduceLightRifleInfantryButton" to="." method="_on_produce_light_rifle_infantry_button_pressed"]
+[connection signal="pressed" from="ProduceRocketInfantryButton" to="." method="_on_produce_rocket_infantry_button_pressed"]
+[connection signal="pressed" from="ProduceFieldMedicButton" to="." method="_on_produce_field_medic_button_pressed"]
+[connection signal="pressed" from="ProduceShieldTrooperButton" to="." method="_on_produce_shield_trooper_button_pressed"]
+[connection signal="pressed" from="ProduceFlakRocketTeamButton" to="." method="_on_produce_flak_rocket_team_button_pressed"]
+[connection signal="pressed" from="ProduceFlakRocketTeamMk2Button" to="." method="_on_produce_flak_rocket_team_mk2_button_pressed"]
+[connection signal="pressed" from="ProduceHeavyMachinegunTrooperButton" to="." method="_on_produce_heavy_machinegun_trooper_button_pressed"]
+[connection signal="pressed" from="ProduceShockTrooperButton" to="." method="_on_produce_shock_trooper_button_pressed"]
+[connection signal="pressed" from="ProduceGrenadierTrooperButton" to="." method="_on_produce_grenadier_trooper_button_pressed"]
+[connection signal="pressed" from="ProduceMortarTeamButton" to="." method="_on_produce_mortar_team_button_pressed"]
+[connection signal="pressed" from="ProduceCryoSprayerButton" to="." method="_on_produce_cryo_sprayer_button_pressed"]
+[connection signal="pressed" from="ProduceSniperScoutButton" to="." method="_on_produce_sniper_scout_button_pressed"]
+[connection signal="pressed" from="ProduceRailSniperTeamButton" to="." method="_on_produce_rail_sniper_team_button_pressed"]
+[connection signal="pressed" from="ProducePhaseSaboteurButton" to="." method="_on_produce_phase_saboteur_button_pressed"]
+[connection signal="pressed" from="ProduceSaboteurInfiltratorButton" to="." method="_on_produce_saboteur_infiltrator_button_pressed"]
+[connection signal="pressed" from="ProducePulseRifleCommandoButton" to="." method="_on_produce_pulse_rifle_commando_button_pressed"]
+[connection signal="pressed" from="ProduceTacticalOfficerButton" to="." method="_on_produce_tactical_officer_button_pressed"]
+[connection signal="pressed" from="SellStructureButton" to="." method="_on_sell_structure_button_pressed"]
+[connection signal="pressed" from="SetRallyPointButton" to="." method="_on_set_rally_point_button_pressed"]

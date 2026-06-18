@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/Refinery.gd" id="1_7o5sn"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Highlight.tscn" id="2_v7hui"]
+[ext_resource type="PackedScene" path="res://source/match/units/structure-geometries/Refinery.tscn" id="3_j4o0j"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Selection.tscn" id="4_hkqkg"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/MovementObstacle.tscn" id="5_t7yla"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/HealthBar.tscn" id="6_krbdo"]
+[ext_resource type="PackedScene" path="res://source/match/units/traits/Targetability.tscn" id="7_n4rq3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vu1wb"]
+height = 1.0
+radius = 1.5
+
+[node name="Refinery" type="Area3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_7o5sn")
+
+[node name="Geometry" parent="." instance=ExtResource("3_j4o0j")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_vu1wb")
+
+[node name="Highlight" parent="." instance=ExtResource("2_v7hui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.5
+
+[node name="Selection" parent="." instance=ExtResource("4_hkqkg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.5
+
+[node name="MovementObstacle" parent="." instance=ExtResource("5_t7yla")]
+radius = 1.5
+vertices = PackedVector3Array(0, 0, -1.12, 0.792, 0, -0.792, 1.12, 0, 0, 0.792, 0, 0.792, 0, 0, 1.12, -0.792, 0, 0.792, -1.12, 0, 0, -0.792, 0, -0.792)
+affect_navigation_mesh = true
+path_height_offset = 0.6
+
+[node name="HealthBar" parent="." instance=ExtResource("6_krbdo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+size = Vector2(240, 10)
+
+[node name="Targetability" parent="." instance=ExtResource("7_n4rq3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 1.5
+
+[editable path="Geometry"]

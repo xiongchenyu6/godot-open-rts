@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_0tpai"]
+[ext_resource type="Script" path="res://tests/manual/TestStructureSelling.gd" id="2_v32ms"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_x5tqs"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_tykhu"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_yv1el"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_cu7k1"]
+[ext_resource type="PackedScene" path="res://source/match/units/VehicleFactory.tscn" id="7_r2wkq"]
+
+[sub_resource type="Resource" id="Resource_tx4fk"]
+script = ExtResource("3_x5tqs")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_0tpai")]
+script = ExtResource("2_v32ms")
+allow_resources_deficit_spending = false
+settings = SubResource("Resource_tx4fk")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_tykhu")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_yv1el")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("6_cu7k1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="VehicleFactory" parent="Players/Human" index="1" instance=ExtResource("7_r2wkq")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 14.0, 0, 10.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

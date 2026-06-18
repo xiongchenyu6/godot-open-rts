@@ -23,6 +23,10 @@ func _handle_double_click(unit_type):
 
 
 func _on_unit_selected(unit):
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		_last_unit_selected = null
+		_last_unit_selected_timestamp = 0
+		return
 	if not unit.is_in_group("controlled_units"):
 		return
 	if Time.get_ticks_msec() < _last_unit_selected_timestamp + DOUBLE_CLICK_LB_MS:

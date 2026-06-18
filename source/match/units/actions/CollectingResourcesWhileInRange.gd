@@ -13,6 +13,7 @@ var _timer = null
 static func is_applicable(source_unit, target_unit):
 	return (
 		source_unit is Worker
+		and source_unit.can_collect_resources()
 		and target_unit is ResourceUnit
 		and not source_unit.is_full()
 		and Utils.Match.Unit.Movement.units_adhere(source_unit, target_unit)

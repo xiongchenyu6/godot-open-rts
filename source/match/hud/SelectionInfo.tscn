@@ -1,0 +1,121 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://source/match/hud/SelectionInfo.gd" id="1_select"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rank_badge"]
+bg_color = Color(0.03, 0.05, 0.06, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.58, 0.64, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="SelectionInfo" type="PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(320, 126)
+mouse_filter = 2
+script = ExtResource("1_select")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Tank"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="CountLabel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "1"
+horizontal_alignment = 2
+
+[node name="GroupLabel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+visible = false
+custom_minimum_size = Vector2(66, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Group 1"
+horizontal_alignment = 2
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="HealthRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HealthRow"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer/HealthRow"]
+custom_minimum_size = Vector2(88, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "HP 10/10"
+horizontal_alignment = 2
+
+[node name="RankRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="RankBadge" type="Label" parent="MarginContainer/VBoxContainer/RankRow"]
+visible = false
+custom_minimum_size = Vector2(22, 18)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rank_badge")
+theme_override_font_sizes/font_size = 11
+text = "V"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RankLabel" type="Label" parent="MarginContainer/VBoxContainer/RankRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Rank: Green"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="StatsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Atk 2   Range 5   Sight 8"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="SummaryLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = ""
+clip_text = true
+text_overrun_behavior = 3

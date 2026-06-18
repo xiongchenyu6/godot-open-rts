@@ -1,0 +1,80 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_icv26"]
+[ext_resource type="Script" path="res://tests/manual/TestAdvancedVehicleProduction.gd" id="2_n60wv"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_uauj4"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_ny3me"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_ycxhr"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_26aox"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="7_4eyns"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="8_us3st"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="9_20jyf"]
+[ext_resource type="PackedScene" path="res://source/match/units/VehicleFactory.tscn" id="10_xqaca"]
+[ext_resource type="Shader" path="res://source/shaders/3d/simple_fog_of_war.gdshader" id="11_pyn0s"]
+[ext_resource type="Shader" path="res://source/shaders/2d/white_transparent.gdshader" id="12_f3hbd"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="13_hgco8"]
+
+[sub_resource type="Resource" id="Resource_e5qno"]
+script = ExtResource("3_uauj4")
+players = Array[Resource]([])
+visibility = 0
+visible_player = 0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tmi7l"]
+viewport_path = NodePath("FogOfWar/CombinedViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bv18d"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("11_pyn0s")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/texture_units_per_world_unit = 2
+shader_parameter/debug_texture_view = false
+shader_parameter/world_visibility_texture = SubResource("ViewportTexture_tmi7l")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dq4dp"]
+viewport_path = NodePath("FogOfWar/CombinedViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fdrjh"]
+resource_local_to_scene = true
+shader = ExtResource("12_f3hbd")
+shader_parameter/reference_texture = SubResource("ViewportTexture_dq4dp")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gdxf7"]
+viewport_path = NodePath("HUD/MarginContainer/Minimap/MarginContainer/MinimapViewport")
+
+[node name="Match" instance=ExtResource("1_icv26")]
+script = ExtResource("2_n60wv")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_e5qno")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_ny3me")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_ycxhr")]
+
+[node name="CommandCenter" parent="Players/Human" index="1" instance=ExtResource("6_26aox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 10.0)
+
+[node name="PowerReactor" parent="Players/Human" index="2" instance=ExtResource("7_4eyns")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 15.3, 0, 10.3)
+
+[node name="RadarUplink" parent="Players/Human" index="3" instance=ExtResource("8_us3st")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 9.0, 0, 14.0)
+
+[node name="RoboticsBay" parent="Players/Human" index="4" instance=ExtResource("13_hgco8")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 11.5, 0, 14.0)
+
+[node name="TechLab" parent="Players/Human" index="5" instance=ExtResource("9_20jyf")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 14.0, 0, 14.0)
+
+[node name="VehicleFactory" parent="Players/Human" index="6" instance=ExtResource("10_xqaca")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 8.0, 0, 7.0)
+
+[node name="ScreenOverlay" parent="FogOfWar" index="1"]
+material_override = SubResource("ShaderMaterial_bv18d")
+
+[node name="FogOfWarMask" parent="HUD/MarginContainer/Minimap/MarginContainer/MinimapViewport" index="3"]
+material = SubResource("ShaderMaterial_fdrjh")
+
+[node name="MinimapTextureRect" parent="HUD/MarginContainer/Minimap/MarginContainer" index="1"]
+texture = SubResource("ViewportTexture_gdxf7")

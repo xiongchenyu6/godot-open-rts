@@ -11,5 +11,6 @@ extends Node
 @export var allow_navigation_rebaking = true
 
 @export_group("Match/Debug")
+@export var diagnostic_hud = false
 @export var frame_incrementer = false
 @export var god_mode = false

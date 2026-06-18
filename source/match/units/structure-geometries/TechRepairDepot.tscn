@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/platform_large.glb" id="1_platform"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="2_wireless"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="3_generator"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_barrelLarge.glb" id="4_barrel"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/pipe_ring.glb" id="5_ring"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/rail_middle.glb" id="6_rail"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_repair_glow"]
+albedo_color = Color(0.08, 0.78, 1, 1)
+emission_enabled = true
+emission = Color(0.08, 0.78, 1, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_repair_beam"]
+size = Vector3(0.08, 0.08, 1.8)
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.72, 0, 0, 0, 0.72, 0, 0, 0, 0.72, 0, 0, 0)
+
+[node name="platform_large" parent="Transforms" instance=ExtResource("1_platform")]
+transform = Transform3D(1.22, 0, 0, 0, 0.2, 0, 0, 0, 1.22, -2.0, 0, -1.5)
+
+[node name="repair_ring" parent="Transforms" instance=ExtResource("5_ring")]
+transform = Transform3D(0.96, 0, 0, 0, 0.18, 0, 0, 0, 0.96, -2.0, 0.24, -1.5)
+
+[node name="north_rail" parent="Transforms" instance=ExtResource("6_rail")]
+transform = Transform3D(0.58, 0, 0, 0, 0.18, 0, 0, 0, 0.58, -2.0, 0.25, -2.05)
+
+[node name="south_rail" parent="Transforms" instance=ExtResource("6_rail")]
+transform = Transform3D(-0.58, 0, 0, 0, 0.18, 0, 0, 0, -0.58, -2.0, 0.25, -0.95)
+
+[node name="machine_generatorLarge" parent="Transforms" instance=ExtResource("3_generator")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -2.0, 0.2, -2.42)
+
+[node name="left_repair_arm" parent="Transforms" instance=ExtResource("4_barrel")]
+transform = Transform3D(0.22, 0, 0.22, 0, 0.32, 0, -0.22, 0, 0.22, -2.88, 0.42, -1.35)
+
+[node name="right_repair_arm" parent="Transforms" instance=ExtResource("4_barrel")]
+transform = Transform3D(-0.22, 0, 0.22, 0, 0.32, 0, -0.22, 0, -0.22, -1.12, 0.42, -1.35)
+
+[node name="repair_beam" type="MeshInstance3D" parent="Transforms"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2.0, 0.62, -1.35)
+material_override = SubResource("StandardMaterial3D_repair_glow")
+mesh = SubResource("BoxMesh_repair_beam")
+
+[node name="machine_wireless" parent="Transforms" instance=ExtResource("2_wireless")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, -2.0, 0.24, -0.55)

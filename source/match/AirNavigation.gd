@@ -25,11 +25,25 @@ func bake(map):
 		"bake() should be called exactly once - during runtime"
 	)
 	var shape = BoxShape3D.new()
-	shape.size = Vector3(map.size.x, 0, map.size.y)
+	shape.size = Vector3(map.size.x, Constants.Match.Air.Navmesh.CELL_HEIGHT, map.size.y)
 	_reference_static_collider_shape.shape = shape
 	_reference_static_collider_shape.global_transform.origin.x = map.size.x / 2.0
 	_reference_static_collider_shape.global_transform.origin.z = map.size.y / 2.0
-	_navigation_region.bake_navigation_mesh(false)
+	var source_geometry = NavigationMeshSourceGeometryData3D.new()
+	NavigationServer3D.parse_source_geometry_data(
+		_navigation_region.navigation_mesh, source_geometry, get_tree().root
+	)
+	NavigationServer3D.bake_from_source_geometry_data(
+		_navigation_region.navigation_mesh, source_geometry
+	)
+	_sync_navmesh_changes()
+
+
+func _sync_navmesh_changes():
+	NavigationServer3D.region_set_navigation_mesh(
+		_navigation_region.get_region_rid(), _navigation_region.navigation_mesh
+	)
+	NavigationServer3D.map_force_update(navigation_map_rid)
 
 
 func _safety_checks():

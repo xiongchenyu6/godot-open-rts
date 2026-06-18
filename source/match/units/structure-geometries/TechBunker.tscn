@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_closed.glb" id="1_base"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="2_wireless"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_barrelLarge.glb" id="3_barrel"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/weapon_gun.glb" id="4_weapon"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bunker_slit"]
+albedo_color = Color(1, 0.32, 0.08, 1)
+emission_enabled = true
+emission = Color(1, 0.22, 0.05, 1)
+emission_energy_multiplier = 1.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_firing_slit"]
+size = Vector3(1.55, 0.08, 0.08)
+
+[sub_resource type="BoxMesh" id="BoxMesh_roof_plate"]
+size = Vector3(1.65, 0.16, 1.35)
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, 0, 0, 0)
+
+[node name="structure_closed" parent="Transforms" instance=ExtResource("1_base")]
+transform = Transform3D(1.05, 0, 0, 0, 0.74, 0, 0, 0, 1.05, -2, 0, -1.5)
+
+[node name="roof_plate" type="MeshInstance3D" parent="Transforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.96, -1.5)
+mesh = SubResource("BoxMesh_roof_plate")
+
+[node name="front_firing_slit" type="MeshInstance3D" parent="Transforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.74, -0.58)
+material_override = SubResource("StandardMaterial3D_bunker_slit")
+mesh = SubResource("BoxMesh_firing_slit")
+
+[node name="antenna" parent="Transforms" instance=ExtResource("2_wireless")]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, -1.3, 0.96, -1.28)
+
+[node name="left_armor_barrel" parent="Transforms" instance=ExtResource("3_barrel")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -1.08, 0.12, -0.42)
+
+[node name="right_armor_barrel" parent="Transforms" instance=ExtResource("3_barrel")]
+transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, -2.92, 0.12, -0.42)
+
+[node name="AimPivot" type="Node3D" parent="Transforms"]
+
+[node name="hidden_port_gun" parent="Transforms/AimPivot" instance=ExtResource("4_weapon")]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, -2, 0.82, -0.78)

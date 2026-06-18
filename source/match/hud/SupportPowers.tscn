@@ -1,0 +1,315 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://source/match/hud/SupportPowers.gd" id="1_vh2y3"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/RadarSweep.png" id="2_7doxq"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/OrbitalStrike.png" id="3_g8oos"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/EmpPulse.png" id="4_emp"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/WeatherStorm.png" id="5_weather"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ShieldOverdrive.png" id="6_shield"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/NaniteRepairSwarm.png" id="7_nanite"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/ChronoRelay.png" id="8_chrono"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Paradrop.png" id="9_paradrop"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/StrategicMissile.png" id="10_missile"]
+
+[node name="SupportPowers" type="PanelContainer"]
+script = ExtResource("1_vh2y3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="RadarSweepButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/RadarSweepButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_7doxq")
+expand_mode = 1
+
+[node name="RadarSweepCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/RadarSweepButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OrbitalStrikeButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/OrbitalStrikeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_g8oos")
+expand_mode = 1
+
+[node name="OrbitalStrikeCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/OrbitalStrikeButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmpPulseButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/EmpPulseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_emp")
+expand_mode = 1
+
+[node name="EmpPulseCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/EmpPulseButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChronoRelayButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ChronoRelayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_chrono")
+expand_mode = 1
+
+[node name="ChronoRelayCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/ChronoRelayButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldOverdriveButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ShieldOverdriveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_shield")
+expand_mode = 1
+
+[node name="ShieldOverdriveCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/ShieldOverdriveButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NaniteRepairSwarmButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/NaniteRepairSwarmButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_nanite")
+expand_mode = 1
+
+[node name="NaniteRepairSwarmCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/NaniteRepairSwarmButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeatherStormButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/WeatherStormButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_weather")
+expand_mode = 1
+
+[node name="WeatherStormCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/WeatherStormButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StrategicMissileButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/StrategicMissileButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_missile")
+expand_mode = 1
+
+[node name="StrategicMissileCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/StrategicMissileButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ParadropButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+
+[node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ParadropButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_paradrop")
+expand_mode = 1
+
+[node name="ParadropCooldownLabel" type="Label" parent="MarginContainer/HBoxContainer/ParadropButton"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="MarginContainer/HBoxContainer/RadarSweepButton" to="." method="_on_radar_sweep_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/OrbitalStrikeButton" to="." method="_on_orbital_strike_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/EmpPulseButton" to="." method="_on_emp_pulse_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/ChronoRelayButton" to="." method="_on_chrono_relay_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/ShieldOverdriveButton" to="." method="_on_shield_overdrive_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/NaniteRepairSwarmButton" to="." method="_on_nanite_repair_swarm_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/WeatherStormButton" to="." method="_on_weather_storm_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/StrategicMissileButton" to="." method="_on_strategic_missile_button_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/ParadropButton" to="." method="_on_paradrop_button_toggled"]

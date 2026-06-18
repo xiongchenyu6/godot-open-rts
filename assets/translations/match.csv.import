@@ -6,12 +6,14 @@ uid="uid://dekv0kryuknte"
 
 [deps]
 
-files=["res://assets/translations/match.en.translation", "res://assets/translations/match.pl.translation"]
+files=["res://assets/translations/match.en.translation", "res://assets/translations/match.pl.translation", "res://assets/translations/match.zh_CN.translation"]
 
 source_file="res://assets/translations/match.csv"
-dest_files=["res://assets/translations/match.en.translation", "res://assets/translations/match.pl.translation"]
+dest_files=["res://assets/translations/match.en.translation", "res://assets/translations/match.pl.translation", "res://assets/translations/match.zh_CN.translation"]
 
 [params]
 
 compress=true
 delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -15,7 +15,7 @@ func _init(target_unit):
 
 
 func _ready():
-	if _teardown_if_out_of_range():
+	if _teardown_if_invalid_target() or _teardown_if_out_of_range():
 		return
 	_target_unit.tree_exited.connect(_on_target_unit_removed)
 	if _unit_movement_trait != null:
@@ -29,6 +29,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if _unit_movement_trait == null:
+		if _teardown_if_invalid_target():
+			return
 		_rotate_unit_towards_target()  # stationary units can rotate every frame
 
 
@@ -47,15 +49,19 @@ func _setup_range_check_timer():
 
 
 func _rotate_unit_towards_target():
-	_unit.global_transform = _unit.global_transform.looking_at(
-		Vector3(
-			_target_unit.global_position.x, _unit.global_position.y, _target_unit.global_position.z
-		),
-		Vector3(0, 1, 0)
+	if _teardown_if_invalid_target():
+		return
+	var rotation_target = Vector3(
+		_target_unit.global_position.x, _unit.global_position.y, _target_unit.global_position.z
 	)
+	if rotation_target.is_equal_approx(_unit.global_position):
+		return
+	_unit.global_transform = _unit.global_transform.looking_at(rotation_target, Vector3(0, 1, 0))
 
 
 func _schedule_hit():
+	if _one_shot_timer == null or _teardown_if_invalid_target():
+		return
 	var now = Time.get_ticks_msec()
 	var next_attack_availability_time = _unit.get_meta("next_attack_availability_time", now)
 	if next_attack_availability_time > now:
@@ -66,7 +72,7 @@ func _schedule_hit():
 
 
 func _hit_target():
-	if _teardown_if_out_of_range():
+	if _teardown_if_invalid_target() or _teardown_if_out_of_range():
 		return
 	_unit.set_meta(
 		"next_attack_availability_time", Time.get_ticks_msec() + int(_unit.attack_interval * 1000.0)
@@ -85,6 +91,8 @@ func _hit_target():
 
 
 func _teardown_if_out_of_range():
+	if _teardown_if_invalid_target():
+		return true
 	if (
 		_unit.global_position_yless.distance_to(_target_unit.global_position_yless)
 		> _unit.attack_range
@@ -94,14 +102,32 @@ func _teardown_if_out_of_range():
 	return false
 
 
+func _teardown_if_invalid_target():
+	if not _has_source_unit() or not _has_target_unit():
+		queue_free()
+		return true
+	return false
+
+
+func _has_source_unit():
+	return _unit != null and is_instance_valid(_unit) and _unit.is_inside_tree()
+
+
+func _has_target_unit():
+	return _target_unit != null and is_instance_valid(_target_unit) and _target_unit.is_inside_tree()
+
+
 func _on_target_unit_removed():
 	queue_free()
 
 
 func _on_passive_movement_started():
-	_one_shot_timer.stop()
+	if _one_shot_timer != null:
+		_one_shot_timer.stop()
 
 
 func _on_passive_movement_finished():
+	if _teardown_if_invalid_target():
+		return
 	_rotate_unit_towards_target()
 	_schedule_hit()

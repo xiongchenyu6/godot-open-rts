@@ -1,0 +1,76 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_cdldt"]
+[ext_resource type="Script" path="res://tests/manual/TestAIMixedOffenseProduction.gd" id="2_cfp70"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_c67i0"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_jc0v8"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_kq6e7"]
+[ext_resource type="PackedScene" path="res://source/match/players/simple-clairvoyant-ai/SimpleClairvoyantAI.tscn" id="6_xok1e"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_aqneq"]
+[ext_resource type="PackedScene" path="res://source/match/units/PowerReactor.tscn" id="8_7ykhf"]
+[ext_resource type="PackedScene" path="res://source/match/units/RadarUplink.tscn" id="9_1q8eq"]
+[ext_resource type="PackedScene" path="res://source/match/units/RoboticsBay.tscn" id="10_hshdt"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechLab.tscn" id="11_yf4c8"]
+[ext_resource type="PackedScene" path="res://source/match/units/VehicleFactory.tscn" id="12_u17hg"]
+[ext_resource type="PackedScene" path="res://source/match/units/Barracks.tscn" id="13_c7d7n"]
+[ext_resource type="PackedScene" path="res://source/match/units/AircraftFactory.tscn" id="14_ogtla"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="15_p8hpq"]
+
+[sub_resource type="Resource" id="Resource_wbks1"]
+script = ExtResource("3_c67i0")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_cdldt")]
+script = ExtResource("2_cfp70")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_wbks1")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_jc0v8")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_kq6e7")]
+
+[node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("6_xok1e")]
+
+[node name="CommandCenter" parent="Players/SimpleClairvoyantAI" index="0" instance=ExtResource("7_aqneq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.0, 0, 35.0)
+
+[node name="PowerReactor" parent="Players/SimpleClairvoyantAI" index="1" instance=ExtResource("8_7ykhf")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 38.0, 0, 35.0)
+
+[node name="PowerReactor2" parent="Players/SimpleClairvoyantAI" index="2" instance=ExtResource("8_7ykhf")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 41.0, 0, 35.0)
+
+[node name="RadarUplink" parent="Players/SimpleClairvoyantAI" index="3" instance=ExtResource("9_1q8eq")]
+transform = Transform3D(0.877583, 0, 0.479426, 0, 1, 0, -0.479426, 0, 0.877583, 35.0, 0, 38.0)
+
+[node name="RoboticsBay" parent="Players/SimpleClairvoyantAI" index="4" instance=ExtResource("10_hshdt")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 38.0, 0, 38.0)
+
+[node name="TechLab" parent="Players/SimpleClairvoyantAI" index="5" instance=ExtResource("11_yf4c8")]
+transform = Transform3D(0.764842, 0, 0.644218, 0, 1, 0, -0.644218, 0, 0.764842, 41.0, 0, 38.0)
+
+[node name="VehicleFactory" parent="Players/SimpleClairvoyantAI" index="6" instance=ExtResource("12_u17hg")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 35.0, 0, 41.0)
+
+[node name="Barracks" parent="Players/SimpleClairvoyantAI" index="7" instance=ExtResource("13_c7d7n")]
+transform = Transform3D(0.921061, 0, 0.389418, 0, 1, 0, -0.389418, 0, 0.921061, 38.0, 0, 41.0)
+
+[node name="AircraftFactory" parent="Players/SimpleClairvoyantAI" index="8" instance=ExtResource("14_ogtla")]
+transform = Transform3D(0.802099, 0, 0.597191, 0, 1, 0, -0.597191, 0, 0.802099, 41.0, 0, 41.0)
+
+[node name="Tank" parent="Players/SimpleClairvoyantAI" index="9" instance=ExtResource("15_p8hpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0, 0, 34.0)
+
+[node name="Tank2" parent="Players/SimpleClairvoyantAI" index="10" instance=ExtResource("15_p8hpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0, 0, 36.0)
+
+[node name="Tank3" parent="Players/SimpleClairvoyantAI" index="11" instance=ExtResource("15_p8hpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0, 0, 38.0)
+
+[node name="Tank4" parent="Players/SimpleClairvoyantAI" index="12" instance=ExtResource("15_p8hpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0, 0, 40.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

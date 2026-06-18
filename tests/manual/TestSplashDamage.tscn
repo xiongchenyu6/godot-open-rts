@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_0kgff"]
+[ext_resource type="Script" path="res://tests/manual/TestSplashDamage.gd" id="2_3tdd2"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_byfy5"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_qiyn5"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_h6h6w"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_vrp4n"]
+[ext_resource type="PackedScene" path="res://source/match/units/SiegeArtilleryVehicle.tscn" id="7_l0hwa"]
+[ext_resource type="PackedScene" path="res://source/match/units/Tank.tscn" id="8_y82sf"]
+
+[sub_resource type="Resource" id="Resource_5xs3e"]
+script = ExtResource("3_byfy5")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_0kgff")]
+script = ExtResource("2_3tdd2")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_5xs3e")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_qiyn5")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_h6h6w")]
+
+[node name="SiegeArtilleryVehicle" parent="Players/Human" index="0" instance=ExtResource("7_l0hwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 10.0)
+
+[node name="FriendlyTarget" parent="Players/Human" index="1" instance=ExtResource("8_y82sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 11.0)
+
+[node name="Player" parent="Players" index="1" instance=ExtResource("6_vrp4n")]
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="PrimaryTarget" parent="Players/Player" index="0" instance=ExtResource("8_y82sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0, 0, 10.0)
+
+[node name="NearbyTarget" parent="Players/Player" index="1" instance=ExtResource("8_y82sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4, 0, 10.0)
+
+[node name="FarTarget" parent="Players/Player" index="2" instance=ExtResource("8_y82sf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2, 0, 10.0)
+
+[node name="HUD" parent="." index="12"]
+visible = false

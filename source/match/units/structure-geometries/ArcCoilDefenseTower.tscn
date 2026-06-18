@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/structure_detailed.glb" id="1_base"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_generatorLarge.glb" id="2_generator"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/machine_wireless.glb" id="3_wireless"]
+[ext_resource type="PackedScene" path="res://assets/models/kenney-spacekit/satelliteDish.glb" id="4_dish"]
+
+[node name="Geometry" type="Node3D"]
+
+[node name="Transforms" type="Node3D" parent="."]
+transform = Transform3D(0.68, 0, 0, 0, 0.68, 0, 0, 0, 0.68, 0, 0, 0)
+
+[node name="structure_detailed" parent="Transforms" instance=ExtResource("1_base")]
+transform = Transform3D(0.78, 0, 0, 0, 0.78, 0, 0, 0, 0.78, -2, 0, -1.5)
+
+[node name="static_generator_left" parent="Transforms" instance=ExtResource("2_generator")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -0.95, 0, -0.15)
+
+[node name="static_generator_right" parent="Transforms" instance=ExtResource("2_generator")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, -3.05, 0, -0.15)
+
+[node name="AimPivot" type="Node3D" parent="Transforms"]
+
+[node name="coil_core" parent="Transforms/AimPivot" instance=ExtResource("2_generator")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -2, 0.28, -1.5)
+
+[node name="machine_wireless" parent="Transforms/AimPivot" instance=ExtResource("3_wireless")]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, -2, 0.95, -1.5)
+
+[node name="satelliteDish" parent="Transforms/AimPivot" instance=ExtResource("4_dish")]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.34, -2, 1.35, -1.5)

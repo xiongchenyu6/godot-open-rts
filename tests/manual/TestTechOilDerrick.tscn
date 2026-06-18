@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_8j4a8"]
+[ext_resource type="Script" path="res://tests/manual/TestTechOilDerrick.gd" id="2_g7gps"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_85631"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_e4a4x"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_sk0ja"]
+[ext_resource type="PackedScene" path="res://source/match/players/Player.tscn" id="6_qr86v"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="7_qv348"]
+[ext_resource type="PackedScene" path="res://source/match/units/Worker.tscn" id="8_gkc8h"]
+[ext_resource type="PackedScene" path="res://source/match/units/EngineerDrone.tscn" id="9_ni7mv"]
+[ext_resource type="PackedScene" path="res://source/match/units/TechOilDerrick.tscn" id="10_mpw3m"]
+
+[sub_resource type="Resource" id="Resource_jn77x"]
+script = ExtResource("3_85631")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_8j4a8")]
+script = ExtResource("2_g7gps")
+settings = SubResource("Resource_jn77x")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_e4a4x")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_sk0ja")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("7_qv348")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+
+[node name="Worker" parent="Players/Human" index="1" instance=ExtResource("8_gkc8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 10)
+
+[node name="EngineerDrone" parent="Players/Human" index="2" instance=ExtResource("9_ni7mv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 10)
+
+[node name="Enemy" parent="Players" index="1" instance=ExtResource("6_qr86v")]
+color = Color(1, 0.360784, 0.45098, 1)
+
+[node name="CommandCenter" parent="Players/Enemy" index="0" instance=ExtResource("7_qv348")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, 10)
+
+[node name="Worker" parent="Players/Enemy" index="1" instance=ExtResource("8_gkc8h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, 10)
+
+[node name="NeutralTech" parent="Players" index="2" instance=ExtResource("6_qr86v")]
+color = Color(0.56, 0.56, 0.56, 1)
+participates_in_match = false
+
+[node name="TechOilDerrick" parent="Players/NeutralTech" index="0" instance=ExtResource("10_mpw3m")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 17, 0, 10)

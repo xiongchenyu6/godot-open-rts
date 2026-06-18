@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://source/match/Match.tscn" id="1_bvixu"]
+[ext_resource type="Script" path="res://tests/manual/TestRefineryDropoff.gd" id="2_ciosy"]
+[ext_resource type="Script" path="res://source/data-model/MatchSettings.gd" id="3_m5h43"]
+[ext_resource type="PackedScene" path="res://source/match/maps/PlainAndSimple.tscn" id="4_a04vg"]
+[ext_resource type="PackedScene" path="res://source/match/players/human/Human.tscn" id="5_wsn2d"]
+[ext_resource type="PackedScene" path="res://source/match/units/CommandCenter.tscn" id="6_q5rjj"]
+[ext_resource type="PackedScene" path="res://source/match/units/Refinery.tscn" id="7_br6tf"]
+[ext_resource type="PackedScene" path="res://source/match/units/Worker.tscn" id="8_u0iec"]
+[ext_resource type="PackedScene" path="res://source/match/units/OreHarvester.tscn" id="9_harvester"]
+
+[sub_resource type="Resource" id="Resource_mxrno"]
+script = ExtResource("3_m5h43")
+players = Array[Resource]([])
+visibility = 2
+visible_player = 0
+
+[node name="Match" instance=ExtResource("1_bvixu")]
+script = ExtResource("2_ciosy")
+allow_resources_deficit_spending = true
+settings = SubResource("Resource_mxrno")
+
+[node name="Map" parent="." index="0" instance=ExtResource("4_a04vg")]
+
+[node name="Human" parent="Players" index="0" instance=ExtResource("5_wsn2d")]
+
+[node name="CommandCenter" parent="Players/Human" index="0" instance=ExtResource("6_q5rjj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0, 0, 10.0)
+
+[node name="Refinery" parent="Players/Human" index="1" instance=ExtResource("7_br6tf")]
+transform = Transform3D(0.968912, 0, 0.247404, 0, 1, 0, -0.247404, 0, 0.968912, 10.5, 0, 14.5)
+
+[node name="Worker" parent="Players/Human" index="2" instance=ExtResource("8_u0iec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 14.8)
+
+[node name="OreHarvester" parent="Players/Human" index="3" instance=ExtResource("9_harvester")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 15.8)
+
+[node name="HUD" parent="." index="12"]
+visible = false

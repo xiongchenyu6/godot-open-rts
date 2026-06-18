@@ -1,75 +1,165 @@
-[gd_scene load_steps=2 format=3 uid="uid://pawymiv0p8ab"]
+[gd_scene load_steps=10 format=3 uid="uid://pawymiv0p8ab"]
 
 [ext_resource type="Script" path="res://source/match/hud/unit-menus/GenericMenu.gd" id="1_i7s8m"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/SellStructure.png" id="2_sell"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/StopCommand.png" id="3_cancel"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/HoldPosition.png" id="4_hold"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/AttackMove.png" id="5_attack"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Patrol.png" id="6_patrol"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/DeployMode.png" id="7_deploy"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/Scatter.png" id="8_scatter"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/GuardArea.png" id="9_guard"]
 
 [node name="GenericMenu" type="GridContainer"]
-columns = 4
+columns = 6
 script = ExtResource("1_i7s8m")
 
-[node name="Padding" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="HoldPositionButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+tooltip_text = "HOLD_POSITION"
+toggle_mode = true
+focus_mode = 0
 
-[node name="Padding2" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect" type="TextureRect" parent="HoldPositionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_hold")
+expand_mode = 1
+
+[node name="AttackMoveButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+tooltip_text = "ATTACK_MOVE"
+focus_mode = 0
 
-[node name="Padding3" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect" type="TextureRect" parent="AttackMoveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_attack")
+expand_mode = 1
+
+[node name="PatrolButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+tooltip_text = "PATROL"
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PatrolButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_patrol")
+expand_mode = 1
+
+[node name="SellStructureButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="SellStructureButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_sell")
+expand_mode = 1
+
+[node name="DeployModeButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+tooltip_text = "DEPLOY_MODE"
+toggle_mode = true
+focus_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="DeployModeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_deploy")
+expand_mode = 1
+
+[node name="RepairStructureButtonSlot" type="Control" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 
 [node name="CancelActionButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 tooltip_text = "CANCEL_CURRENT_ACTION"
 focus_mode = 0
-text = "X"
 
-[node name="Padding5" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect" type="TextureRect" parent="CancelActionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_cancel")
+expand_mode = 1
+
+[node name="GuardAreaButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+tooltip_text = "GUARD_AREA"
+focus_mode = 0
 
-[node name="Padding6" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
+[node name="TextureRect" type="TextureRect" parent="GuardAreaButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_guard")
+expand_mode = 1
+
+[node name="ScatterButton" type="Button" parent="."]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
+tooltip_text = "SCATTER"
+focus_mode = 0
 
-[node name="Padding7" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="ScatterButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_scatter")
+expand_mode = 1
 
-[node name="Padding8" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding9" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding10" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding11" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding12" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding13" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding14" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding15" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Padding16" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
+[connection signal="toggled" from="HoldPositionButton" to="." method="_on_hold_position_button_toggled"]
+[connection signal="pressed" from="AttackMoveButton" to="." method="_on_attack_move_button_pressed"]
+[connection signal="pressed" from="PatrolButton" to="." method="_on_patrol_button_pressed"]
+[connection signal="pressed" from="SellStructureButton" to="." method="_on_sell_structure_button_pressed"]
+[connection signal="toggled" from="DeployModeButton" to="." method="_on_deploy_mode_button_toggled"]
 [connection signal="pressed" from="CancelActionButton" to="." method="_on_cancel_action_button_pressed"]
+[connection signal="pressed" from="GuardAreaButton" to="." method="_on_guard_area_button_pressed"]
+[connection signal="pressed" from="ScatterButton" to="." method="_on_scatter_button_pressed"]

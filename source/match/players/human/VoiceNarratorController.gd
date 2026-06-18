@@ -31,6 +31,8 @@ func _ready():
 	MatchSignals.not_enough_resources_for_production.connect(_on_not_enough_resources)
 	MatchSignals.not_enough_resources_for_construction.connect(_on_not_enough_resources)
 	MatchSignals.unit_construction_finished.connect(_on_construction_finished)
+	MatchSignals.support_power_activated.connect(_on_support_power_activated)
+	MatchSignals.support_power_ready.connect(_on_support_power_ready)
 
 
 func _handle_event(event):
@@ -47,6 +49,7 @@ func _handle_event(event):
 		return
 	_last_event_handled = event
 	_audio_player.stream = Constants.Match.VoiceNarrator.EVENT_TO_ASSET_MAPPING[event]
+	_audio_player.volume_db = _voice_volume_db()
 	_audio_player.play()
 
 
@@ -91,3 +94,40 @@ func _on_construction_finished(unit):
 func _on_not_enough_resources(player):
 	if player == get_parent():
 		_handle_event(Constants.Match.VoiceNarrator.Events.NOT_ENOUGH_RESOURCES)
+
+
+func _on_support_power_activated(power_id, player, _target_position):
+	if player == _player:
+		_handle_event(Constants.Match.VoiceNarrator.Events.SUPPORT_POWER_FIRED)
+	elif _player_is_enemy(player):
+		_handle_event(
+			(
+				Constants.Match.VoiceNarrator.Events.ENEMY_SUPERWEAPON_LAUNCHED
+				if _is_superweapon(power_id)
+				else Constants.Match.VoiceNarrator.Events.ENEMY_SUPPORT_POWER_FIRED
+			)
+		)
+
+
+func _on_support_power_ready(power_id, player):
+	if player == _player:
+		_handle_event(Constants.Match.VoiceNarrator.Events.SUPPORT_POWER_READY)
+	elif _player_is_enemy(player) and _is_superweapon(power_id):
+		_handle_event(Constants.Match.VoiceNarrator.Events.ENEMY_SUPERWEAPON_READY)
+
+
+func _player_is_enemy(player):
+	return player != null and _player != null and _player.is_enemy_with(player)
+
+
+func _is_superweapon(power_id):
+	return (
+		Constants.Match.SupportPowers.DEFINITIONS.has(power_id)
+		and Constants.Match.SupportPowers.DEFINITIONS[power_id].get("superweapon", false)
+	)
+
+
+func _voice_volume_db():
+	if Globals.options != null and Globals.options.has_method("voice_volume_db"):
+		return Globals.options.voice_volume_db(0.0)
+	return 0.0
